@@ -1,0 +1,21 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: var(--white);
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+:root {
+    --transparent: rgba(185, 178, 178, 0.29);
+    --white: white;
+    --font: 'Black Ops One';
+    --text-shadow: -13px -10px 3px #423f3f;
+}
