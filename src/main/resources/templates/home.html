@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="/static/css/style.css">
-    <link rel="stylesheet" href="/static/css/home.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="preconnect" href="/css/home.css">
+    <link rel="stylesheet" href="/css/navigation.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/navigation.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <title>FitWiz</title>
 </head>
@@ -18,7 +18,7 @@
         <a href="" class="nav-logo-text"><span >FitWizz</span></a>
         <ul class="nav-list-pages">
             <li class="nav-list-page tracker"><a href="">TRACKER</a></li>
-            <li class="nav-list-page shedule"><a href="">SHEDULE</a></li>
+            <li class="nav-list-page schedule"><a href="">SCHEDULE</a></li>
             <li class="nav-list-page store"><a href="">STORE</a></li>
         </ul>
 
@@ -43,8 +43,12 @@
     <div class="background-pic-container">
         <span class="main-pic-quote">Unleash Your Potential</span>
             <ul class="log-reg-btns">
-                <li class="login-btn-li"><a href="" class="login-btn">LOGIN</a></li>
-                <li class="register-btn-li"><a href="" class="register-btn">REGISTER</a></li>
+                <li class="login-btn-li">
+                        <a href="/login" class="login-btn">LOGIN</a>
+                </li>
+                <li class="register-btn-li">
+                        <a href="/register" class="register-btn">REGISTER</a>
+                </li>
             </ul>
     </div>
 
