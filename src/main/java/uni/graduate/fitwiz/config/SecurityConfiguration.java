@@ -1,8 +1,5 @@
 package uni.graduate.fitwiz.config;
 
-import uni.graduate.fitwiz.enums.UserRoleEnum;
-import uni.graduate.fitwiz.repository.UserRepository;
-import uni.graduate.fitwiz.service.impl.ApplicationUserDetailsService;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,51 +8,52 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.context.DelegatingSecurityContextRepository;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.RequestAttributeSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
+import uni.graduate.fitwiz.enums.UserRoleEnum;
+import uni.graduate.fitwiz.repository.UserRepository;
+import uni.graduate.fitwiz.service.impl.ApplicationUserDetailsService;
 @Configuration
 public class SecurityConfiguration {
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http,
-                                           SecurityContextRepository securityContextRepository) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http
+       return http
                 .authorizeHttpRequests(
                         authorizeHttpRequests ->
                                 authorizeHttpRequests.
                                         requestMatchers(PathRequest.toStaticResources().atCommonLocations())
                                         .permitAll().
-                                        requestMatchers("/api/home", "/loginAndRegister", "/users/loginAndRegister-error")
+                                        requestMatchers("/api/home", "/api/users/login", "/api/users/registration", "/users/loginAndRegister-error")
                                         .permitAll().
                                         requestMatchers("/pages/users").hasRole(UserRoleEnum.USER.name()).
                                         requestMatchers("/pages/admins").hasRole(UserRoleEnum.ADMIN.name()).
                                         anyRequest().authenticated()
                 )
-                .formLogin(
-                        (formLogin) ->
-                                formLogin.
-                                        loginPage("/loginAndRegister").
-                                        usernameParameter(
-                                                UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY).
-                                        passwordParameter(
-                                                UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY).
-                                        defaultSuccessUrl("/api/home").
-                                        failureForwardUrl("/users/loginAndRegister-error")
+               .formLogin(
+                       formLogin ->
+                               formLogin
+                               // redirect here when we access something which is not allowed.
+                               // also this is the page where we perform login.
+                               .loginPage("/api/users/login")
+                               // The names of the input fields (in our case in auth-login.html)
+                               .usernameParameter("email")
+                               .passwordParameter("password")
+                               .defaultSuccessUrl("/api/home")
+                               .failureForwardUrl("/api/users/login")
                 )
-                .logout((logout) ->
-                        logout.logoutUrl("/logout").
-                                logoutSuccessUrl("/api/home").
-                                invalidateHttpSession(true)
-                ).securityContext(
-                        securityContext -> securityContext.
-                                securityContextRepository(securityContextRepository)
-                );
-
-        return http.build();
+                .logout(
+                        logout -> logout
+                                // the URL where we should POST something in order to perform the logout
+                                .logoutUrl("/api/users/logout")
+                                // where to go when logged out?
+                                .logoutSuccessUrl("/api/home")
+                                // invalidate the HTTP session
+                                .invalidateHttpSession(true)
+                ).build();
     }
 
     @Bean

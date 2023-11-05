@@ -4,15 +4,19 @@ import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserEntityDto {
 
     @NotEmpty
     @Column(unique = true)
     @Size(min = 2, max = 18)
-    private String name;
+    private String username;
 
     @NotEmpty
     @Email
@@ -25,26 +29,32 @@ public class UserEntityDto {
     @NotEmpty
     private String confirmPassword;
 
-    public UserEntityDto() {
+    public String getUsername() {
+        return username;
     }
 
-    public UserEntityDto(String name, String email, String password, String confirmPassword) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.confirmPassword = confirmPassword;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getEmail() {
+        return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
     }
 
     public void setConfirmPassword(String confirmPassword) {

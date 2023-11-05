@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -15,19 +15,19 @@
 </head>
 <body>
     <nav class="nav-bar">
-        <a href="" class="nav-logo-text"><span >FitWizz</span></a>
+        <a th:href="@{/api/home}" class="nav-logo-text"><span >FitWizz</span></a>
         <ul class="nav-list-pages">
-            <li class="nav-list-page tracker"><a href="">TRACKER</a></li>
-            <li class="nav-list-page schedule"><a href="">SCHEDULE</a></li>
-            <li class="nav-list-page store"><a href="">STORE</a></li>
+            <li class="nav-list-page tracker"><a th:href="@{/api/home}">TRACKER</a></li>
+            <li class="nav-list-page schedule"><a th:href="@{/api/home}">SCHEDULE</a></li>
+            <li class="nav-list-page store"><a th:href="@{/api/home}">STORE</a></li>
         </ul>
 
         <ul class="nav-list-socials">
-            <li class="nav-list-social instagram"><a href=""><i class="fab fa-instagram"></i></a></li>
-            <li class="nav-list-social facebook"><a href=""><i class="fab fa-youtube"></i></a></li>
-            <li class="nav-list-social youtube"><a href=""><i class="fab fa-facebook-f"></i></a></li>
+            <li class="nav-list-social instagram"><a th:href="@{/api/home}"><i class="fab fa-instagram"></i></a></li>
+            <li class="nav-list-social facebook"><a th:href="@{/api/home}"><i class="fab fa-youtube"></i></a></li>
+            <li class="nav-list-social youtube"><a th:href="@{/api/home}"><i class="fab fa-facebook-f"></i></a></li>
             <li class="nav-list-cart">
-                <a href="">
+                <a th:href="@{/api/home}">
                     <span class="cart">
                         <i class="fas fa-shopping-cart"></i>
                         <small class="cart-counter">0</small>
@@ -42,12 +42,12 @@
 
     <div class="background-pic-container">
         <span class="main-pic-quote">Unleash Your Potential</span>
-            <ul class="log-reg-btns">
-                <li class="login-btn-li">
-                        <a href="/loginAndRegister" class="login-btn">LOGIN</a>
+            <ul class="log-reg-btns" sec:authorize="isAnonymous()">
+                <li class="login-btn-li" >
+                        <a th:href="@{api/users/login}" class="login-btn">LOGIN</a>
                 </li>
                 <li class="register-btn-li">
-                        <a href="/loginAndRegister" class="register-btn">REGISTER</a>
+                        <a th:href="@{/api/users/registration}" class="register-btn">REGISTER</a>
                 </li>
             </ul>
     </div>
