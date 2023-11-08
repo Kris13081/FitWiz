@@ -30,6 +30,7 @@ public class ApplicationUserDetailsService implements UserDetailsService {
         return User
                 .withUsername(userEntity.getEmail())
                 .password(userEntity.getPassword())
+                .authorities(userEntity.getUsername())
                 .authorities(userEntity.getRoles().stream().map(ApplicationUserDetailsService::map).toList())
                 .build();
     }

@@ -29,6 +29,7 @@
     font-size: 20px;
     margin-left: 10%;
     gap: 15px;
+    margin-bottom: 0;
 }
 
 .nav-list-pages .nav-list-page {
@@ -46,6 +47,7 @@
     color: var(--white);
     gap: 20px;
     padding-left: 5%;
+    margin-bottom: 0;
 }
 
 .nav-list-cart{

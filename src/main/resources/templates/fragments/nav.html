@@ -1,0 +1,23 @@
+<nav th:fragment="nav" class="nav-bar">
+    <a th:href="@{/api/home}" class="nav-logo-text"><span>FitWizz</span></a>
+    <ul class="nav-list-pages">
+        <li class="nav-list-page tracker"><a th:href="@{/api/home}">TRACKER</a></li>
+        <li class="nav-list-page schedule"><a th:href="@{/api/home}">SCHEDULE</a></li>
+        <li class="nav-list-page store"><a th:href="@{/api/home}">STORE</a></li>
+    </ul>
+
+    <ul class="nav-list-socials">
+        <li class="nav-list-social instagram"><a th:href="@{/api/home}"><i class="fab fa-instagram"></i></a></li>
+        <li class="nav-list-social facebook"><a th:href="@{/api/home}"><i class="fab fa-youtube"></i></a></li>
+        <li class="nav-list-social youtube"><a th:href="@{/api/home}"><i class="fab fa-facebook-f"></i></a></li>
+        <li class="nav-list-cart">
+            <a th:href="@{/api/home}">
+                    <span class="cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <small class="cart-counter">0</small>
+                    </span>
+            </a>
+        </li>
+    </ul>
+
+</nav>

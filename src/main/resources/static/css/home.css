@@ -85,5 +85,16 @@
     text-align: center;
     justify-content: center;
     align-items: center;
-    color: var();
+    color: var(--white);
+}
+
+.top-page-sec .background-pic-container .log-reg-btns .logout-btn {
+    color: var(--white);
+    font-size: 30px;
+    border: 2px solid var(--white);
+    padding: 5px 15px;
+    text-align: center;
+    border-radius: 26%;
+    background-color: transparent;
+    font-family: var(--font);
 }

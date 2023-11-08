@@ -2,56 +2,36 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="/css/style.css">
+    <link th:replace="~{/fragments/common-links}">
     <link rel="stylesheet" href="/css/home.css">
-    <link rel="preconnect" href="/css/home.css">
-    <link rel="stylesheet" href="/css/navigation.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <title>FitWiz</title>
 </head>
 <body>
-    <nav class="nav-bar">
-        <a th:href="@{/api/home}" class="nav-logo-text"><span >FitWizz</span></a>
-        <ul class="nav-list-pages">
-            <li class="nav-list-page tracker"><a th:href="@{/api/home}">TRACKER</a></li>
-            <li class="nav-list-page schedule"><a th:href="@{/api/home}">SCHEDULE</a></li>
-            <li class="nav-list-page store"><a th:href="@{/api/home}">STORE</a></li>
-        </ul>
 
-        <ul class="nav-list-socials">
-            <li class="nav-list-social instagram"><a th:href="@{/api/home}"><i class="fab fa-instagram"></i></a></li>
-            <li class="nav-list-social facebook"><a th:href="@{/api/home}"><i class="fab fa-youtube"></i></a></li>
-            <li class="nav-list-social youtube"><a th:href="@{/api/home}"><i class="fab fa-facebook-f"></i></a></li>
-            <li class="nav-list-cart">
-                <a th:href="@{/api/home}">
-                    <span class="cart">
-                        <i class="fas fa-shopping-cart"></i>
-                        <small class="cart-counter">0</small>
-                    </span>
-                 </a>
-            </li>
-        </ul>
-        
-    </nav>
+<th:block th:replace="~{fragments/nav :: nav}"> </th:block>
 
 <section class="top-page-sec">
 
     <div class="background-pic-container">
-        <span class="main-pic-quote">Unleash Your Potential</span>
-            <ul class="log-reg-btns" sec:authorize="isAnonymous()">
-                <li class="login-btn-li" >
-                        <a th:href="@{api/users/login}" class="login-btn">LOGIN</a>
+        <span class="main-pic-quote" sec:authorize="isAnonymous()">Unleash Your Potential</span>
+        <span class="main-pic-quote" sec:authorize="isAuthenticated()">Welcome back <th:block ></th:block></span>
+            <ul class="log-reg-btns">
+                <li class="login-btn-li" sec:authorize="isAnonymous()">
+                        <a th:href="@{/api/users/login}" class="login-btn">LOGIN</a>
                 </li>
-                <li class="register-btn-li">
+                <li class="register-btn-li" sec:authorize="isAnonymous()">
                         <a th:href="@{/api/users/registration}" class="register-btn">REGISTER</a>
                 </li>
+                <li class="register-btn-li" sec:authorize="isAuthenticated()">
+                    <form th:action="@{/api/users/logout}" th:method="POST">
+                        <button type="submit" class="logout-btn" value="Logout">LOGOUT</button>
+                    </form>
+                </li>
             </ul>
+
     </div>
 
+    <th:block th:replace="~{fragments/script :: script}"> </th:block>
 </section>
 </body>
 </html>

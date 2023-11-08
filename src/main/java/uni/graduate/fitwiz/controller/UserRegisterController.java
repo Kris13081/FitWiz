@@ -12,7 +12,7 @@ import uni.graduate.fitwiz.model.dto.UserEntityDto;
 import uni.graduate.fitwiz.service.UserService;
 
 @RestController
-@RequestMapping("api/users")
+@RequestMapping("/api/users")
 public class UserRegisterController {
 
     private final UserService userService;
