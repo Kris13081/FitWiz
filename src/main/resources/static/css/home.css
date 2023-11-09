@@ -1,11 +1,11 @@
-.top-page-sec .background-pic-container {
-    position: relative;
-    z-index: 0;
-    display: flex;
-    width: 100%;
-    height: 1035px;
-    background-image: url("../images/wp.jpg");
-}
+/*.top-page-sec .background-pic-container {*/
+/*    position: relative;*/
+/*    z-index: 0;*/
+/*    display: flex;*/
+/*    width: 100%;*/
+/*    height: 1035px;*/
+/*    background-image: url("../images/wp.jpg");*/
+/*}*/
 
 
 .top-page-sec .background-pic-container .main-pic-quote {

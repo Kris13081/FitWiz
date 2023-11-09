@@ -1,23 +1,54 @@
-<nav th:fragment="nav" class="nav-bar">
-    <a th:href="@{/api/home}" class="nav-logo-text"><span>FitWizz</span></a>
-    <ul class="nav-list-pages">
-        <li class="nav-list-page tracker"><a th:href="@{/api/home}">TRACKER</a></li>
-        <li class="nav-list-page schedule"><a th:href="@{/api/home}">SCHEDULE</a></li>
-        <li class="nav-list-page store"><a th:href="@{/api/home}">STORE</a></li>
-    </ul>
+<nav th:fragment="nav" class="navbar navbar-expand-lg bg-dark w-100 border-bottom border-2"
+     style="--bs-breadcrumb-divider: '';">
 
-    <ul class="nav-list-socials">
-        <li class="nav-list-social instagram"><a th:href="@{/api/home}"><i class="fab fa-instagram"></i></a></li>
-        <li class="nav-list-social facebook"><a th:href="@{/api/home}"><i class="fab fa-youtube"></i></a></li>
-        <li class="nav-list-social youtube"><a th:href="@{/api/home}"><i class="fab fa-facebook-f"></i></a></li>
-        <li class="nav-list-cart">
-            <a th:href="@{/api/home}">
+    <div class="hidden-container container-fluid d-lg-flex justify-content-start mx-0">
+        <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a th:href="@{/api/home}"
+           class="navbar-brand fs-1 text-white ms-4 mt-3 align-self-lg-center "><span>FitWizz</span></a>
+
+        <div class="collapse navbar-collapse justify-content-center align-items-center" id="navbarNavDropdown">
+            <ul class="nav-item nav-list text-white breadcrumb fs-4 gap-3 my-0 mt-3 ">
+                <li class="breadcrumb-item">
+                    <a class="page-link" th:href="@{/api/home}">TRACKER</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a class="page-link" th:href="@{/api/home}">SCHEDULE</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a class="page-link" th:href="@{/api/home}">STORE</a>
+                </li>
+            </ul>
+
+            <!--            <ul class="nav-item nav-list text-white breadcrumb gap-2 my-0 d-none d-lg-flex align-self-end ms-5">-->
+            <!--                <li class="breadcrumb-item">-->
+            <!--                    <a th:href="@{/api/home}" class="page-link"><i class="fab fa-instagram nav-link"></i></a>-->
+            <!--                </li>-->
+            <!--                <li class="breadcrumb-item">-->
+            <!--                    <a th:href="@{/api/home}" class="page-link"><i class="fab fa-youtube"></i></a>-->
+            <!--                </li>-->
+            <!--                <li class="breadcrumb-item">-->
+            <!--                    <a th:href="@{/api/home}" class="page-link"><i class="fab fa-facebook-f nav-link"></i></a>-->
+            <!--                </li>-->
+            <!--            </ul>-->
+        </div>
+    </div>
+
+    <div id="cart-cont" class="img-cart-container nav-item text-white gap-3 d-flex">
+
+        <a th:href="@{/api/home}"><img src="/images/profile-pic.jpg" class="rounded-circle shadow-4 border border-1"
+                                       style="width: 50px; height: 50px;"
+                                       alt="Avatar"/>
+        </a>
+
+        <a th:href="@{/api/home}" class="page-link align-self-end fs-4">
                     <span class="cart">
                         <i class="fas fa-shopping-cart"></i>
                         <small class="cart-counter">0</small>
                     </span>
-            </a>
-        </li>
-    </ul>
-
+        </a>
+    </div>
 </nav>
