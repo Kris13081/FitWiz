@@ -1,5 +1,7 @@
 package uni.graduate.fitwiz.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,15 +22,15 @@ public class UserLoginController {
         return new ModelAndView("login");
     }
 
-    @PostMapping("/api/users/login-error")
-    public String onFailure(
+    @GetMapping("/login-error")
+    public ModelAndView onFailure(
             @ModelAttribute("email") String email,
             Model model) {
 
         model.addAttribute("email", email);
         model.addAttribute("bad_credentials", "true");
 
-        return "login-error";
+        return new ModelAndView("login-error");
     }
 
     @GetMapping("logout")

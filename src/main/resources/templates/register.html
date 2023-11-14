@@ -53,6 +53,15 @@
              placeholder='Confirm Password'
              type='password'>
   </div>
+    <div class="flex-row">
+        <label for="profilePicture" class="form-label">
+        </label>
+        <input id="profilePicture"
+               name="profilePicture"
+               class="form-control form-control-sm "
+               type="file"
+               accept=".jpg">
+    </div>
   <input class='lf--submit' type='submit' value='REGISTER'>
 </form>
 <a class='lf--forgot' th:href="@{/api/users/login}">Already have account?</a>

@@ -44,6 +44,7 @@ public class SecurityConfiguration {
                                .usernameParameter("email")
                                .passwordParameter("password")
                                .defaultSuccessUrl("/api/home")
+                               .failureForwardUrl("/api/users/login-error")
                 )
                 .logout(
                         logout -> logout

@@ -10,6 +10,12 @@ import uni.graduate.fitwiz.repository.UserRepository;
 import uni.graduate.fitwiz.repository.UserRoleRepository;
 import uni.graduate.fitwiz.service.UserService;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,24 +43,43 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
+
         UserEntity newUser = dtoToEntityMapper(userEntityDto);
         userRepository.save(newUser);
         return true;
     }
 
+    @Override
+    public UserEntity getUserDetails(String currentUsername) {
+
+        Optional<UserEntity> optionalUser = userRepository.findUserEntityByEmail(currentUsername);
+
+        if (optionalUser.isPresent()) {
+         return userRepository.getUserEntitiesByEmail(currentUsername);
+        }
+        return null;
+    }
+
     private UserEntity dtoToEntityMapper(UserEntityDto userEntityDto) {
+        UserEntity user = getUserDetails(userEntityDto.getUsername());
 
-        UserEntity user = new UserEntity();
+        if (user == null) {
+            user = new UserEntity();
 
-        UserRoleEntity role = userRoleRepository.getByRole(UserRoleEnum.USER);
-        List<UserRoleEntity> roles = user.getRoles();
-        roles.add(role);
+            UserRoleEntity role = userRoleRepository.getByRole(UserRoleEnum.USER);
+            List<UserRoleEntity> roles = user.getRoles();
+            roles.add(role);
 
-        user.setUsername(userEntityDto.getUsername());
-        user.setEmail(userEntityDto.getEmail());
-        user.setPassword(passwordEncoder.encode(userEntityDto.getPassword()));
-        user.setRoles(roles);
+            user.setUsername(userEntityDto.getUsername());
+            user.setEmail(userEntityDto.getEmail());
+            user.setPassword(passwordEncoder.encode(userEntityDto.getPassword()));
+            user.setRoles(roles);
+            userRepository.save(user);
+        }
 
         return user;
     }
+
+
+
 }

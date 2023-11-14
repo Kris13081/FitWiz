@@ -4,7 +4,7 @@
     <link th:replace="~{/fragments/common-links}">
     <title>Document</title>
 </head>
-<body>
+<body th:object="userDetails">
 
 <nav th:fragment="nav" class="navbar navbar-expand-lg bg-dark w-100 border-bottom border-2"
      style="--bs-breadcrumb-divider: '';">

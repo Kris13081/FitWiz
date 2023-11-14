@@ -1,6 +1,7 @@
 package uni.graduate.fitwiz.model.dto;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Lob;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -28,6 +29,7 @@ public class UserEntityDto {
 
     @NotEmpty
     private String confirmPassword;
+
 
     public String getUsername() {
         return username;
@@ -60,4 +62,5 @@ public class UserEntityDto {
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
     }
+
 }

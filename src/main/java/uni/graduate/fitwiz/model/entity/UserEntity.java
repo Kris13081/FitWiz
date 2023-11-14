@@ -30,6 +30,7 @@ public class UserEntity extends BaseEntity{
     @Email
     private String email;
 
+
     @ManyToMany(fetch = FetchType.EAGER)
     private List<UserRoleEntity> roles = new ArrayList<>();
 
