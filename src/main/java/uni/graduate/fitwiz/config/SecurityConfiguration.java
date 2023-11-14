@@ -27,10 +27,12 @@ public class SecurityConfiguration {
                                 authorizeHttpRequests.
                                         requestMatchers(PathRequest.toStaticResources().atCommonLocations())
                                         .permitAll().
-                                        requestMatchers("/api/home", "/api/users/login", "/api/users/registration", "/users/loginAndRegister-error")
+                                        requestMatchers("/api/home", "/api/users/login", "/api/users/registration", "/api/users/login-error")
                                         .permitAll().
-                                        requestMatchers("/pages/users").hasRole(UserRoleEnum.USER.name()).
-                                        requestMatchers("/pages/admins").hasRole(UserRoleEnum.ADMIN.name()).
+                                        requestMatchers("/api/users/**")
+                                        .hasRole(UserRoleEnum.USER.name()).
+                                        requestMatchers("/api/admins/**")
+                                        .hasRole(UserRoleEnum.ADMIN.name()).
                                         anyRequest().authenticated()
                 )
                .formLogin(
@@ -39,11 +41,9 @@ public class SecurityConfiguration {
                                // redirect here when we access something which is not allowed.
                                // also this is the page where we perform login.
                                .loginPage("/api/users/login")
-                               // The names of the input fields (in our case in auth-login.html)
                                .usernameParameter("email")
                                .passwordParameter("password")
                                .defaultSuccessUrl("/api/home")
-                               .failureForwardUrl("/api/users/login-e")
                 )
                 .logout(
                         logout -> logout

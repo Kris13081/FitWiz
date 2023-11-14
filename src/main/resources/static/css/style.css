@@ -4,10 +4,21 @@
     box-sizing: border-box;
 }
 
+:root {
+    --transparent: rgba(185, 178, 178, 0.29);
+    --white: white;
+    --font: 'Black Ops One';
+    --text-shadow: -13px -10px 3px #423f3f;
+}
+
+html,
 body {
+
     font-family: var(--font), sans-serif;
     color: var(--bs-body-bg);
     background-color: #333;
+    width: 100%;
+    height: 100%;
 }
 
 a {
@@ -19,12 +30,7 @@ button:hover {
     cursor: pointer;
 }
 
-:root {
-    --transparent: rgba(185, 178, 178, 0.29);
-    --white: white;
-    --font: 'Black Ops One';
-    --text-shadow: -13px -10px 3px #423f3f;
-}
+
 
 
 

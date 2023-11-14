@@ -1,37 +1,46 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:replace="~{/fragments/common-links}">
     <link rel="stylesheet" th:href="@{/css/loginAndRegistration.css}">
-    <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css}" rel="stylesheet">
     <title>FitWizz</title>
 </head>
 <body>
-<form class='register-form' th:action="@{/api/users/login}" th:method="POST">
 
-    <div class="flex-row">
-        <label class="lf--label" for="email">
-            <i class="far fa-envelope"></i>
-        </label>
-        <input id="email"
-               name="email"
-               class='lf--input'
-               placeholder='Email'
-               type='text'>
-    </div>
-    <div class="flex-row">
-        <label class="lf--label" for="password">
-            <i class="fas fa-key"></i>
-        </label>
-        <input id="password"
-               name="password"
-               class='lf--input'
-               placeholder='Password'
-               type='password'>
-    </div>
-    <input class='lf--submit' type='submit' value='LOGIN'>
-</form>
-<a class='lf--forgot' th:href="@{/api/home}">Forgot password?</a>
+<header>
+    <th:block th:replace="~{fragments/nav :: nav}"></th:block>
+</header>
+
+<main class="container h-75">
+    <form class='register-form' th:action="@{/api/users/login}" th:method="POST">
+
+        <div class="flex-row">
+            <label class="lf--label" for="email">
+                <i class="far fa-envelope"></i>
+            </label>
+            <input id="email"
+                   name="email"
+                   class='lf--input'
+                   placeholder='Email'
+                   type='text'>
+            <div id="error-message" class="error-message"></div>
+        </div>
+
+        <div class="flex-row">
+            <label class="lf--label" for="password">
+                <i class="fas fa-key"></i>
+            </label>
+            <input id="password"
+                   name="password"
+                   class='lf--input'
+                   placeholder='Password'
+                   type='password'>
+        </div>
+
+        <input class='lf--submit' type='submit' value='LOGIN'>
+    </form>
+    <a class='lf--forgot' th:href="@{/api/home}">Forgot password?</a>
+</main>
+<th:block th:replace="~{fragments/script :: script}"></th:block>
 </body>
 </html>

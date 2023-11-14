@@ -6,12 +6,17 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-@RequestMapping("/api/home")
+@RequestMapping()
 public class HomeController {
 
-    @GetMapping()
+    @GetMapping("/api/home")
     public ModelAndView homePage() {
         return new ModelAndView("home");
     }
 
+
+    @GetMapping("/error-continue")
+    public ModelAndView home() {
+        return new ModelAndView("home");
+    }
 }

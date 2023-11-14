@@ -14,18 +14,13 @@
 
 html, body { height: 100%; }
 body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    position: relative;
 
     background: linear-gradient(
             135deg,
             var(--left-color),
             var(--right-color)
     );
-    font-family: 'Roboto', helvetica, arial, sans-serif;
+    font-family: var(--font) 'Roboto', helvetica, arial, sans-serif;
     font-size: 1.5em;
 
     &:before {
@@ -39,11 +34,29 @@ body {
     }
 }
 
+.pages-list {
+    padding-left: 25px;
+}
+
+.fa-facebook-f, .fa-youtube, .fa-instagram {
+    font-size: 14px;
+}
+
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+}
+
 .register-form {
     width: 100%;
     padding: 2em;
     position: relative;
     background: rgba(0, 0, 0, .15);
+    font-family: 'Roboto', helvetica, arial, sans-serif;
 
     &:before {
         content: '';

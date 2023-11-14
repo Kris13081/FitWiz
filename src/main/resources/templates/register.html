@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link th:replace="~{/fragments/common-links :: pageLinks}">
+    <link th:replace="~{/fragments/common-links}">
     <link rel="stylesheet" th:href="@{/css/loginAndRegistration.css}">
     <title>FitWizz</title>
 </head>
 <body>
+
+<header>
+    <th:block th:replace="~{fragments/nav :: nav}"></th:block>
+</header>
+
+<main class="container h-75">
 <form class='register-form' th:action="@{/api/users/registration}" th:method="POST">
     <div class="flex-row">
         <label class="lf--label" for="username">
@@ -50,5 +56,8 @@
   <input class='lf--submit' type='submit' value='REGISTER'>
 </form>
 <a class='lf--forgot' th:href="@{/api/users/login}">Already have account?</a>
+
+</main>
+<th:block th:replace="~{fragments/script :: script}"></th:block>
 </body>
 </html>

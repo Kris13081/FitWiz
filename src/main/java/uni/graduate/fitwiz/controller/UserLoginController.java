@@ -1,8 +1,7 @@
 package uni.graduate.fitwiz.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import uni.graduate.fitwiz.service.UserService;
 
@@ -19,6 +18,17 @@ public class UserLoginController {
     @GetMapping("/login")
     public ModelAndView getLoginPage() {
         return new ModelAndView("login");
+    }
+
+    @PostMapping("/api/users/login-error")
+    public String onFailure(
+            @ModelAttribute("email") String email,
+            Model model) {
+
+        model.addAttribute("email", email);
+        model.addAttribute("bad_credentials", "true");
+
+        return "login-error";
     }
 
     @GetMapping("logout")
