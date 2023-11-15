@@ -19,7 +19,7 @@
            class="navbar-brand fs-1 text-white ms-4 mt-3 align-self-lg-center "><span>FitWizz</span></a>
 
         <div class="collapse navbar-collapse justify-content-center align-items-center" id="navbarNavDropdown">
-            <ul  class="pages-list nav-item nav-list text-white breadcrumb fs-4 gap-3 my-0 mt-3 ms-5">
+            <ul class="pages-list nav-item nav-list text-white breadcrumb fs-4 gap-3 my-0 mt-3 ms-5">
                 <li class="breadcrumb-item">
                     <a class="page-link" th:href="@{/api/home}">TRACKER</a>
                 </li>
@@ -29,8 +29,10 @@
                 <li class="breadcrumb-item">
                     <a class="page-link" th:href="@{/api/home}">STORE</a>
                 </li>
+                <li class="breadcrumb-item" sec:authorize="hasRole('ADMIN')">
+                    <a class="page-link" th:href="@{/api/admins/menu}">STORE</a>
+                </li>
             </ul>
-
 
         </div>
     </div>
@@ -38,7 +40,8 @@
     <div id="cart-cont" class="img-cart-container nav-item text-white gap-3 d-flex">
 
 
-        <ul sec:authorize="isAnonymous()" id="social-links" class="social-links nav-item nav-list text-white breadcrumb gap-2 my-0  align-self-end">
+        <ul sec:authorize="isAnonymous()" id="social-links"
+            class="social-links nav-item nav-list text-white breadcrumb gap-2 my-0  align-self-end">
             <li class="breadcrumb-item">
                 <a th:href="@{/api/home}" class="page-link"><i class="fab fa-instagram nav-link"></i></a>
             </li>
