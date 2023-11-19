@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
+<head th:fragment="head">
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1 ">
   <title>AdminLTE 3 | Dashboard</title>
 
   <!-- Google Font: Source Sans Pro -->
@@ -27,32 +27,39 @@
   <link rel="stylesheet" href="/plugins/summernote/summernote-bs4.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed" th:object="${userDetails}">
+
 <div class="wrapper">
 
   <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
+  <div th:fragment="logo-placeholder" class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__shake" src="/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
   </div>
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <nav th:fragment="admin-nav" class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        <a class="nav-link" data-widget="pushmenu" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="./index" class="nav-link">Home</a>
+        <a th:href="@{/api/admins/index}" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
+        <a th:href="@{/api/admins/add-product}" class="nav-link">Add Product</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a th:href="@{/api/admins/index}" class="nav-link">Orders</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a th:href="@{/api/admins/index}" class="nav-link">Users</a>
       </li>
     </ul>
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+        <a class="nav-link" data-widget="fullscreen" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
       </li>
@@ -61,7 +68,7 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside th:fragment="sidebar" class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="/api/home" class="brand-link">
       <img src="/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -73,7 +80,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block" th:text="${userDetails.username}"></a>
@@ -99,58 +106,42 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fas fas fa-layer-group"></i>
               <p>
-                Dashboard
+                MENU
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="./index" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-clipboard nav-icon"></i>
                   <p>Dashboard</p>
                 </a>
               </li>
             </ul>
           </li>
+          <li class="nav-header">PRODUCTS</li>
           <li class="nav-item">
-            <a href="/api/admins/pages/widgets" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+            <a th:href="@{/api/admins/add-product}" class="nav-link">
+              <i class="nav-icon fas fa-plus"></i>
               <p>
-                Widgets
-                <span class="right badge badge-danger">New</span>
+                Add Product
               </p>
             </a>
           </li>
-          <li class="nav-header">EXAMPLES</li>
+          <li class="nav-header">ORDERS</li>
           <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
-              <p>
-                Gallery
-              </p>
+            <a href="" class="nav-link">
+              <i class="nav-icon fas fa-truck"></i>
+              <p>All Orders</p>
             </a>
           </li>
-          <li class="nav-header">MISCELLANEOUS</li>
-          <li class="nav-item">
-            <a href="iframe.html" class="nav-link">
-              <i class="nav-icon fas fa-ellipsis-h"></i>
-              <p>Tabbed IFrame Plugin</p>
-            </a>
-          </li>
-          <li class="nav-header">MULTI LEVEL EXAMPLE</li>
+          <li class="nav-header">USERS</li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="fas fa-circle nav-icon"></i>
-              <p>Level 1</p>
-            </a>
-          </li>
-          <li class="nav-header">LABELS</li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-circle text-danger"></i>
-              <p class="text">Important</p>
+              <i class="nav-icon fas fa-user"></i>
+              <p> All Users</p>
             </a>
           </li>
         </ul>
@@ -167,7 +158,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Dashboard</h1>
+            <h1 class="m-0"></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -191,7 +182,7 @@
               <div class="inner">
                 <h3>150</h3>
 
-                <p>All Orders</p>
+                <p>Orders</p>
               </div>
               <div class="icon">
                 <i class="fas fa-truck"></i>
@@ -251,6 +242,7 @@
         <div class="row">
           <!-- Left col -->
           <section class="col-lg-7 connectedSortable">
+
             <!-- TO DO List -->
             <div class="card">
               <div class="card-header">
@@ -281,7 +273,7 @@
                     <!-- checkbox -->
                     <div  class="icheck-primary d-inline ml-2">
                       <input type="checkbox" value="" name="todo1" id="todoCheck7">
-                      <label for="todoCheck1"></label>
+                      <label for="todoCheck7"></label>
                     </div>
                     <!-- todo text -->
                     <span class="text">Design a nice theme</span>
@@ -302,7 +294,7 @@
                     <!-- checkbox -->
                     <div  class="icheck-primary d-inline ml-2">
                       <input type="checkbox" value="" name="todo1" id="todoCheck9">
-                      <label for="todoCheck1"></label>
+                      <label for="todoCheck9"></label>
                     </div>
                     <!-- todo text -->
                     <span class="text">Design a nice theme</span>
@@ -520,7 +512,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
+  <footer th:fragment="footer" class="main-footer">
     <strong>FitWiz &copy; 2023-2024 <a href="https://github.com/Kris13081/FitWiz">FitWizz.com</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
@@ -531,7 +523,7 @@
 
 </div>
 <!-- ./wrapper -->
-
+<div th:fragment="scr">
 <!-- jQuery -->
 <script src="/plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -564,5 +556,6 @@
 <script src="/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="/dist/js/pages/dashboard.js"></script>
+</div>
 </body>
 </html>

@@ -33,8 +33,8 @@ public class AdminController {
         return new ModelAndView("/admin/index");
     }
 
-    @GetMapping("/pages/widgets")
+    @GetMapping("/add-product")
     public ModelAndView getAdminWidgetsPage() {
-        return new ModelAndView("/admin/pages/widgets");
+        return new ModelAndView("/admin/add-product");
     }
 }
