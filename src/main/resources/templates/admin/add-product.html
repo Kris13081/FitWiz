@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<th:block th:replace="~{admin/index :: head}"></th:block>
+
+<body class="hold-transition sidebar-mini layout-fixed" th:object="${userDetails}">
+<div class="wrapper">
+
+    <!-- Preloader -->
+    <th:block th:replace="~{admin/index :: logo-placeholder}"></th:block>
+
+    <th:block th:replace="~{admin/index :: admin-nav}"></th:block>
+
+    <th:block th:replace="~{admin/index :: sidebar}"></th:block>
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0"></h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a th:href="@{/api/admins/index}">Home</a></li>
+                            <li class="breadcrumb-item active">Add Product</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+    </div>
+    <!-- /.content-wrapper -->
+    
+    <th:block th:replace="~{admin/index :: footer}"></th:block>
+</div>
+
+<th:block th:replace="~{admin/index :: scr}"></th:block>
+
+</body>
+</html>
