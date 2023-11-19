@@ -23,19 +23,44 @@ public class ProductEntity extends BaseEntity {
     @NotEmpty
     private String description;
 
+    @Enumerated(EnumType.STRING)
+    private ProductTypeEnum category;
+
     @NotEmpty
     private BigDecimal price;
 
-    @Enumerated(EnumType.STRING)
-    private ProductTypeEnum type;
+    @NotEmpty
+    private int quantity;
+
+    @NotEmpty
+    private String mainImgPath;
+
+    private String secondImgPath;
+
+    private String thirdImgPath;
+
 
     public ProductEntity() {
     }
 
-    public ProductEntity(String name, String description, BigDecimal price, ProductTypeEnum type) {
+    public ProductEntity(
+                         String name,
+                         String description,
+                         ProductTypeEnum category,
+                         BigDecimal price,
+                         int quantity,
+                         String mainImgPath,
+                         String secondImgPath,
+                         String thirdImgPath
+                        ) {
         this.name = name;
         this.description = description;
+        this.category = category;
         this.price = price;
-        this.type = type;
+        this.quantity = quantity;
+        this.mainImgPath = mainImgPath;
+        this.secondImgPath = secondImgPath;
+        this.thirdImgPath = thirdImgPath;
+
     }
 }
