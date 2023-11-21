@@ -16,30 +16,112 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0"></h1>
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a th:href="@{/api/admins/index}">Home</a></li>
-                            <li class="breadcrumb-item active">Add Product</li>
-                        </ol>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <form class="form-horizontal d-flex flex-column bg-dark p-5 rounded-circle border border-width-5 border-primary" th:method="POST" th:action="@{/api/admins/add-product}">
+
+                        <div class="form-group align-items-center justify-content-center w-100 d-flex flex-column text-center">
+                            <label class="col-md-4 control-label w-100" for="name">PRODUCT NAME</label>
+                            <div class="col-md-4 w-100">
+                                <input id="name"
+                                       name="name"
+                                       placeholder="PRODUCT NAME"
+                                       class="form-control input-md"
+                                       type="text"
+                                       required>
+                            </div>
+                        </div>
+
+                        <div class="form-group align-items-center justify-content-center w-100 d-flex flex-column text-center">
+                            <label class="col-md-4 control-label" for="description">PRODUCT DESCRIPTION</label>
+                            <div class="col-md-4">
+                                <textarea class="form-control"
+                                          id="description"
+                                          name="description"
+                                          required>- Product description -</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group align-items-center justify-content-center w-100 d-flex flex-column text-center">
+                            <label class="col-md-4 control-label" for="category">PRODUCT CATEGORY</label>
+                            <div class="col-md-4">
+                                <select id="category"
+                                        name="category"
+                                        class="form-control"
+                                        required>
+                                    <option>- Select category -</option>
+                                    <option th:each="t : ${T(uni.graduate.fitwiz.enums.ProductTypeEnum).values()}"
+                                            th:text="${t}"
+                                            th:value="${t}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group align-items-center justify-content-center w-100 d-flex flex-column text-center">
+                            <label class="col-md-4 control-label" for="price">PRICE</label>
+                            <div class="col-md-4 w-100">
+                                <input id="price"
+                                       name="price"
+                                       placeholder="PRICE"
+                                       class="form-control input-md"
+                                       type="text"
+                                       required>
+                            </div>
+                        </div>
+
+                        <div class="form-group align-items-center justify-content-center w-100 d-flex flex-column text-center">
+                            <label class="col-md-4 control-label" for="quantity">QUANTITY</label>
+                            <div class="col-md-4">
+                                <input id="quantity"
+                                       name="quantity"
+                                       placeholder="AVAILABLE QUANTITY"
+                                       class="form-control input-md"
+                                       type="text"
+                                       required>
+                            </div>
+                        </div>
+
+                        <!-- Text input-->
+                        <div class="form-group align-items-center justify-content-center w-100 d-flex flex-column ">
+
+                            <!-- File Button -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="main-img">main_image</label>
+                                <div class="col-md-4">
+                                    <input id="main-img" name="main-img" class="input-file" type="file">
+                                </div>
+                            </div>
+                            <!-- File Button -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="second-img">second_images</label>
+                                <div class="col-md-4">
+                                    <input id="second-img" name="second-img" class="input-file" type="file">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="third-img">third_images</label>
+                                <div class="col-md-4">
+                                    <input id="third-img" name="third-img" class="input-file" type="file">
+                                </div>
+                            </div>
+
+                            <!-- Button -->
+                            <button id="singlebutton" name="singlebutton" type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <!-- /.content-header -->
     </div>
     <!-- /.content-wrapper -->
-    
+
     <th:block th:replace="~{admin/index :: footer}"></th:block>
 </div>
 
 <th:block th:replace="~{admin/index :: scr}"></th:block>
-
+<th:block th:replace="~{fragments/script}"></th:block>
 </body>
 </html>
