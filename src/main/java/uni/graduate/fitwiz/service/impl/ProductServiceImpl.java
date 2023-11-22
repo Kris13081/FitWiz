@@ -40,9 +40,9 @@ public class ProductServiceImpl implements ProductService {
 
         ProductEntity newProduct = new ProductEntity();
 
-        String mainImagePath = gcsService.uploadFile("fitwiz_images_bucket", productEntityDto.getMainImage());
-        String secondImagePath = gcsService.uploadFile("fitwiz_images_bucket", productEntityDto.getSecondImage());
-        String thirdImagePath = gcsService.uploadFile("fitwiz_images_bucket", productEntityDto.getThirdImage());
+        String mainImagePath = gcsService.uploadProductImage("fitwiz_images_bucket", productEntityDto.getMainImage());
+        String secondImagePath = gcsService.uploadProductImage("fitwiz_images_bucket", productEntityDto.getSecondImage());
+        String thirdImagePath = gcsService.uploadProductImage("fitwiz_images_bucket", productEntityDto.getThirdImage());
 
         newProduct.setMainImgPath(mainImagePath);
         newProduct.setSecondImgPath(secondImagePath);
