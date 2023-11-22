@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             user = new UserEntity();
 
-            String profileImagePath = gcsService.uploadFile("fitwiz_images_bucket", userEntityDto.getProfileImage());
+            String profileImagePath = gcsService.uploadProfileImages("fitwiz_images_bucket", userEntityDto.getProfileImage());
             UserRoleEntity role = userRoleRepository.getByRole(UserRoleEnum.USER);
             List<UserRoleEntity> roles = user.getRoles();
             roles.add(role);

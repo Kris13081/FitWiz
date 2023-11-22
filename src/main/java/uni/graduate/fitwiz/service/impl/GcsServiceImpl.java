@@ -20,23 +20,38 @@ public class GcsServiceImpl implements GcsService {
 
 
     @Override
-    public String uploadFile(String bucketName, MultipartFile file) throws IOException {
+    public String uploadProfileImages(String bucketName, MultipartFile file) throws IOException {
 
-        // Generate a unique file name or use the original file name
+        if (file.isEmpty()) {
+            return "https://storage.googleapis.com/fitwiz_images_bucket/user-images/defaultProfile.jpg";
+        }
+
         String fileName = generateUniqueFileName(file.getOriginalFilename());
+        String directoryPath = "user-images/";
 
-        // Specify the bucket and file name
-        BlobId blobId = BlobId.of(bucketName, fileName);
+        return save(bucketName, file, directoryPath, fileName);
+    }
 
-        // Upload the file to Google Cloud Storage
-        storage.create(BlobInfo.newBuilder(blobId).build(), file.getBytes());
+    @Override
+    public String uploadProductImage(String bucketName, MultipartFile file) throws IOException {
+        String fileName = generateUniqueFileName(file.getOriginalFilename());
+        String directoryPath = "website-images/";
 
-
-        return "https://storage.googleapis.com/" + bucketName + "/" + fileName;
+        return save(bucketName, file, directoryPath, fileName);
     }
 
     private String generateUniqueFileName(String originalFileName) {
         return System.currentTimeMillis() + "_" + originalFileName;
+    }
+    private String save(String bucketName, MultipartFile file, String directoryPath, String fileName) throws IOException {
+        BlobId blobId = BlobId.of(bucketName, directoryPath + fileName);
+        storage.create(BlobInfo.newBuilder(blobId).build(), file.getBytes());
+
+        return getPath(bucketName, directoryPath, fileName);
+    }
+
+    private static String getPath(String bucketName, String directoryPath, String fileName) {
+        return "https://storage.googleapis.com/" + bucketName + "/" + directoryPath + fileName;
     }
 
 }
