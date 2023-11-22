@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 import uni.graduate.fitwiz.enums.ProductTypeEnum;
 
 import java.math.BigDecimal;
@@ -32,11 +33,10 @@ public class ProductEntityDto {
     @NotEmpty
     private int quantity;
 
-    @NotEmpty
-    private String mainImgPath;
+    private MultipartFile mainImage;
 
-    private String secondImgPath;
+    private MultipartFile secondImage;
 
-    private String thirdImgPath;
+    private MultipartFile thirdImage;
 
 }

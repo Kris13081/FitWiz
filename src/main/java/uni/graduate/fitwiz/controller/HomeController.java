@@ -14,7 +14,7 @@ import uni.graduate.fitwiz.service.UserService;
 @RequestMapping()
 public class HomeController {
 
-    private UserService userService;
+    private final UserService userService;
 
     public HomeController(UserService userService) {
         this.userService = userService;

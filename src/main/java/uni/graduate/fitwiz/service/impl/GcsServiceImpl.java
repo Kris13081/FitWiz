@@ -32,7 +32,7 @@ public class GcsServiceImpl implements GcsService {
         storage.create(BlobInfo.newBuilder(blobId).build(), file.getBytes());
 
 
-        return "gs://" + bucketName + "/" + fileName;
+        return "https://storage.googleapis.com/" + bucketName + "/" + fileName;
     }
 
     private String generateUniqueFileName(String originalFileName) {

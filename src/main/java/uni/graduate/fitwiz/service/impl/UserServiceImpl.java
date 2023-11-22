@@ -8,14 +8,10 @@ import uni.graduate.fitwiz.model.entity.UserEntity;
 import uni.graduate.fitwiz.model.entity.UserRoleEntity;
 import uni.graduate.fitwiz.repository.UserRepository;
 import uni.graduate.fitwiz.repository.UserRoleRepository;
+import uni.graduate.fitwiz.service.GcsService;
 import uni.graduate.fitwiz.service.UserService;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,17 +21,20 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserRoleRepository userRoleRepository;
+    private final GcsService gcsService;
 
     public UserServiceImpl(UserRepository userRepository,
                            PasswordEncoder passwordEncoder,
-                           UserRoleRepository userRoleRepository) {
+                           UserRoleRepository userRoleRepository,
+                           GcsService gcsService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.userRoleRepository = userRoleRepository;
+        this.gcsService = gcsService;
     }
 
     @Override
-    public boolean create(UserEntityDto userEntityDto) {
+    public boolean create(UserEntityDto userEntityDto) throws IOException {
 
         Optional<UserEntity> optionalUser = userRepository.findUserEntityByEmail(userEntityDto.getEmail());
 
@@ -60,12 +59,13 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-    private UserEntity dtoToEntityMapper(UserEntityDto userEntityDto) {
+    private UserEntity dtoToEntityMapper(UserEntityDto userEntityDto) throws IOException {
         UserEntity user = getUserDetails(userEntityDto.getUsername());
 
         if (user == null) {
             user = new UserEntity();
 
+            String profileImagePath = gcsService.uploadFile("fitwiz_images_bucket", userEntityDto.getProfileImage());
             UserRoleEntity role = userRoleRepository.getByRole(UserRoleEnum.USER);
             List<UserRoleEntity> roles = user.getRoles();
             roles.add(role);
@@ -73,6 +73,7 @@ public class UserServiceImpl implements UserService {
             user.setUsername(userEntityDto.getUsername());
             user.setEmail(userEntityDto.getEmail());
             user.setPassword(passwordEncoder.encode(userEntityDto.getPassword()));
+            user.setProfileImage(profileImagePath);
             user.setRoles(roles);
             userRepository.save(user);
         }
