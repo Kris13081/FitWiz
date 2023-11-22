@@ -35,10 +35,4 @@ public class UserEntity extends BaseEntity{
     @ManyToMany(fetch = FetchType.EAGER)
     private List<UserRoleEntity> roles = new ArrayList<>();
 
-    public UserEntity(String username, String password, String email, String profileImage) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.profileImage = profileImage;
-    }
 }

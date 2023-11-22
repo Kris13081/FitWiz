@@ -1,7 +1,6 @@
 package uni.graduate.fitwiz.model.dto;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Lob;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;

@@ -29,11 +29,11 @@ public class ProductServiceImpl implements ProductService {
         Optional<ProductEntity> optionalProduct = productRepository.findByName(productEntityDto.getName());
 
         if (optionalProduct.isPresent()) {
-            return new ResponseEntity<String>("Product with such a name already exists", HttpStatus.FOUND);
+            return new ResponseEntity<>("Product with such a name already exists", HttpStatus.FOUND);
         }
         ProductEntity product = mapDtoToEntity(productEntityDto);
         productRepository.save(product);
-        return new ResponseEntity<String>("Successfully created product", HttpStatus.CREATED);
+        return new ResponseEntity<>("Successfully created product", HttpStatus.CREATED);
     }
 
     private ProductEntity mapDtoToEntity(ProductEntityDto productEntityDto) throws IOException {
