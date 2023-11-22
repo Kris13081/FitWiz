@@ -7,6 +7,6 @@ import java.io.IOException;
 
 public interface GcsService {
 
-    String uploadFile(String bucketName, MultipartFile file) throws IOException;
+    String  uploadFile(String bucketName, MultipartFile file) throws IOException;
 
 }

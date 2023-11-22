@@ -29,7 +29,7 @@ public class UserRegisterController {
     @PostMapping("/registration")
     public ModelAndView registerUser(@Valid UserEntityDto userEntityDto,
                                             BindingResult bindingResult,
-                                            RedirectAttributes rAtt){
+                                            RedirectAttributes rAtt) throws IOException {
 
         if (bindingResult.hasErrors()) {
             rAtt.addFlashAttribute("userEntityDto", userEntityDto);

@@ -12,7 +12,7 @@
 </header>
 
 <main class="container h-75">
-<form class='register-form' th:action="@{/api/users/registration}" th:method="POST">
+<form class='register-form' th:action="@{/api/users/registration}" th:method="POST" enctype="multipart/form-data">
     <div class="flex-row">
         <label class="lf--label" for="username">
             <i class="far fa-user"></i>
@@ -54,13 +54,13 @@
              type='password'>
   </div>
     <div class="flex-row">
-        <label for="profilePicture" class="form-label">
+        <label for="profileImage" class="form-label">
         </label>
-        <input id="profilePicture"
-               name="profilePicture"
+        <input id="profileImage"
+               name="profileImage"
                class="form-control form-control-sm "
                type="file"
-               accept=".jpg">
+               accept=".png, .jpg, .jpeg">
     </div>
   <input class='lf--submit' type='submit' value='REGISTER'>
 </form>

@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 import uni.graduate.fitwiz.model.dto.ProductEntityDto;
 import uni.graduate.fitwiz.service.ProductService;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("/api/admins")
 public class ProductController {
@@ -18,7 +20,7 @@ public class ProductController {
     }
 
     @PostMapping("/add-product")
-    public ResponseEntity<String> createProduct(ProductEntityDto productEntityDto) {
+    public ResponseEntity<String> createProduct(ProductEntityDto productEntityDto) throws IOException {
       return productService.create(productEntityDto);
     }
 }
