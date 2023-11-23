@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<th:block th:replace="~{admin/index :: head}"></th:block>
+
+<body class="hold-transition sidebar-mini layout-fixed" th:object="${userDetails}">
+<div class="wrapper">
+
+    <!-- Preloader -->
+    <th:block th:replace="~{admin/index :: logo-placeholder}"></th:block>
+
+    <th:block th:replace="~{admin/index :: admin-nav}"></th:block>
+
+    <th:block th:replace="~{admin/index :: sidebar}"></th:block>
+
+    <div class="content-wrapper">
+        <div class="container h-100 pt-5">
+            <div class="row d-flex justify-content-center align-items-center h-100 ">
+                <div class="col-12 col-md-6">
+                    <!-- Form 1 -->
+                    <div class="card mb-4 bg-dark" style="border-radius: 15px;">
+                        <div class="card-body p-5">
+                            <h2 class="text-uppercase text-center mb-5">CREATE BLOGCARD</h2>
+                            <form>
+
+                                <div class="form-outline mb-4">
+                                    <input type="text" name="name" id="name" class="form-control form-control-lg"/>
+                                    <label class="form-label" for="name">Banner Name</label>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <input type="text" id="title" name="title" class="form-control form-control-lg"/>
+                                    <label class="form-label" for="title">Title</label>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <input type="text" id="text" class="form-control form-control-lg"/>
+                                    <label class="form-label" for="text">Text</label>
+                                </div>
+
+                                <div class="form-outline mb-4 border border-white rounded pb-2">
+                                    <label class="col-md-4 control-label border-bottom border-white " for="image">Image</label>
+                                    <div class="col-md-4">
+                                        <input id="image" name="image" class="input-file" type="file" accept=".png, .jpg, .jpeg">
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-center">
+                                    <button type="button"
+                                            class="btn btn-primary btn-block btn-lg gradient-custom-4 text-body text-white bold w-50">
+                                        CREATE
+                                    </button>
+                                </div>
+
+                                <p class="text-center text-white opacity-75 mt-5 mb-0">Want to see them all? <a href="#" class="fw-bold text-muted"><span>All Banners</span></a></p>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <th:block th:replace="~{admin/index :: footer}"></th:block>
+</div>
+
+<th:block th:replace="~{admin/index :: scr}"></th:block>
+<th:block th:replace="~{fragments/script}"></th:block>
+</body>
+</html>
