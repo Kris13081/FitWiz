@@ -18,7 +18,6 @@ public class GcsServiceImpl implements GcsService {
         this.storage = storage;
     }
 
-
     @Override
     public String uploadProfileImages(String bucketName, MultipartFile file) throws IOException {
 
@@ -36,6 +35,14 @@ public class GcsServiceImpl implements GcsService {
     public String uploadProductImage(String bucketName, MultipartFile file) throws IOException {
         String fileName = generateUniqueFileName(file.getOriginalFilename());
         String directoryPath = "products-images/";
+
+        return save(bucketName, file, directoryPath, fileName);
+    }
+
+    @Override
+    public String uploadBannerImage(String bucketName, MultipartFile file) throws IOException {
+        String fileName = generateUniqueFileName(file.getOriginalFilename());
+        String directoryPath = "home-page-images/";
 
         return save(bucketName, file, directoryPath, fileName);
     }

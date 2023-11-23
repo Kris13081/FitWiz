@@ -32,16 +32,16 @@ public class AdminController {
 
     @GetMapping("/add-product")
     public ModelAndView getAdProductPage() {
-        return new ModelAndView("/admin/add-product");
+        return new ModelAndView("/admin/page-manager/store/add-product");
     }
 
     @GetMapping("/management/add-banner")
     public ModelAndView getAddBannerPage() {
-        return new ModelAndView("/admin/page-manager/add-banner");
+        return new ModelAndView("/admin/page-manager/home/add-banner");
     }
 
     @GetMapping("/management/add-blogcard")
     public ModelAndView getHomePageManagerPage() {
-        return new ModelAndView("/admin/page-manager/add-blogcard");
+        return new ModelAndView("/admin/page-manager/home/add-blogcard");
     }
 }

@@ -21,33 +21,33 @@
                     <div class="card mb-4 bg-dark" style="border-radius: 15px;">
                         <div class="card-body p-5">
                             <h2 class="text-uppercase text-center mb-5">CREATE BANNER</h2>
-                            <form>
+                            <form id="bannerForm" th:method="POST" th:action="@{/api/admins/management/add-banner}" enctype="multipart/form-data">
 
                                 <div class="form-outline mb-4">
-                                    <input type="text" name="name" id="name" class="form-control form-control-lg"/>
+                                    <input type="text" name="name" id="name" class="form-control form-control-lg" required/>
                                     <label class="form-label" for="name">Banner Name</label>
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="title" name="title" class="form-control form-control-lg"/>
+                                    <input type="text" id="title" name="title" class="form-control form-control-lg" required/>
                                     <label class="form-label" for="title">Title</label>
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="text" class="form-control form-control-lg"/>
+                                    <input type="text" id="text" name="text" class="form-control form-control-lg" required/>
                                     <label class="form-label" for="text">Text</label>
                                 </div>
 
                                 <div class="form-outline mb-4 border border-white rounded pb-2">
                                     <label class="col-md-4 control-label border-bottom border-white " for="image">Image</label>
                                     <div class="col-md-4">
-                                        <input id="image" name="image" class="input-file" type="file" accept=".png, .jpg, .jpeg">
+                                        <input id="image" name="image" class="input-file" type="file" accept=".png, .jpg, .jpeg" required>
                                     </div>
                                 </div>
 
                                 <div class="d-flex justify-content-center">
-                                    <button type="button"
-                                            class="btn btn-primary btn-block btn-lg gradient-custom-4 text-body text-white bold w-50">
+                                    <button type="submit"
+                                            class="btn btn-primary btn-block btn-lg gradient-custom-4 text-body text-white bold w-50" >
                                        CREATE
                                     </button>
                                 </div>
@@ -67,5 +67,7 @@
 
 <th:block th:replace="~{admin/index :: scr}"></th:block>
 <th:block th:replace="~{fragments/script}"></th:block>
+<script th:inline="javascript" src="/js/productForm.js"></script>
+
 </body>
 </html>
