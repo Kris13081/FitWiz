@@ -5,7 +5,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import uni.graduate.fitwiz.model.dto.ProductEntityDto;
 import uni.graduate.fitwiz.service.UserService;
 
 @RestController
@@ -32,8 +31,17 @@ public class AdminController {
     }
 
     @GetMapping("/add-product")
-    public ModelAndView getAdminWidgetsPage() {
+    public ModelAndView getAdProductPage() {
         return new ModelAndView("/admin/add-product");
     }
 
+    @GetMapping("/management/add-banner")
+    public ModelAndView getAddBannerPage() {
+        return new ModelAndView("/admin/page-manager/add-banner");
+    }
+
+    @GetMapping("/management/add-blogcard")
+    public ModelAndView getHomePageManagerPage() {
+        return new ModelAndView("/admin/page-manager/add-blogcard");
+    }
 }
