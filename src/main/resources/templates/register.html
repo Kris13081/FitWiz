@@ -11,62 +11,102 @@
     <th:block th:replace="~{fragments/nav :: nav}"></th:block>
 </header>
 
-<main class="container h-75">
-<form class='register-form' th:action="@{/api/users/registration}" th:method="POST" enctype="multipart/form-data">
-    <div class="flex-row">
-        <label class="lf--label" for="username">
-            <i class="far fa-user"></i>
-        </label>
-        <input id="username"
-               name="username"
-               class='lf--input'
-               placeholder='Username'
-               type='text'>
-    </div>
-    <div class="flex-row">
-      <label class="lf--label" for="email">
-          <i class="far fa-envelope"></i>
-      </label>
-      <input id="email"
-             name="email"
-             class='lf--input'
-             placeholder='Email'
-             type='text'>
-  </div>
-    <div class="flex-row">
-        <label class="lf--label" for="password">
-            <i class="fas fa-key"></i>
-        </label>
-        <input id="password"
-               name="password"
-               class='lf--input'
-               placeholder='Password'
-               type='password'>
-    </div>
-    <div class="flex-row">
-      <label class="lf--label" for="confirmPassword">
-          <i class="fas fa-check"></i>
-      </label>
-      <input id="confirmPassword"
-             name="confirmPassword"
-             class='lf--input'
-             placeholder='Confirm Password'
-             type='password'>
-  </div>
-    <div class="flex-row">
-        <label for="profileImage" class="form-label">
-        </label>
-        <input id="profileImage"
-               name="profileImage"
-               class="form-control form-control-sm "
-               type="file"
-               accept=".png, .jpg, .jpeg">
-    </div>
-  <input class='lf--submit' type='submit' value='REGISTER'>
-</form>
-<a class='lf--forgot' th:href="@{/api/users/login}">Already have account?</a>
+<main class="container h-75" th:object="${userEntityDto}">
+    <form class='register-form pt-3' th:action="@{/api/users/registration}" th:method="POST"
+          enctype="multipart/form-data">
+
+        <div class="flex-row input-group">
+            <label class="lf--label input-group-prepend" for="username">
+                <i class="far fa-user"></i>
+            </label>
+            <input th:field="*{username}"
+                   th:errorclass="bg-danger"
+                   id="username"
+                   name="username"
+                   class='form-control lf--input'
+                   placeholder='Username'
+                   type='text'>
+            <div class="input-group-append">
+        <span class=" h-100 lf--label" data-toggle="tooltip" data-placement="top" data-tippy-content="Username requirements:<br>1. Not Empty<br>2. Must be between 2 and 18 characters">
+            <i class="fas fa-info-circle"></i>
+        </span>
+            </div>
+        </div>
+
+        <div class="flex-row input-group">
+            <label class="lf--label input-group-prepend" for="email">
+                <i class="far fa-envelope"></i>
+            </label>
+            <input th:field="*{email}"
+                   th:errorclass="bg-danger"
+                   id="email"
+                   name="email"
+                   class='form-control lf--input'
+                   placeholder='Email'
+                   type='text'>
+            <!-- Information icon and dropdown content for email field -->
+            <div class="input-group-append">
+        <span class=" h-100 lf--label" data-toggle="tooltip" data-placement="top" data-tippy-content="Email requirements:<br>1. Not Empty<br>2. Must contain '@'">
+            <i class="fas fa-info-circle"></i>
+        </span>
+            </div>
+        </div>
+
+        <div class="flex-row input-group">
+            <label class="lf--label input-group-prepend" for="password">
+                <i class="fas fa-key"></i>
+            </label>
+            <input th:field="*{password}"
+                   th:errorclass="bg-danger"
+                   id="password"
+                   name="password"
+                   class='form-control lf--input'
+                   placeholder='Password'
+                   type='password'>
+            <div class="input-group-append">
+        <span class=" h-100 lf--label" data-toggle="tooltip" data-placement="top" data-tippy-content="Password requirements:<br>1. Not Empty<br>2. Must be between 2 and 10 characters">
+            <i class="fas fa-info-circle"></i>
+        </span>
+            </div>
+        </div>
+
+        <div class="flex-row input-group">
+            <label class="lf--label input-group-prepend" for="confirmPassword">
+                <i class="fas fa-check"></i>
+            </label>
+            <input th:field="*{confirmPassword}"
+                   th:errorclass="bg-danger"
+                   id="confirmPassword"
+                   name="confirmPassword"
+                   class='form-control lf--input'
+                   placeholder='Confirm Password'
+                   type='password'>
+            <div class="input-group-append">
+        <span class=" h-100 lf--label" data-toggle="tooltip" data-placement="top" data-tippy-content="Confirm your password">
+            <i class="fas fa-info-circle"></i>
+        </span>
+            </div>
+        </div>
+        <div class="flex-row">
+            <label for="profileImage" class="form-label">
+            </label>
+            <input id="profileImage"
+                   name="profileImage"
+                   class="form-control form-control-sm "
+                   type="file"
+                   accept=".png, .jpg, .jpeg"
+                   data-toggle="tooltip"
+                   data-placement="top"
+                   data-tippy-content="Accepted file types are: ( png | jpg | jpeg )">
+
+        </div>
+        <input class='lf--submit' type='submit' value='REGISTER'>
+    </form>
+    <a class='lf--forgot' th:href="@{/api/users/login}">Already have account?</a>
 
 </main>
 <th:block th:replace="~{fragments/script :: script}"></th:block>
+<script src="https://unpkg.com/tippy.js@6.3.1"></script>
+<script src="/js/FormInformationToggle.js"></script>
 </body>
 </html>
