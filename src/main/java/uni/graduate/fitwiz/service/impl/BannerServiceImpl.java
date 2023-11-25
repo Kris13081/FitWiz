@@ -10,6 +10,7 @@ import uni.graduate.fitwiz.service.BannerService;
 import uni.graduate.fitwiz.service.GcsService;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -37,6 +38,11 @@ public class BannerServiceImpl implements BannerService {
         bannerRepository.save(banner);
 
         return new ResponseEntity<>("Banner created!", HttpStatus.CREATED);
+    }
+
+    @Override
+    public List<BannerEntity> getBanners() {
+        return bannerRepository.findAll();
     }
 
     private BannerEntity mapDtoToEntity(BannerEntityDto bannerEntityDto) throws IOException {

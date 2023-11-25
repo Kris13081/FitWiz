@@ -20,20 +20,16 @@
              data-bs-ride="carousel">
             <!-- login, register, and logout btns -->
             <div class="background-pic-container position-absolute w-100  justify-content-end z-3">
-                <!--        <span class="main-pic-quote" sec:authorize="isAnonymous()">Unleash Your Potential</span>-->
-                <!--        <span class="main-pic-quote" sec:authorize="isAuthenticated()">Welcome back <th:block ></th:block></span>-->
                 <ul class="log-reg-btns">
                     <li class="login-btn-li" sec:authorize="isAnonymous()">
                         <a th:href="@{/api/users/login}" class="login-btn bg-dark overflow-hidden">LOGIN</a>
                     </li>
                     <li class="register-btn-li" sec:authorize="isAnonymous()">
-                        <a th:href="@{/api/users/registration}"
-                           class="register-btn bg-dark overflow-hidden">REGISTER</a>
+                        <a th:href="@{/api/users/registration}" class="register-btn bg-dark overflow-hidden">REGISTER</a>
                     </li>
                     <li class="register-btn-li" sec:authorize="isAuthenticated()">
                         <form th:action="@{/api/users/logout}" th:method="POST">
-                            <button type="submit" class="logout-btn bg-dark overflow-hidden" value="Logout">LOGOUT
-                            </button>
+                            <button type="submit" class="logout-btn bg-dark overflow-hidden" value="Logout">LOGOUT</button>
                         </form>
                     </li>
                 </ul>
@@ -52,35 +48,15 @@
 
             <!-- Inner -->
             <div class="carousel-inner">
-                <!-- Single item -->
-                <div class="carousel-item active">
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(15).webp" class="d-block w-100"
-                         alt="Sunset Over the City"/>
+                <!-- Thymeleaf loop for each banner -->
+                <div th:each="banner, iterStat : ${bannersList}" th:classappend="${iterStat.first} ? 'carousel-item active' : 'carousel-item'">
+                    <img th:src="${banner.imagePath}" class="d-block w-100" th:alt="${banner.title}"/>
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>First slide label</h5>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        <h5 th:text="${banner.title}">Banner Title</h5>
+                        <p th:text="${banner.text}">Banner Text</p>
                     </div>
                 </div>
-
-                <!-- Single item -->
-                <div class="carousel-item">
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(22).webp" class="d-block w-100"
-                         alt="Canyon at Night"/>
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Second slide label</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </div>
-                </div>
-
-                <!-- Single item -->
-                <div class="carousel-item">
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(23).webp" class="d-block w-100"
-                         alt="Cliff Above a Stormy Sea"/>
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Third slide label</h5>
-                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                    </div>
-                </div>
+                <!-- Thymeleaf loop for each banner -->
             </div>
             <!-- Inner -->
 
@@ -96,7 +72,8 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-        <!-- Carousel wrapper --></section>
+        <!-- Carousel wrapper -->
+    </section>
 
     <section id="about-us">
         <div class="container-fluid bg-dark">

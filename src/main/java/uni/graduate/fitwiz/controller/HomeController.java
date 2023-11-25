@@ -5,7 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import uni.graduate.fitwiz.model.dto.BannerEntityDto;
+import uni.graduate.fitwiz.service.BannerService;
 import uni.graduate.fitwiz.service.UserService;
 
 @RestController
@@ -13,9 +13,12 @@ import uni.graduate.fitwiz.service.UserService;
 public class HomeController {
 
     private final UserService userService;
+    private final BannerService bannerService;
 
-    public HomeController(UserService userService) {
+    public HomeController(UserService userService,
+                          BannerService bannerService) {
         this.userService = userService;
+        this.bannerService = bannerService;
     }
 
     @ModelAttribute(name = "userDetails")
@@ -24,6 +27,11 @@ public class HomeController {
         String currentUsername = authentication.getName();
 
         model.addAttribute("userDetails", userService.getUserDetails(currentUsername));
+    }
+
+    @ModelAttribute(name = "bannersList")
+    public void getBanners(Model model) {
+        model.addAttribute("bannersList", bannerService.getBanners());
     }
 
     @GetMapping("/api/home")

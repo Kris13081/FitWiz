@@ -4,16 +4,12 @@ import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class UserEntityDto {
 
     @NotEmpty
@@ -27,6 +23,7 @@ public class UserEntityDto {
     private String email;
 
     @NotEmpty
+    @Size(min = 2, max = 10)
     private String password;
 
     @NotEmpty

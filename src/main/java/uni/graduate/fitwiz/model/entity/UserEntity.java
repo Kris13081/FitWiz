@@ -18,16 +18,17 @@ import java.util.List;
 @Table(name = "users")
 public class UserEntity extends BaseEntity{
 
-    @NotEmpty
+    @NotEmpty(message = "Username cannot be empty!")
     @Column(unique = true)
     @Size(min = 2, max = 18)
     private String username;
 
-    @NotEmpty
+    @NotEmpty(message = "Password cannot be empty!")
     private String password;
 
-    @NotEmpty
-    @Email
+    @NotEmpty(message = "Email cannot be empty!")
+    @Email(message = "Must contain '@'.")
+    @Column(unique = true)
     private String email;
 
     private String profileImage;
