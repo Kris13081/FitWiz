@@ -32,6 +32,14 @@ public class GcsServiceImpl implements GcsService {
     }
 
     @Override
+    public String uploadBlogImage(String bucketName, MultipartFile file) throws IOException {
+        String fileName = generateUniqueFileName(file.getOriginalFilename());
+        String directoryPath = "home-page-images/";
+
+        return save(bucketName, file, directoryPath, fileName);
+    }
+
+    @Override
     public String uploadProductImage(String bucketName, MultipartFile file) throws IOException {
         String fileName = generateUniqueFileName(file.getOriginalFilename());
         String directoryPath = "products-images/";

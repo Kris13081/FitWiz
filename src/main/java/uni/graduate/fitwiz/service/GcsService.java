@@ -10,5 +10,6 @@ public interface GcsService {
     String  uploadProfileImages(String bucketName, MultipartFile file) throws IOException;
     String uploadProductImage(String bucketName, MultipartFile file) throws IOException;
     String uploadBannerImage(String bucketName, MultipartFile file) throws IOException;
+    String uploadBlogImage(String bucketName, MultipartFile file) throws IOException;
 
 }
