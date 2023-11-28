@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import uni.graduate.fitwiz.service.BannerService;
+import uni.graduate.fitwiz.service.BlogService;
 import uni.graduate.fitwiz.service.UserService;
 
 @RestController
@@ -14,11 +15,14 @@ public class HomeController {
 
     private final UserService userService;
     private final BannerService bannerService;
+    private final BlogService blogService;
 
     public HomeController(UserService userService,
-                          BannerService bannerService) {
+                          BannerService bannerService,
+                          BlogService blogService) {
         this.userService = userService;
         this.bannerService = bannerService;
+        this.blogService = blogService;
     }
 
     @ModelAttribute(name = "userDetails")
@@ -32,6 +36,11 @@ public class HomeController {
     @ModelAttribute(name = "bannersList")
     public void getBanners(Model model) {
         model.addAttribute("bannersList", bannerService.getBanners());
+    }
+
+    @ModelAttribute(name = "blogsList")
+    public void getBlogs(Model model) {
+        model.addAttribute("blogsList", blogService.getBlogs());
     }
 
     @GetMapping("/api/home")

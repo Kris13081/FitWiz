@@ -20,39 +20,56 @@
                     <!-- Form 1 -->
                     <div class="card mb-4 bg-dark" style="border-radius: 15px;">
                         <div class="card-body p-5">
-                            <h2 class="text-uppercase text-center mb-5">CREATE BLOGCARD</h2>
-                            <form>
+                            <h2 class="text-uppercase text-center mb-5">CREATE BLOG</h2>
+                            <form id="blogForm" th:method="POST" th:action="@{/api/admins/management/add-blogcard}" enctype="multipart/form-data">
 
                                 <div class="form-outline mb-4">
-                                    <input type="text" name="name" id="name" class="form-control form-control-lg"/>
-                                    <label class="form-label" for="name">Banner Name</label>
+                                    <input type="text"
+                                           name="name"
+                                           id="name"
+                                           class="form-control form-control-lg"
+                                           required/>
+                                    <label class="form-label" for="name">Blog Name</label>
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="title" name="title" class="form-control form-control-lg"/>
+                                    <input type="text"
+                                           id="title"
+                                           name="title"
+                                           class="form-control form-control-lg"
+                                           required/>
                                     <label class="form-label" for="title">Title</label>
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="text" class="form-control form-control-lg"/>
-                                    <label class="form-label" for="text">Text</label>
+                                    <input type="text"
+                                           name="description"
+                                           id="description"
+                                           class="form-control form-control-lg"
+                                           required/>
+                                    <label class="form-label" for="description">Description</label>
                                 </div>
 
                                 <div class="form-outline mb-4 border border-white rounded pb-2">
                                     <label class="col-md-4 control-label border-bottom border-white " for="image">Image</label>
                                     <div class="col-md-4">
-                                        <input id="image" name="image" class="input-file" type="file" accept=".png, .jpg, .jpeg">
+                                        <input id="image"
+                                               name="image"
+                                               class="input-file"
+                                               type="file"
+                                               accept=".png, .jpg, .jpeg"
+                                               required>
                                     </div>
                                 </div>
 
                                 <div class="d-flex justify-content-center">
-                                    <button type="button"
+                                    <button type="submit"
                                             class="btn btn-primary btn-block btn-lg gradient-custom-4 text-body text-white bold w-50">
                                         CREATE
                                     </button>
                                 </div>
 
-                                <p class="text-center text-white opacity-75 mt-5 mb-0">Want to see them all? <a href="#" class="fw-bold text-muted"><span>All Banners</span></a></p>
+                                <p class="text-center text-white opacity-75 mt-5 mb-0">Want to see them all? <a href="#" class="fw-bold text-muted"><span>All Blogs</span></a></p>
 
                             </form>
                         </div>
@@ -67,5 +84,6 @@
 
 <th:block th:replace="~{admin/index :: scr}"></th:block>
 <th:block th:replace="~{fragments/script}"></th:block>
+<script src="/js/blogForm.js"></script>
 </body>
 </html>
