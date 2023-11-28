@@ -1,0 +1,16 @@
+.carousel .flickity-prev-next-button {
+    background: #007BFF; /* Set your desired background color */
+}
+
+/* Change the position of the carousel control buttons */
+.carousel .flickity-prev-next-button {
+    top: 90%; /* Adjust the vertical position */
+}
+
+.carousel .flickity-prev-next-button.previous {
+    left: 20px; /* Adjust the left position for the previous button */
+}
+
+.carousel .flickity-prev-next-button.next {
+    right: 20px; /* Adjust the right position for the next button */
+}
