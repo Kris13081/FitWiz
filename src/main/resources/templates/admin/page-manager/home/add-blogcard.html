@@ -3,7 +3,7 @@
 
 <th:block th:replace="~{admin/index :: head}"></th:block>
 
-<body class="hold-transition sidebar-mini layout-fixed" th:object="${userDetails}">
+<body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
     <!-- Preloader -->
@@ -24,7 +24,8 @@
                             <form id="blogForm" th:method="POST" th:action="@{/api/admins/management/add-blogcard}" enctype="multipart/form-data">
 
                                 <div class="form-outline mb-4">
-                                    <input type="text"
+                                    <input
+                                           type="text"
                                            name="name"
                                            id="name"
                                            class="form-control form-control-lg"
@@ -48,6 +49,15 @@
                                            class="form-control form-control-lg"
                                            required/>
                                     <label class="form-label" for="description">Description</label>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <input type="text"
+                                           name="url"
+                                           id="url"
+                                           class="form-control form-control-lg"
+                                           required/>
+                                    <label class="form-label" for="url">URL</label>
                                 </div>
 
                                 <div class="form-outline mb-4 border border-white rounded pb-2">

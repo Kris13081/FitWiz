@@ -53,7 +53,7 @@
             <div class="carousel-inner">
                 <!-- Thymeleaf loop for each banner -->
                 <div th:each="banner, iterStat : ${bannersList}" th:classappend="${iterStat.first} ? 'carousel-item active' : 'carousel-item'">
-                    <img th:src="${banner.imagePath}" class="d-block w-100" th:alt="${banner.title}"/>
+                    <img th:src="${banner.imagePath}" class="d-block w-100" th:alt="${banner.title}" loading="lazy"/>
                     <div class="carousel-caption d-none d-md-block">
                         <h5 th:text="${banner.title}">Banner Title</h5>
                         <p th:text="${banner.text}">Banner Text</p>
@@ -85,7 +85,7 @@
                 <h2 class="text-capitalize text-center m-0 py-lg-5 fs-1">Why to choose us</h2>
 
                 <div class="text-center col-lg-4">
-                    <img src="/images/search.png" class="bd-placeholder-img rounded-circle border border-white border-4" alt="Bootstrap Themes"
+                    <img th:src="@{/images/search.png}" class="bd-placeholder-img rounded-circle border border-white border-4" alt="Bootstrap Themes"
                          width="140"
                          height="140" loading="lazy">
                     <h4 class="fw-normal mt-5 text-decoration-underline">Easy To Find</h4>
@@ -96,7 +96,7 @@
                 </div>
 
                 <div class="text-center col-lg-4">
-                    <img src="/images/price.png" class="bd-placeholder-img rounded-circle border border-white border-4" alt="Bootstrap Themes"
+                    <img th:src="@{/images/price.png}" class="bd-placeholder-img rounded-circle border border-white border-4" alt="Bootstrap Themes"
                          width="140"
                          height="140" loading="lazy">
                     <h4 class="fw-normal mt-5 text-decoration-underline">Affordable Prices</h4>
@@ -107,7 +107,7 @@
                 </div>
 
                 <div class="text-center col-lg-4">
-                    <img src="/images/time.png" class="bd-placeholder-img rounded-circle border border-white border-4" alt="Bootstrap Themes"
+                    <img th:src="@{/images/time.png}" class="bd-placeholder-img rounded-circle border border-white border-4" alt="Bootstrap Themes"
                          width="140"
                          height="140" loading="lazy">
                     <h4 class="fw-normal mt-5 text-decoration-underline">Quickly Process</h4>
@@ -127,14 +127,14 @@
                 <div class="carousel" data-flickity='{ "wrapAround": true, "pageDots": false }'>
                     <!-- Iterate over each blog entity from the model -->
                     <div th:each="blog : ${blogsList}" class="carousel-cell">
-                        <div class="card text-center" style="width: 24rem; margin-left: 30px; margin-right: 30px">
+                        <div class="card text-center border border-white border-3 bg-dark text-white" style="width: 24rem; margin-left: 30px; margin-right: 30px">
                             <!-- Use Thymeleaf expressions to access blog properties -->
-                            <img class="card-img-top" th:src="${blog.imagePath}" alt="Blog Image" style="height: 250px; object-fit: cover;">
+                            <img class="card-img-top border-bottom border-white border-3" th:src="${blog.imagePath}" alt="Blog Image" style="height: 250px; object-fit: cover;" loading="lazy">
                             <div class="card-body">
-                                <h5 class="card-title" th:text="${blog.title}"></h5>
-                                <p class="card-text" th:text="${blog.description}"></p>
+                                <h5 class="card-title border-bottom border-white border-1 " th:text="${blog.title}"></h5>
+<!--                                <p class="card-text border border-top-0 border-white border-1" th:text="${blog.description}"></p>-->
                                 <!-- You can add more details here -->
-                                <a class="btn btn-primary" href="#" th:href="@{/blogs/{id}(id=${blog.id})}">Read more</a>
+                                <a class="btn btn-primary border border-white border-3" th:href="${blog.url}">Read more</a>
                             </div>
                         </div>
                     </div>
@@ -157,8 +157,8 @@
                             but you have to be serious whit it, simply because this is for your health. If you want to take this
                             further, order a custom plan from us and if you subscribe we will connect with you daily  to track your progress.
                         </p>
-                        <a href="/api/home" class="btn btn-primary btn-lg px-4 me-md-2">Calculate</a>
-                        <a href="/api/home" class="btn btn-primary btn-lg px-4 me-md-2">Custom plan</a>
+                        <a th:href="@{/api/home}" class="btn btn-primary btn-lg px-4 me-md-2">Calculate</a>
+                        <a th:href="@{/api/home}" class="btn btn-primary btn-lg px-4 me-md-2">Custom plan</a>
                     </div>
                 </div>
             </div>
@@ -173,7 +173,7 @@
 
             <div class=" col-md-4 fs-4">
                 <h2 class="fs-1">FitWizz</h2>
-                <p class="fs-5">Neque, vestibulum sed varius magna et at. Eu, adipiscing morbi augue.</p>
+                <p class="fs-5">You want to know something more, feel free to explore each link and find what you need.</p>
                 <i class="bi-facebook pe-4"></i>
                 <i class="bi-instagram pe-4"></i>
                 <i class="bi-twitter pe-4"></i>
@@ -181,40 +181,40 @@
             </div>
 
             <div class="col-md-2 ">
-                <h4 class="text-primary">Project</h4>
+                <h4 class="text-primary">Socials</h4>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white">Houses</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white">Rooms</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white">Flats</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white">Appartments</a></li>
+                    <li class="nav-item mb-2"><a th:href="@{#}" class="nav-link p-0 text-white">Facebook</a></li>
+                    <li class="nav-item mb-2"><a th:href="@{#}" class="nav-link p-0 text-white">Instagram</a></li>
+                    <li class="nav-item mb-2"><a th:href="@{#}" class="nav-link p-0 text-white">LinkedIn</a></li>
+                    <li class="nav-item mb-2"><a th:href="@{#}" class="nav-link p-0 text-white">GitHub</a></li>
                 </ul>
             </div>
 
             <div class="col-md-2 ">
-                <h4 class="text-primary">Company</h4>
+                <h4 class="text-primary">About us</h4>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white">How we work ?</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white">Capital </a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white">Security </a></li>
+                    <li class="nav-item mb-2"><a th:href="@{#}" class="nav-link p-0 text-white">The Project</a></li>
+                    <li class="nav-item mb-2"><a th:href="@{#}" class="nav-link p-0 text-white">Creator</a></li>
+                    <li class="nav-item mb-2"><a th:href="@{#}" class="nav-link p-0 text-white">Goals</a></li>
                 </ul>
             </div>
 
             <div class="col-md-2 ">
                 <h4 class="text-primary">Movement</h4>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white">Movement</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white">Support us</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white">Pricing</a></li>
+                    <li class="nav-item mb-2"><a th:href="@{#}" class="nav-link p-0 text-white">Movement</a></li>
+                    <li class="nav-item mb-2"><a th:href="@{#}" class="nav-link p-0 text-white">Support us</a></li>
+                    <li class="nav-item mb-2"><a th:href="@{#}" class="nav-link p-0 text-white">Pricing</a></li>
                 </ul>
             </div>
 
             <div class="col-md-2 ">
                 <h4 class="text-primary">Help</h4>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white">Privacy </a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white">Condition</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white">Blog</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white">FAQs</a></li>
+                    <li class="nav-item mb-2"><a th:href="@{#}" class="nav-link p-0 text-white">Privacy </a></li>
+                    <li class="nav-item mb-2"><a th:href="@{#}" class="nav-link p-0 text-white">Shipping</a></li>
+                    <li class="nav-item mb-2"><a th:href="@{#}" class="nav-link p-0 text-white">Contacts</a></li>
+                    <li class="nav-item mb-2"><a th:href="@{#}" class="nav-link p-0 text-white">FAQs</a></li>
                 </ul>
             </div>
         </footer>
@@ -230,7 +230,7 @@
 
             </div>
             <div class="col-md-4 d-flex align-items-center">
-                <p class="text-secondary">Created by: <a href="https://templatesjungle.com/" class="link-primary text-primary-emphasis"
+                <p class="text-secondary">Created by: <a th:href="@{https://github.com/Kris13081}" class="link-primary text-primary-emphasis"
                                         target="_blank">Kristiyan Stefanov</a></p>
 
             </div>

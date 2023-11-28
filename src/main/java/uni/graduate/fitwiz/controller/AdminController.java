@@ -5,6 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import uni.graduate.fitwiz.model.dto.BlogEntityDto;
 import uni.graduate.fitwiz.service.UserService;
 
 @RestController
@@ -41,7 +42,7 @@ public class AdminController {
     }
 
     @GetMapping("/management/add-blogcard")
-    public ModelAndView getHomePageManagerPage() {
+    public ModelAndView getAddBlogPage() {
         return new ModelAndView("/admin/page-manager/home/add-blogcard");
     }
 }

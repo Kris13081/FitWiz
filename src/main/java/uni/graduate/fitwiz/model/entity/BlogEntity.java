@@ -1,5 +1,6 @@
 package uni.graduate.fitwiz.model.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
@@ -19,6 +20,7 @@ import java.time.LocalDateTime;
 public class BlogEntity extends BaseEntity{
 
     @NotEmpty
+    @Column(unique = true)
     private String name;
 
     @NotEmpty
@@ -26,6 +28,9 @@ public class BlogEntity extends BaseEntity{
 
     @NotEmpty
     private String description;
+
+    @NotEmpty
+    private String url;
 
     @NotEmpty
     private String imagePath;
