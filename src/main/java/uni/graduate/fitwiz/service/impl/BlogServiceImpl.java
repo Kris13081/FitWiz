@@ -55,6 +55,7 @@ public class BlogServiceImpl implements BlogService {
         newBlog.setName(blogEntityDto.getName());
         newBlog.setTitle(blogEntityDto.getTitle());
         newBlog.setDescription(blogEntityDto.getDescription());
+        newBlog.setUrl(blogEntityDto.getUrl());
         newBlog.setImagePath(blogImage);
         newBlog.setCreated(LocalDateTime.now());
 

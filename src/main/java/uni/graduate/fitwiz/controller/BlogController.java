@@ -1,6 +1,10 @@
 package uni.graduate.fitwiz.controller;
 
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +17,7 @@ import java.io.IOException;
 @RequestMapping("/api/admins")
 public class BlogController {
 
-    private BlogService blogService;
+    private final BlogService blogService;
 
     public BlogController(BlogService blogService) {
         this.blogService = blogService;
