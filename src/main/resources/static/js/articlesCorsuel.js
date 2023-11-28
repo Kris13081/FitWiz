@@ -1,14 +1,11 @@
-    document.addEventListener("DOMContentLoaded", function () {
-    var myCarousel = new bootstrap.Carousel(document.getElementById('carouselExampleIndicators2'), {
+// Enable Carousel Controls
+$('.carousel-control-prev').click(function () {
+    $('#recipeCarousel').carousel('prev');
 });
 
-    var nextButton = document.querySelector('.carousel-control-next');
-    nextButton.addEventListener('click', function () {
-    myCarousel.next();
+$('.carousel-control-next').click(function () {
+    $('#recipeCarousel').carousel('next');
 });
 
-    var prevButton = document.querySelector('.carousel-control-prev');
-    prevButton.addEventListener('click', function () {
-    myCarousel.prev();
-});
-});
+// Manually trigger carousel initialization after the page is loaded
+$('#recipeCarousel').carousel();
