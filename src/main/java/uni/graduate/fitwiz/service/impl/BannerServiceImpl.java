@@ -1,9 +1,11 @@
 package uni.graduate.fitwiz.service.impl;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import uni.graduate.fitwiz.model.dto.BannerEntityDto;
+import uni.graduate.fitwiz.model.dto.BannerUpdateDto;
 import uni.graduate.fitwiz.model.entity.BannerEntity;
 import uni.graduate.fitwiz.repository.BannerRepository;
 import uni.graduate.fitwiz.service.BannerService;
@@ -43,6 +45,49 @@ public class BannerServiceImpl implements BannerService {
     @Override
     public List<BannerEntity> getBanners() {
         return bannerRepository.findAll();
+    }
+
+    @Override
+    public void delete(Long id) {
+        Optional<BannerEntity> optionalBanner = bannerRepository.findById(id);
+
+        if (optionalBanner.isPresent()) {
+            bannerRepository.delete(optionalBanner.get());
+        } else {
+            throw new EntityNotFoundException("Banner with ID " + id + " not found");
+        }
+    }
+
+    @Override
+    public HttpStatus updateBanner(Long id, BannerUpdateDto bannerUpdateDto) {
+        Optional<BannerEntity> optionalBanner = bannerRepository.findById(id);
+
+        if (optionalBanner.isPresent()) {
+            BannerEntity bannerEntity = getBannerEntity(bannerUpdateDto, optionalBanner);
+
+            bannerRepository.save(bannerEntity);
+            return HttpStatus.OK;
+        } else {
+            return HttpStatus.BAD_REQUEST;
+        }
+    }
+
+    private static BannerEntity getBannerEntity(BannerUpdateDto bannerUpdateDto, Optional<BannerEntity> optionalBanner) {
+        BannerEntity bannerEntity = optionalBanner.get();
+
+        // Update fields from the DTO
+        if (bannerUpdateDto.getName() != null) {
+            bannerEntity.setName(bannerUpdateDto.getName());
+        }
+
+        if (bannerUpdateDto.getTitle() != null){
+            bannerEntity.setTitle(bannerUpdateDto.getTitle());
+        }
+
+        if (bannerUpdateDto.getText() != null) {
+            bannerEntity.setText(bannerUpdateDto.getText());
+        }
+        return bannerEntity;
     }
 
     private BannerEntity mapDtoToEntity(BannerEntityDto bannerEntityDto) throws IOException {

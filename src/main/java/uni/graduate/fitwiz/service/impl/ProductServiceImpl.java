@@ -10,6 +10,7 @@ import uni.graduate.fitwiz.service.GcsService;
 import uni.graduate.fitwiz.service.ProductService;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -34,6 +35,11 @@ public class ProductServiceImpl implements ProductService {
         ProductEntity product = mapDtoToEntity(productEntityDto);
         productRepository.save(product);
         return new ResponseEntity<>("Successfully created product", HttpStatus.CREATED);
+    }
+
+    @Override
+    public List<ProductEntity> getProducts() {
+        return productRepository.findAll();
     }
 
     private ProductEntity mapDtoToEntity(ProductEntityDto productEntityDto) throws IOException {

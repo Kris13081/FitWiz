@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface BannerRepository extends JpaRepository<BannerEntity, Long> {
 
     Optional<BannerEntity> findByName(String name);
+
 }
