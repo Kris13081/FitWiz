@@ -1,9 +1,15 @@
 package uni.graduate.fitwiz.service.impl;
 
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import uni.graduate.fitwiz.enums.UserRoleEnum;
+import uni.graduate.fitwiz.model.dto.BannerUpdateDto;
 import uni.graduate.fitwiz.model.dto.UserEntityDto;
+import uni.graduate.fitwiz.model.dto.UserUpdateDto;
+import uni.graduate.fitwiz.model.entity.BannerEntity;
 import uni.graduate.fitwiz.model.entity.UserEntity;
 import uni.graduate.fitwiz.model.entity.UserRoleEntity;
 import uni.graduate.fitwiz.repository.UserRepository;
@@ -38,7 +44,7 @@ public class UserServiceImpl implements UserService {
 
         Optional<UserEntity> optionalUser = userRepository.findUserEntityByEmail(userEntityDto.getEmail());
 
-        if (optionalUser.isPresent()){
+        if (optionalUser.isPresent()) {
             return false;
         }
 
@@ -54,33 +60,83 @@ public class UserServiceImpl implements UserService {
         Optional<UserEntity> optionalUser = userRepository.findUserEntityByEmail(currentUsername);
 
         if (optionalUser.isPresent()) {
-         return userRepository.getUserEntitiesByEmail(currentUsername);
+            return userRepository.getUserEntitiesByEmail(currentUsername);
         }
         return null;
     }
 
-    private UserEntity dtoToEntityMapper(UserEntityDto userEntityDto) throws IOException {
-        UserEntity user = getUserDetails(userEntityDto.getUsername());
-
-        if (user == null) {
-            user = new UserEntity();
-
-            String profileImagePath = gcsService.uploadProfileImages("fitwiz_images_bucket", userEntityDto.getProfileImage());
-            UserRoleEntity role = userRoleRepository.getByRole(UserRoleEnum.USER);
-            List<UserRoleEntity> roles = user.getRoles();
-            roles.add(role);
-
-            user.setUsername(userEntityDto.getUsername());
-            user.setEmail(userEntityDto.getEmail());
-            user.setPassword(passwordEncoder.encode(userEntityDto.getPassword()));
-            user.setProfileImage(profileImagePath);
-            user.setRoles(roles);
-            userRepository.save(user);
-        }
-
-        return user;
+    @Override
+    public List<UserEntity> getUsers() {
+        return userRepository.findAll();
     }
 
+    @Override
+    public void delete(Long id) {
+        Optional<UserEntity> optionalUser = userRepository.findById(id);
 
+        if (optionalUser.isPresent()) {
+            userRepository.delete(optionalUser.get());
+        } else {
+            throw new EntityNotFoundException("User with ID " + id + " not found");
+        }
+    }
 
-}
+    @Override
+    public HttpStatus updateUser(Long id, UserUpdateDto userUpdateDto) {
+        Optional<UserEntity> optionalUser = userRepository.findById(id);
+
+        if (optionalUser.isPresent()) {
+            UserEntity userEntity = getUserEntity(userUpdateDto, optionalUser);
+
+            if (userEntity == null) {
+                return HttpStatus.BAD_REQUEST;
+            }
+
+            userRepository.save(userEntity);
+            return HttpStatus.OK;
+        }
+
+        return HttpStatus.BAD_REQUEST;
+    }
+
+        private static UserEntity getUserEntity (UserUpdateDto userUpdateDto, Optional < UserEntity > optionalUser){
+            UserEntity userEntity = optionalUser.get();
+
+            if (!userUpdateDto.getUsername().isEmpty()) {
+                userEntity.setUsername(userUpdateDto.getUsername());
+            } else {
+                return null;
+            }
+
+            if (!userUpdateDto.getEmail().isEmpty() && userUpdateDto.getEmail().contains("@") && userUpdateDto.getEmail().contains(".")) {
+                userEntity.setEmail(userUpdateDto.getEmail());
+            } else {
+                return null;
+            }
+
+            return userEntity;
+        }
+
+        private UserEntity dtoToEntityMapper (UserEntityDto userEntityDto) throws IOException {
+            UserEntity user = getUserDetails(userEntityDto.getUsername());
+
+            if (user == null) {
+                user = new UserEntity();
+
+                String profileImagePath = gcsService.uploadProfileImages("fitwiz_images_bucket", userEntityDto.getProfileImage());
+                UserRoleEntity role = userRoleRepository.getByRole(UserRoleEnum.USER);
+                List<UserRoleEntity> roles = user.getRoles();
+                roles.add(role);
+
+                user.setUsername(userEntityDto.getUsername());
+                user.setEmail(userEntityDto.getEmail());
+                user.setPassword(passwordEncoder.encode(userEntityDto.getPassword()));
+                user.setProfileImage(profileImagePath);
+                user.setRoles(roles);
+                userRepository.save(user);
+            }
+
+            return user;
+        }
+
+    }
