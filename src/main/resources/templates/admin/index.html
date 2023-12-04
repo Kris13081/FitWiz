@@ -45,16 +45,22 @@
                 <a class="nav-link" data-widget="pushmenu" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a th:href="@{/api/admins/index}" class="nav-link">Home</a>
+                <a th:href="@{/api/admins/index}" class=" nav-link">Home</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a th:href="@{/api/admins/add-product}" class="nav-link">Add Product</a>
+                <a th:href="@{/api/admins/add-product}" class= "nav-link">Add Product</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a th:href="@{/api/admins/index}" class="nav-link">Orders</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a th:href="@{/api/admins/index}" class="nav-link">Users</a>
+                <a th:href="@{/api/admins/all-users}" class="nav-link">All Users</a>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a th:href="@{/api/admins/management/add-blogcard}" class="nav-link">Add Blog</a>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a th:href="@{/api/admins/management/add-banner}" class="nav-link">Add Banner</a>
             </li>
         </ul>
 
@@ -144,7 +150,7 @@
                     </li>
                     <li class="nav-header">USERS</li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a th:href="@{/api/admins/all-users}" class="nav-link">
                             <i class="nav-icon fas fa-user"></i>
                             <p> All Users</p>
                         </a>
@@ -304,40 +310,6 @@
                             </table>
                         </div>
 
-
-                        <h2 class="w-100 border border-2 border-dark  d-flex justify-content-center">Users</h2>
-                        <div class="container mt-2 h-50 overflow-auto p-0">
-                            <table class="table table-bordered h-50 overflow-hidden">
-                                <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Username</th>
-                                    <th>Email</th>
-                                    <th>Actions</th>
-                                    <!-- Add more columns based on your entity fields -->
-                                </tr>
-                                </thead>
-                                <tbody class="overflow-hidden">
-                                <!-- Use Thymeleaf to iterate over your entity records -->
-                                <tr th:each="user : ${usersList}" th:id="${user.username}">
-                                    <td class="id" th:text="${user.id}"></td>
-                                    <td class="username" th:text="${user.username}"></td>
-                                    <td class="email" th:text="${user.email}"></td>
-
-                                    <!-- Add more cells based on your entity fields -->
-                                    <td class="actions d-flex flex-row justify-content-around">
-                                        <button type="button" class="user-edit-btn btn btn-primary btn-sm" th:id="'editBtn-' + ${user.username}">Edit</button>
-
-                                        <form th:method="POST" th:action="@{/api/admins/management/user/delete/{id}}" th:object="${user.id}">
-                                            <input type="hidden" name="id" th:value="${user.id}" />
-                                            <button type="submit" class="delete-btn btn btn-danger btn-sm">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
                     </section>
                     <!-- /.Left col -->
                     <!-- right col (We are only adding the ID to make the widgets sortable)-->
@@ -482,7 +454,6 @@
 
     <script src="/js/BannerRecords.js"> </script>
 
-    <script src="/js/UserRecords.js"> </script>
 </div>
 </body>
 </html>
