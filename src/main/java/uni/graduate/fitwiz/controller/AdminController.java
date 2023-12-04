@@ -77,4 +77,9 @@ public class AdminController {
     public ModelAndView getAddBlogPage() {
         return new ModelAndView("/admin/page-manager/home/add-blogcard");
     }
+
+    @GetMapping("/all-users")
+    public ModelAndView getAllUsersPage() {
+        return new ModelAndView("/admin/page-manager/user/all-users");
+    }
 }

@@ -99,7 +99,6 @@ function saveUserHandler(event) {
         });
 }
 
-
 function undoHandler() {
     location.reload();
 }
