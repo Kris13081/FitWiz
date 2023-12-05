@@ -9,5 +9,6 @@ public class UserUpdateDto {
 
     private String username;
     private String email;
+    private String role;
 
 }

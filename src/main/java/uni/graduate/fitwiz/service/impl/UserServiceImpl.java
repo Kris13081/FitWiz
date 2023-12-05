@@ -18,6 +18,7 @@ import uni.graduate.fitwiz.service.GcsService;
 import uni.graduate.fitwiz.service.UserService;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -99,7 +100,7 @@ public class UserServiceImpl implements UserService {
         return HttpStatus.BAD_REQUEST;
     }
 
-        private static UserEntity getUserEntity (UserUpdateDto userUpdateDto, Optional < UserEntity > optionalUser){
+        private UserEntity getUserEntity (UserUpdateDto userUpdateDto, Optional < UserEntity > optionalUser){
             UserEntity userEntity = optionalUser.get();
 
             if (!userUpdateDto.getUsername().isEmpty()) {
@@ -112,6 +113,24 @@ public class UserServiceImpl implements UserService {
                 userEntity.setEmail(userUpdateDto.getEmail());
             } else {
                 return null;
+            }
+
+            if (!userUpdateDto.getRole().isEmpty() && userUpdateDto.getRole().equals("ADMIN")){
+                UserRoleEntity admin = userRoleRepository.getByRole(UserRoleEnum.ADMIN);
+                UserRoleEntity user = userRoleRepository.getByRole(UserRoleEnum.USER);
+                List<UserRoleEntity> roles = new ArrayList<>();
+
+                roles.add(admin);
+                roles.add(user);
+
+                userEntity.setRoles(roles);
+            } else {
+                UserRoleEntity user = userRoleRepository.getByRole(UserRoleEnum.USER);
+                List<UserRoleEntity> roles = new ArrayList<>();
+
+                roles.add(user);
+
+                userEntity.setRoles(roles);
             }
 
             return userEntity;
