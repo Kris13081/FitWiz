@@ -12,6 +12,7 @@
 </header>
 
 <main class="container h-75">
+    <th:block th:replace="~{fragments/snow.html :: snowflakes}"></th:block>
     <form class='register-form' th:action="@{/api/users/login}" th:method="POST">
 
         <div class="flex-row">

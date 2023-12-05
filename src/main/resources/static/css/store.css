@@ -1,0 +1,53 @@
+.card {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover img {
+    transform: scale(1.2);
+}
+
+.card-body {
+    transition: background-color 0.3s ease-in-out;
+}
+
+.card:hover .card-body {
+    background-color: #dc4343;
+    border-bottom: 3px solid white;
+}
+
+.card-title,
+.card-text,
+.card-footer a {
+    transition: color 0.3s ease-in-out;
+}
+
+.card:hover .card-title,
+.card:hover .card-text,
+.card-footer a:hover {
+    color: #ffc107; /* Change to your preferred hover color */
+}
+
+.header-background {
+    background-image: url('https://storage.googleapis.com/fitwiz_images_bucket/products-images/store-banner.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+}
+
+@media (min-width: 576px) {
+    .header-background {
+        height: 300px;
+    }
+}

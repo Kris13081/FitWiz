@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-gray"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link th:replace="~{/fragments/common-links}">
+    <link rel="stylesheet" th:href="@{/css/store.css}">
+    <title>FitWizz</title>
+</head>
+<body class="container-fluid p-0 h-100 bg-gray">
+<!-- Navigation-->
+<th:block th:replace="~{fragments/nav :: nav}"></th:block>
+<th:block th:replace="~{fragments/snow.html :: snowflakes}"></th:block>
+
+<!-- Header-->
+<header class="store-header bg-dark h-50 border-bottom border-white position-relative text-white">
+    <div class="header-background h-100">
+        <div class="container h-100 d-flex flex-column justify-content-center align-items-center text-center">
+            <div class="header-content bg-dark bg-opacity-50 rounded p-4">
+                <h1 class="display-4 fw-bolder">Shop in style</h1>
+                <p class="lead fw-normal mb-0 text-warning">With this shop homepage template</p>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Section-->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-xl-4 justify-content-center">
+            <!-- Thymeleaf iteration over products -->
+            <div th:each="product : ${productsList}" class="col mb-5">
+                <div class="card h-100 border-3 border-white bg-secondary text-white">
+                    <!-- Product image -->
+                    <img class="card-img-top border-3 border-bottom border-white" th:src="${product.mainImgPath}" alt="Product Image" />
+                    <!-- Product details -->
+                    <div class="card-body p-2">
+                        <div class="text-center">
+                            <!-- Product name -->
+                            <h5 class="fw-bolder" th:text="${product.name}">Product Name</h5>
+                            <!-- Product price -->
+                            <span class="w-100" th:text="${'$' + product.price}"></span>
+                        </div>
+                    </div>
+                    <!-- Product actions -->
+                    <div class="card-footer p-1 pt-1 border-top-0 bg-transparent">
+                        <div class="text-center d-flex justify-content-around">
+                            <!-- Link to view product details -->
+                            <a th:href="@{'/api/product/' + ${product.id}}" class="btn btn-outline-light mt-auto">View Details</a>
+                            <a th:href="@{'/api/product/' + ${product.id}}" class="btn btn-outline-light mt-auto">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Thymeleaf iteration -->
+        </div>
+    </div>
+</section>
+
+<!-- Footer-->
+<div class="container-fluid bg-dark m-0 p-0 w-100 d-flex justify-content-center border-top border-white">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-2 text-secondary w-75">
+        <div class="col-md-8 d-flex align-items-center">
+            <p>© 2023 FitWizz, Inc. All rights reserved.</p>
+        </div>
+        <div class="col-md-4 d-flex align-items-center">
+            <p class="text-secondary">Created by: <a th:href="@{https://github.com/Kris13081}" class="link-primary text-primary-emphasis" target="_blank">Kristiyan Stefanov</a></p>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

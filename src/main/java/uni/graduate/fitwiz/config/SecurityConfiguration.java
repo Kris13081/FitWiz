@@ -27,7 +27,7 @@ public class SecurityConfiguration {
                                 authorizeHttpRequests.
                                         requestMatchers(PathRequest.toStaticResources().atCommonLocations())
                                         .permitAll().
-                                        requestMatchers("/api/home", "/api/users/login", "/api/users/registration", "/api/users/login-error")
+                                        requestMatchers("/api/home", "/api/users/login", "/api/users/registration", "/api/users/login-error", "/api/store")
                                         .permitAll().
                                         requestMatchers("/api/users/**")
                                         .hasRole(UserRoleEnum.USER.name()).
