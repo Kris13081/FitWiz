@@ -1,10 +1,8 @@
 package uni.graduate.fitwiz.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import uni.graduate.fitwiz.enums.ProductTypeEnum;
@@ -26,10 +24,10 @@ public class ProductEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private ProductTypeEnum category;
 
-    @NotEmpty
+    @NotNull
     private BigDecimal price;
 
-    @NotEmpty
+    @Column(nullable = false)
     private int quantity;
 
     @NotEmpty

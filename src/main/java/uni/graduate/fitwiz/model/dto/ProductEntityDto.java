@@ -1,8 +1,10 @@
 package uni.graduate.fitwiz.model.dto;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,10 +29,10 @@ public class ProductEntityDto {
     @Enumerated(EnumType.STRING)
     private ProductTypeEnum category;
 
-    @NotEmpty
+    @NotNull
     private BigDecimal price;
 
-    @NotEmpty
+    @Column(nullable = false)
     private int quantity;
 
     private MultipartFile mainImage;

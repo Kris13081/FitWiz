@@ -12,6 +12,7 @@
 </header>
 
 <main class="container h-75" th:object="${userEntityDto}">
+    <th:block th:replace="~{fragments/snow.html :: snowflakes}"></th:block>
     <form class='register-form pt-3' th:action="@{/api/users/registration}" th:method="POST"
           enctype="multipart/form-data">
 
