@@ -25,6 +25,8 @@ spring:
     password: ${MYSQL_PASSWORD}
     url: ${DB_URL}
 logging:
+  file:
+    path: ${LOGS}
   level:
     org:
       hibernate:

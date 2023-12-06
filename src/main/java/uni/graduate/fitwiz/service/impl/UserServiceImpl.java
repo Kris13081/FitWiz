@@ -2,14 +2,11 @@ package uni.graduate.fitwiz.service.impl;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import uni.graduate.fitwiz.enums.UserRoleEnum;
-import uni.graduate.fitwiz.model.dto.BannerUpdateDto;
 import uni.graduate.fitwiz.model.dto.UserEntityDto;
 import uni.graduate.fitwiz.model.dto.UserUpdateDto;
-import uni.graduate.fitwiz.model.entity.BannerEntity;
 import uni.graduate.fitwiz.model.entity.UserEntity;
 import uni.graduate.fitwiz.model.entity.UserRoleEntity;
 import uni.graduate.fitwiz.repository.UserRepository;
