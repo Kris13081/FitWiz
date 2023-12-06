@@ -45,7 +45,7 @@
                 <a class="nav-link" data-widget="pushmenu" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a th:href="@{/api/admins/index}" class=" nav-link">Home</a>
+                <a th:href="@{/api/admins/index}" class=" nav-link">Dashboard</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a th:href="@{/api/admins/add-product}" class= "nav-link">Add Product</a>
@@ -57,11 +57,9 @@
                 <a th:href="@{/api/admins/all-users}" class="nav-link">All Users</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a th:href="@{/api/admins/management/add-blogcard}" class="nav-link">Add Blog</a>
+                <a th:href="@{/api/admins/management/homepage-manager}" class="nav-link">Homepage Manager</a>
             </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a th:href="@{/api/admins/management/add-banner}" class="nav-link">Add Banner</a>
-            </li>
+
         </ul>
 
         <!-- Right navbar links -->
@@ -175,6 +173,12 @@
                                     <p>Add Blogcard</p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a th:href="@{/api/admins/management/homepage-manager}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Homepage Manager</p>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
@@ -275,40 +279,6 @@
                 <div class="row">
                     <!-- Left col -->
                     <section class="col-lg-7 connectedSortable">
-
-                        <h2 class="w-100 border border-2 border-dark d-flex justify-content-center">Banner Records</h2>
-                        <div class="container mt-1 h-50 overflow-auto p-0">
-                            <table class="table table-bordered">
-                                <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Title</th>
-                                    <th>Description</th>
-                                    <th>Actions</th>
-                                    <!-- Add more columns based on your entity fields -->
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <!-- Use Thymeleaf to iterate over your entity records -->
-                                <tr th:each="banner : ${bannersList}" th:id="${banner.name}">
-                                    <td class="id" th:text="${banner.id}"></td>
-                                    <td class="name" th:text="${banner.name}"></td>
-                                    <td class="title" th:text="${banner.title}"></td>
-                                    <td class="text" th:text="${banner.text}"></td>
-                                    <!-- Add more cells based on your entity fields -->
-                                    <td class="actions d-flex flex-row justify-content-around">
-                                        <button type="button" class="edit-btn btn btn-primary btn-sm" th:id="'editBtn-' + ${banner.name}">Edit</button>
-
-                                        <form th:method="POST" th:action="@{/api/admins/management/banner/delete/{id}}" th:object="${banner.id}">
-                                            <input type="hidden" name="id" th:value="${banner.id}" />
-                                            <button type="submit" class="delete-btn btn btn-danger btn-sm">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
 
                     </section>
                     <!-- /.Left col -->
@@ -451,8 +421,6 @@
     <script src="/dist/js/adminlte.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="/dist/js/pages/dashboard.js"></script>
-
-    <script src="/js/BannerRecords.js"> </script>
 
 </div>
 </body>

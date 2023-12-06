@@ -22,7 +22,9 @@ public class WebConfig implements WebMvcConfigurer {
                 //product patterns
                 .addPathPatterns("/api/admins/add-product")
                 //blog patterns
-                .addPathPatterns("/api/admins/management/add-blogcard")
+                .addPathPatterns("/api/admins/management/add-blogcard",
+                                 "/api/admins/management/blog/delete/**",
+                                 "/api/admins/management/blog/update/**")
                 //banner patterns
                 .addPathPatterns("/api/admins/management/add-banner",
                                  "/api/admins/management/banner/delete/**",

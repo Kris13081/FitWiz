@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Service
 @Scope("singleton")
@@ -34,9 +35,12 @@ public class LoggingService {
     }
 
     private String buildLogMessage(Object object) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime timestamp = LocalDateTime.now();
+        String formattedTimestamp = timestamp.format(formatter);
+
         String jsonString = gson.toJson(modelMapper.map(object, String.class));
-        return timestamp + " - " + jsonString;
+        return formattedTimestamp + " - " + jsonString;
     }
 
     private void writeLogToFile(String logMessage) {

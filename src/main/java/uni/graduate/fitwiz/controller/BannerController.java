@@ -30,7 +30,7 @@ public class BannerController {
     public ModelAndView deleteBanner(@PathVariable @RequestParam Long id) {
         bannerService.delete(id);
 
-        return new ModelAndView("redirect:/api/admins/index");
+        return new ModelAndView("redirect:/api/admins/management/homepage-manager");
     }
 
     @PreAuthorize("hasRole('ADMIN')")

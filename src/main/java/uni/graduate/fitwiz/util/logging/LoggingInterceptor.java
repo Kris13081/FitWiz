@@ -30,6 +30,12 @@ public class LoggingInterceptor implements HandlerInterceptor {
         } else if (request.getRequestURL().toString().contains("/api/admins/management/add-blogcard") && request.getMethod().equals("POST")) {
             loggingService.log("New blogcard created");
 
+        } else if (request.getRequestURL().toString().contains("/api/admins/management/blog/delete") && request.getMethod().equals("POST")) {
+            loggingService.log("Blog deleted");
+
+        } else if (request.getRequestURL().toString().contains("/api/admins/management/blog/update") && request.getMethod().equals("PUT")) {
+            loggingService.log("Blog updated");
+
         } else if (request.getRequestURL().toString().contains("/api/admins/management/add-banner") && request.getMethod().equals("POST")) {
             loggingService.log("New banner created");
 
