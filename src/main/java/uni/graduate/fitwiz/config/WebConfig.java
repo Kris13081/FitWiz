@@ -19,7 +19,18 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loggingInterceptor())
-                .addPathPatterns("/api/admins/add-product", "/api/admins/management/add-blogcard");
+                //product patterns
+                .addPathPatterns("/api/admins/add-product")
+                //blog patterns
+                .addPathPatterns("/api/admins/management/add-blogcard")
+                //banner patterns
+                .addPathPatterns("/api/admins/management/add-banner",
+                                 "/api/admins/management/banner/delete/**",
+                                 "/api/admins/management/banner/update/**")
+                //user patterns
+                .addPathPatterns("/api/users/registration",
+                                 "/api/admins/management/user/delete/**",
+                                 "/api/admins/management/user/update/**");
     }
 
     @Bean

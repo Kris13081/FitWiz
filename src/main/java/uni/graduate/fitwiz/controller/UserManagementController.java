@@ -23,7 +23,7 @@ public class UserManagementController {
     public ModelAndView deleteBanner(@PathVariable @RequestParam Long id) {
         userService.delete(id);
 
-        return new ModelAndView("redirect:/api/admins/index");
+        return new ModelAndView("redirect:/api/admins/all-users");
     }
 
     @PreAuthorize("hasRole('ADMIN')")
