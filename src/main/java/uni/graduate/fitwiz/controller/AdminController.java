@@ -82,4 +82,8 @@ public class AdminController {
     public ModelAndView getAllUsersPage() {
         return new ModelAndView("/admin/page-manager/user/all-users");
     }
+    @GetMapping("/management/homepage-manager")
+    public ModelAndView getHomepageManagerPage() {
+        return new ModelAndView("/admin/page-manager/home/homepage-manager");
+    }
 }

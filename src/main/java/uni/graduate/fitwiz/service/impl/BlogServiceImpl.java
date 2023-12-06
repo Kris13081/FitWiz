@@ -1,9 +1,11 @@
 package uni.graduate.fitwiz.service.impl;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import uni.graduate.fitwiz.model.dto.BlogEntityDto;
+import uni.graduate.fitwiz.model.dto.BlogUpdateDto;
 import uni.graduate.fitwiz.model.entity.BlogEntity;
 import uni.graduate.fitwiz.repository.BlogRepository;
 import uni.graduate.fitwiz.service.BlogService;
@@ -32,7 +34,7 @@ public class BlogServiceImpl implements BlogService {
 
         Optional<BlogEntity> optionalBlog = blogRepository.findByName(blogEntityDto.getName());
 
-        if (optionalBlog.isPresent()){
+        if (optionalBlog.isPresent()) {
             return new ResponseEntity<>("Blog with this name already exist!", HttpStatus.FOUND);
         }
 
@@ -45,6 +47,53 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public List<BlogEntity> getBlogs() {
         return blogRepository.findAll();
+    }
+
+    @Override
+    public void delete(Long id) {
+        Optional<BlogEntity> optionalBlog = blogRepository.findById(id);
+
+        if (optionalBlog.isPresent()) {
+            blogRepository.delete(optionalBlog.get());
+        } else {
+            throw new EntityNotFoundException("Blog with ID " + id + " not found");
+        }
+    }
+
+    @Override
+    public HttpStatus updateBlog(Long id, BlogUpdateDto blogUpdateDto) {
+        Optional<BlogEntity> optionalBlog = blogRepository.findById(id);
+
+        if (optionalBlog.isPresent()) {
+            BlogEntity blogEntity = getBlogEntity(blogUpdateDto, optionalBlog);
+
+            blogRepository.save(blogEntity);
+            return HttpStatus.OK;
+        } else {
+            return HttpStatus.BAD_REQUEST;
+        }
+    }
+
+    private static BlogEntity getBlogEntity(BlogUpdateDto blogUpdateDto, Optional<BlogEntity> optionalBlog) {
+        BlogEntity blog = optionalBlog.get();
+
+        // Update fields from the DTO
+        if (blogUpdateDto.getName() != null) {
+            blog.setName(blogUpdateDto.getName());
+        }
+
+        if (blogUpdateDto.getTitle() != null) {
+            blog.setTitle(blogUpdateDto.getTitle());
+        }
+
+        if (blogUpdateDto.getDescription() != null) {
+            blog.setDescription(blogUpdateDto.getDescription());
+        }
+
+        if (blogUpdateDto.getUrl() != null) {
+            blog.setUrl(blogUpdateDto.getUrl());
+        }
+        return blog;
     }
 
     private BlogEntity mapDtoToEntity(BlogEntityDto blogEntityDto) throws IOException {

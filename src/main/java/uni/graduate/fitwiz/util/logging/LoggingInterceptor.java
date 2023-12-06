@@ -25,11 +25,35 @@ public class LoggingInterceptor implements HandlerInterceptor {
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 
         if (request.getRequestURL().toString().contains("/api/admins/add-product") && request.getMethod().equals("POST")) {
-            // Example: Log a message using the LoggingService
             loggingService.log("New product created");
+
         } else if (request.getRequestURL().toString().contains("/api/admins/management/add-blogcard") && request.getMethod().equals("POST")) {
-            // Example: Log another message using the LoggingService
             loggingService.log("New blogcard created");
+
+        } else if (request.getRequestURL().toString().contains("/api/admins/management/blog/delete") && request.getMethod().equals("POST")) {
+            loggingService.log("Blog deleted");
+
+        } else if (request.getRequestURL().toString().contains("/api/admins/management/blog/update") && request.getMethod().equals("PUT")) {
+            loggingService.log("Blog updated");
+
+        } else if (request.getRequestURL().toString().contains("/api/admins/management/add-banner") && request.getMethod().equals("POST")) {
+            loggingService.log("New banner created");
+
+        } else if (request.getRequestURL().toString().contains("/api/admins/management/banner/delete") && request.getMethod().equals("POST")) {
+            loggingService.log("Banner deleted");
+
+        } else if (request.getRequestURL().toString().contains("/api/admins/management/banner/update") && request.getMethod().equals("PUT")) {
+            loggingService.log("Banner updated");
+
+        } else if (request.getRequestURL().toString().contains("api/users/registration") && request.getMethod().equals("POST")) {
+            loggingService.log("New registered user");
+
+        } else if (request.getRequestURL().toString().contains("/api/admins/management/user/delete") && request.getMethod().equals("POST")) {
+            loggingService.log("Deleted user");
+
+        } else if (request.getRequestURL().toString().contains("/api/admins/management/user/update") && request.getMethod().equals("PUT")) {
+            loggingService.log("Updated user");
+
         }
     }
 

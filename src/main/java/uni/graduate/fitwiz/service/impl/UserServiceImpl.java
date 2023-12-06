@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService {
         return HttpStatus.BAD_REQUEST;
     }
 
-        private UserEntity getUserEntity (UserUpdateDto userUpdateDto, Optional < UserEntity > optionalUser){
+        private UserEntity getUserEntity (UserUpdateDto userUpdateDto, Optional <UserEntity> optionalUser){
             UserEntity userEntity = optionalUser.get();
 
             if (!userUpdateDto.getUsername().isEmpty()) {

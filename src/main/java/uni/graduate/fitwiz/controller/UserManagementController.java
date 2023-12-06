@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import uni.graduate.fitwiz.model.dto.BannerUpdateDto;
 import uni.graduate.fitwiz.model.dto.UserUpdateDto;
 import uni.graduate.fitwiz.service.UserService;
 
@@ -23,7 +22,7 @@ public class UserManagementController {
     public ModelAndView deleteBanner(@PathVariable @RequestParam Long id) {
         userService.delete(id);
 
-        return new ModelAndView("redirect:/api/admins/index");
+        return new ModelAndView("redirect:/api/admins/all-users");
     }
 
     @PreAuthorize("hasRole('ADMIN')")

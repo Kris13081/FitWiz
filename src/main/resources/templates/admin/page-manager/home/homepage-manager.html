@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{admin/index :: head}"></th:block>
+
+<body class="hold-transition sidebar-mini layout-fixed" th:object="${userDetails}">
+<div class="wrapper">
+
+    <!-- Preloader -->
+    <th:block th:replace="~{admin/index :: logo-placeholder}"></th:block>
+
+    <th:block th:replace="~{admin/index :: admin-nav}"></th:block>
+
+    <th:block th:replace="~{admin/index :: sidebar}"></th:block>
+
+    <div class="content-wrapper bg-dark">
+        <div class="container h-100 pt-5">
+            <div class="row d-flex justify-content-center align-items-center h-100 ">
+
+                        <h2 class="w-100 border border-2 border-dark d-flex justify-content-center">Banner Records</h2>
+                        <div class="container mt-1 h-50 overflow-auto p-0">
+                            <table class="table table-bordered bg-white">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Actions</th>
+                                    <!-- Add more columns based on your entity fields -->
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <!-- Use Thymeleaf to iterate over your entity records -->
+                                <tr th:each="banner : ${bannersList}" th:id="${banner.name}">
+                                    <td class="id" th:text="${banner.id}"></td>
+                                    <td class="name" th:text="${banner.name}"></td>
+                                    <td class="title" th:text="${banner.title}"></td>
+                                    <td class="text" th:text="${banner.text}"></td>
+                                    <!-- Add more cells based on your entity fields -->
+                                    <td class="actions d-flex flex-row justify-content-around">
+                                        <button type="button" class="edit-btn btn btn-primary btn-sm" th:id="'editBtn-' + ${banner.name}">Edit</button>
+
+                                        <form th:method="POST" th:action="@{/api/admins/management/banner/delete/{id}}" th:object="${banner.id}">
+                                            <input type="hidden" name="id" th:value="${banner.id}" />
+                                            <button type="submit" class="delete-btn btn btn-danger btn-sm">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                <h2 class="w-100 border border-2 border-dark d-flex justify-content-center">Banner Records</h2>
+                <div class="container mt-1 h-50 overflow-auto p-0">
+                    <table class="table table-bordered bg-white">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>URL</th>
+                            <th>Actions</th>
+                            <!-- Add more columns based on your entity fields -->
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- Use Thymeleaf to iterate over your entity records -->
+                        <tr th:each="blog : ${blogsList}" th:id="${blog.name}">
+                            <td class="id" th:text="${blog.id}"></td>
+                            <td class="name" th:text="${blog.name}"></td>
+                            <td class="title" th:text="${blog.title}"></td>
+                            <td class="description" th:text="${blog.description}"></td>
+                            <td class="url" th:text="${blog.url}"></td>
+                            <!-- Add more cells based on your entity fields -->
+                            <td class="actions d-flex flex-row justify-content-around">
+                                <button type="button" class="edit-btn btn btn-primary btn-sm" th:id="'editBtn-' + ${blog.name}">Edit</button>
+
+                                <form th:method="POST" th:action="@{/api/admins/management/blog/delete/{id}}" th:object="${blog.id}">
+                                    <input type="hidden" name="id" th:value="${blog.id}" />
+                                    <button type="submit" class="delete-btn btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <th:block th:replace="~{admin/index :: footer}"></th:block>
+</div>
+
+<th:block th:replace="~{admin/index :: scr}"></th:block>
+<th:block th:replace="~{fragments/script}"></th:block>
+<script src="/js/BannerRecords.js"> </script>
+<script src="/js/BlogRecords.js"> </script>
+
+</body>
+</html>
