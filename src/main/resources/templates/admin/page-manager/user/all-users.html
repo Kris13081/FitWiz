@@ -26,6 +26,7 @@
                             <th>ID</th>
                             <th>Username</th>
                             <th>Email</th>
+                            <th>Role</th>
                             <th>Actions</th>
                             <!-- Add more columns based on your entity fields -->
                         </tr>
@@ -36,9 +37,12 @@
                             <td class="id" th:text="${user.id}"></td>
                             <td class="username" th:text="${user.username}"></td>
                             <td class="email" th:text="${user.email}"></td>
+                            <td class="roles">
+                                <th:block th:text="${#strings.contains(user.roles, 'ADMIN') ? 'Admin' : 'User'}"></th:block>
+                            </td>
 
                             <!-- Add more cells based on your entity fields -->
-                            <td class="actions d-flex flex-row justify-content-around">
+                            <td class="actions d-flex flex-row justify-content-around h-100">
                                 <button type="button" class="user-edit-btn btn btn-primary btn-sm" th:id="'editBtn-' + ${user.username}">Edit</button>
 
                                 <form th:method="POST" th:action="@{/api/admins/management/user/delete/{id}}" th:object="${user.id}">
