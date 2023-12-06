@@ -1,8 +1,10 @@
 package uni.graduate.fitwiz.model.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import uni.graduate.fitwiz.enums.UserRoleEnum;
 
+@Getter
 @Entity
 @Table(name = "roles")
 public class UserRoleEntity extends BaseEntity{
@@ -11,10 +13,6 @@ public class UserRoleEntity extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private UserRoleEnum role;
 
-
-    public UserRoleEnum getRole() {
-        return role;
-    }
 
     public UserRoleEntity setRole(UserRoleEnum role) {
         this.role = role;
