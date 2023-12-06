@@ -44,7 +44,7 @@ public class LoggingService {
              PrintWriter printWriter = new PrintWriter(fileWriter)) {
             printWriter.println(logMessage);
         } catch (IOException e) {
-            e.printStackTrace();
+            writeLogToFile("Error logging the data");
         }
     }
 }
