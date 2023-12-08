@@ -20,7 +20,7 @@ public class CartEntity extends BaseEntity {
     @JoinColumn()
     private UserEntity user;
 
-    @OneToMany(mappedBy = "cart", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "cart", fetch = FetchType.EAGER)
     private List<ProductEntity> cartProducts;
 
     public CartEntity() {
