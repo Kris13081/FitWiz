@@ -1,7 +1,6 @@
 package uni.graduate.fitwiz.service;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.servlet.ModelAndView;
 import uni.graduate.fitwiz.model.dto.ProductEntityDto;
 import uni.graduate.fitwiz.model.entity.ProductEntity;
 
