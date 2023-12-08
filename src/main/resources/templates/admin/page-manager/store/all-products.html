@@ -45,7 +45,7 @@
                         <td class="quantity text-center align-middle" th:text="${prduct.quantity}"></td>
                         <td class="sku text-center align-middle" th:text="${prduct.sku}"></td>
                         <td class="text-center align-middle actions">
-                            <button type="button" class="user-edit-btn btn btn-primary btn-sm"
+                            <button type="button" class="product-edit-btn btn btn-primary btn-sm"
                                     th:id="'editBtn-' + ${prduct.name}">Edit
                             </button>
                             <form th:method="POST" th:action="@{/api/admins/management/products/delete/{id}}"
@@ -66,8 +66,7 @@
 
 <th:block th:replace="~{admin/index :: scr}"></th:block>
 <th:block th:replace="~{fragments/script}"></th:block>
-<script th:inline="javascript" src="/js/BannerForm.js"></script>
-<script src="/js/UserRecords.js"></script>
+<script src="/js/ProductRecords.js"></script>
 
 </body>
 

@@ -1,7 +1,9 @@
 package uni.graduate.fitwiz.service;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import uni.graduate.fitwiz.model.dto.ProductEntityDto;
+import uni.graduate.fitwiz.model.dto.ProductUpdateDto;
 import uni.graduate.fitwiz.model.entity.ProductEntity;
 
 import java.io.IOException;
@@ -14,4 +16,8 @@ public interface ProductService {
     List<ProductEntity> getProducts();
 
     ProductEntity viewProduct(String sku);
+
+    void deleteProduct(Long id);
+
+    HttpStatus updateProduct(Long id, ProductUpdateDto productUpdateDto);
 }
