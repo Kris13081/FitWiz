@@ -3,6 +3,8 @@ package uni.graduate.fitwiz.service;
 import org.springframework.http.HttpStatus;
 import uni.graduate.fitwiz.model.dto.UserEntityDto;
 import uni.graduate.fitwiz.model.dto.UserUpdateDto;
+import uni.graduate.fitwiz.model.entity.CartEntity;
+import uni.graduate.fitwiz.model.entity.ProductEntity;
 import uni.graduate.fitwiz.model.entity.UserEntity;
 
 import java.io.IOException;
@@ -18,4 +20,9 @@ public interface UserService {
     void delete(Long id);
 
     HttpStatus updateUser(Long id, UserUpdateDto userUpdateDto);
+
+    List<ProductEntity> getUserCart(String currentUsername);
+
+    UserEntity getCurrentUser();
+
 }

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import uni.graduate.fitwiz.model.dto.ProductEntityDto;
 import uni.graduate.fitwiz.model.dto.ProductUpdateDto;
-import uni.graduate.fitwiz.model.dto.UserUpdateDto;
 import uni.graduate.fitwiz.service.ProductService;
 import uni.graduate.fitwiz.service.UserService;
 
@@ -36,7 +35,6 @@ public class ProductController {
 
         model.addAttribute("userDetails", userService.getUserDetails(currentUsername));
     }
-
 
     @GetMapping("/products/{sku}")
     public ModelAndView getViewProductPage(@PathVariable String sku) {

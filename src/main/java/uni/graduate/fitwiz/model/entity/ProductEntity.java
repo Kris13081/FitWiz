@@ -32,6 +32,8 @@ public class ProductEntity extends BaseEntity {
 
     private String sku;
 
+    private boolean inStock;
+
     @NotEmpty
     private String mainImgPath;
 
@@ -39,6 +41,9 @@ public class ProductEntity extends BaseEntity {
 
     private String thirdImgPath;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cart_id")
+    private CartEntity cart;
 
     public ProductEntity() {
     }

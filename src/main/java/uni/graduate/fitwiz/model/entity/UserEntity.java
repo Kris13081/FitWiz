@@ -11,7 +11,6 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
-@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -34,6 +33,12 @@ public class UserEntity extends BaseEntity{
     private String profileImage;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<UserRoleEntity> roles = new ArrayList<>();
+    private List<UserRoleEntity> roles;
 
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private CartEntity cart;
+    public UserEntity() {
+        this.roles = new ArrayList<>();
+    }
 }

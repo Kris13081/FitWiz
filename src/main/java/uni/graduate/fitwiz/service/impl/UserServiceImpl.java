@@ -2,15 +2,21 @@ package uni.graduate.fitwiz.service.impl;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import uni.graduate.fitwiz.enums.UserRoleEnum;
 import uni.graduate.fitwiz.model.dto.UserEntityDto;
 import uni.graduate.fitwiz.model.dto.UserUpdateDto;
+import uni.graduate.fitwiz.model.entity.CartEntity;
+import uni.graduate.fitwiz.model.entity.ProductEntity;
 import uni.graduate.fitwiz.model.entity.UserEntity;
 import uni.graduate.fitwiz.model.entity.UserRoleEntity;
 import uni.graduate.fitwiz.repository.UserRepository;
 import uni.graduate.fitwiz.repository.UserRoleRepository;
+import uni.graduate.fitwiz.service.CartService;
 import uni.graduate.fitwiz.service.GcsService;
 import uni.graduate.fitwiz.service.UserService;
 
@@ -25,15 +31,18 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserRoleRepository userRoleRepository;
+    private final CartService cartService;
     private final GcsService gcsService;
 
     public UserServiceImpl(UserRepository userRepository,
                            PasswordEncoder passwordEncoder,
                            UserRoleRepository userRoleRepository,
+                           CartService cartService,
                            GcsService gcsService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.userRoleRepository = userRoleRepository;
+        this.cartService = cartService;
         this.gcsService = gcsService;
     }
 
@@ -48,6 +57,10 @@ public class UserServiceImpl implements UserService {
 
 
         UserEntity newUser = dtoToEntityMapper(userEntityDto);
+        userRepository.save(newUser);
+        CartEntity cart = cartService.createCart(newUser);
+        cart.setUser(newUser);
+        newUser.setCart(cart);
         userRepository.save(newUser);
         return true;
     }
@@ -97,7 +110,33 @@ public class UserServiceImpl implements UserService {
         return HttpStatus.BAD_REQUEST;
     }
 
-        private UserEntity getUserEntity (UserUpdateDto userUpdateDto, Optional <UserEntity> optionalUser){
+    @Override
+    public List<ProductEntity> getUserCart(String currentUsername) {
+    return new ArrayList<>();
+    }
+
+    @Override
+    public UserEntity getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return null; // User not authenticated
+        }
+
+        Object principal = authentication.getPrincipal();
+
+        if (principal instanceof UserDetails userDetails) {
+
+            // Retrieve the user based on the username (email in your case)
+            Optional<UserEntity> optionalUser = userRepository.findUserEntityByEmail(userDetails.getUsername());
+
+            return optionalUser.orElse(null);
+        }
+
+        return null;
+    }
+
+    private UserEntity getUserEntity (UserUpdateDto userUpdateDto, Optional <UserEntity> optionalUser){
             UserEntity userEntity = optionalUser.get();
 
             if (!userUpdateDto.getUsername().isEmpty()) {
