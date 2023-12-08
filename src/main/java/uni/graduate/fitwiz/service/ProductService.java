@@ -20,4 +20,8 @@ public interface ProductService {
     void deleteProduct(Long id);
 
     HttpStatus updateProduct(Long id, ProductUpdateDto productUpdateDto);
+
+    List<ProductEntity> getInStockProducts();
+
+    HttpStatus addToCart(String productSKU);
 }

@@ -27,13 +27,15 @@
 
 .card-title,
 .card-text,
-.card-footer a {
+.card-footer a,
+.card-footer button{
     transition: color 0.3s ease-in-out;
 }
 
 .card:hover .card-title,
 .card:hover .card-text,
-.card-footer a:hover {
+.card-footer a:hover,
+.card-footer button:hover{
     color: #ffc107; /* Change to your preferred hover color */
 }
 
@@ -48,9 +50,4 @@
     .header-background {
         height: 300px;
     }
-}
-
-
-#main-sec {
-
 }
