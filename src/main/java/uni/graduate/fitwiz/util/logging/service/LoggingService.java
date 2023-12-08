@@ -7,17 +7,17 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Scope("singleton")
 public class LoggingService {
 
-    @Value("${logging.file.path}")
+    @Value("${LOGS}")
     private String logFilePath;
 
     private final ModelMapper modelMapper;
@@ -50,5 +50,20 @@ public class LoggingService {
         } catch (IOException e) {
             writeLogToFile("Error logging the data");
         }
+    }
+
+    public List<String> getLogs() {
+        List<String> logs = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(logFilePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                logs.add(line + "\n");
+            }
+        } catch (IOException e) {
+            logs.add("Error reading logs from file");
+        }
+
+        return logs;
     }
 }

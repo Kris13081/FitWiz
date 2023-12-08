@@ -1,0 +1,10 @@
+/* Add custom styles to reduce row height */
+.smaller-rows td {
+    padding: 0.2rem;
+    font-size: 0.9rem;
+}
+
+.smaller-rows .btn-sm {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.8rem;
+}

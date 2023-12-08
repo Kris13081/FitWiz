@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="~{admin/index :: head}"></th:block>
+    <link rel="stylesheet" th:href="@{/css/productTable.css}">
+    <title>FitWizz</title>
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed" th:object="${userDetails}">
+<div class="wrapper">
+    <!-- Preloader -->
+    <th:block th:replace="~{admin/index :: logo-placeholder}"></th:block>
+
+    <th:block th:replace="~{admin/index :: admin-nav}"></th:block>
+
+    <th:block th:replace="~{admin/index :: sidebar}"></th:block>
+
+    <div class="content-wrapper bg-dark opacity-25">
+        <h1 class="w-100 bg-dark text-white d-flex justify-content-center border-5 border-bottom border-white">All
+            Products</h1>
+        <div class="container mt-3">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th class="id text-center align-middle">ID</th>
+                        <th class="name text-center align-middle">Name</th>
+                        <th class="description text-center align-middle">Description</th>
+                        <th class="category text-center align-middle">Category</th>
+                        <th class="price text-center align-middle">Price</th>
+                        <th class="quantity text-center align-middle">Quantity</th>
+                        <th class="sku text-center align-middle">SKU</th>
+                        <th class="actions text-center align-middle">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody class="bg-gray">
+                    <!-- Use Thymeleaf to iterate over your entity records -->
+                    <tr th:each="prduct : ${productsList}" th:id="${prduct.sku}" class="smaller-rows">
+                        <td class="id text-center align-middle" th:text="${prduct.id}"></td>
+                        <td class="name text-center align-middle" th:text="${prduct.name}"></td>
+                        <td class="description align-middle" th:text="${prduct.description}"></td>
+                        <td class="category text-center align-middle" th:text="${prduct.category}"></td>
+                        <td class="price text-center align-middle" th:text="${prduct.price}"></td>
+                        <td class="quantity text-center align-middle" th:text="${prduct.quantity}"></td>
+                        <td class="sku text-center align-middle" th:text="${prduct.sku}"></td>
+                        <td class="text-center align-middle actions">
+                            <button type="button" class="user-edit-btn btn btn-primary btn-sm"
+                                    th:id="'editBtn-' + ${prduct.name}">Edit
+                            </button>
+                            <form th:method="POST" th:action="@{/api/admins/management/products/delete/{id}}"
+                                  th:object="${prduct.id}">
+                                <input type="hidden" name="id" th:value="${prduct.id}" />
+                                <button type="submit" class="delete-btn btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <th:block th:replace="~{admin/index :: footer}"></th:block>
+</div>
+
+<th:block th:replace="~{admin/index :: scr}"></th:block>
+<th:block th:replace="~{fragments/script}"></th:block>
+<script th:inline="javascript" src="/js/BannerForm.js"></script>
+<script src="/js/UserRecords.js"></script>
+
+</body>
+
+</html>

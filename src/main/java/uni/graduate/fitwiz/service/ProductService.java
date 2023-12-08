@@ -12,4 +12,6 @@ public interface ProductService {
     ResponseEntity<String> create(ProductEntityDto productEntityDto) throws IOException;
 
     List<ProductEntity> getProducts();
+
+    ProductEntity viewProduct(String sku);
 }

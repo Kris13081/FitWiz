@@ -9,6 +9,7 @@ import uni.graduate.fitwiz.service.BannerService;
 import uni.graduate.fitwiz.service.BlogService;
 import uni.graduate.fitwiz.service.ProductService;
 import uni.graduate.fitwiz.service.UserService;
+import uni.graduate.fitwiz.util.logging.service.LoggingService;
 
 @RestController
 @RequestMapping("/api/admins")
@@ -18,15 +19,18 @@ public class AdminController {
     private final BannerService bannerService;
     private final BlogService blogService;
     private final ProductService productService;
+    private final LoggingService loggingService;
 
     public AdminController(UserService userService,
                            BannerService bannerService,
                            BlogService blogService,
-                           ProductService productService) {
+                           ProductService productService,
+                           LoggingService loggingService) {
         this.userService = userService;
         this.bannerService = bannerService;
         this.blogService = blogService;
         this.productService = productService;
+        this.loggingService = loggingService;
     }
 
     @ModelAttribute(name = "userDetails")
@@ -57,6 +61,10 @@ public class AdminController {
         model.addAttribute("usersList", userService.getUsers());
     }
 
+    @ModelAttribute(name = "logsList")
+    public void getLogs(Model model) {
+        model.addAttribute("logsList", loggingService.getLogs());
+    }
 
     @GetMapping("/index")
     public ModelAndView getAdminMenuPage() {
@@ -85,5 +93,10 @@ public class AdminController {
     @GetMapping("/management/homepage-manager")
     public ModelAndView getHomepageManagerPage() {
         return new ModelAndView("/admin/page-manager/home/homepage-manager");
+    }
+
+    @GetMapping("/management/all-products")
+    public ModelAndView getAllProductsPage() {
+        return new ModelAndView("/admin/page-manager/store/all-products");
     }
 }
