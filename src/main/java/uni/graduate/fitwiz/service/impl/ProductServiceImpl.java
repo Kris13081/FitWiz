@@ -3,7 +3,6 @@ package uni.graduate.fitwiz.service.impl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.ModelAndView;
 import uni.graduate.fitwiz.model.dto.ProductEntityDto;
 import uni.graduate.fitwiz.model.entity.ProductEntity;
 import uni.graduate.fitwiz.repository.ProductRepository;

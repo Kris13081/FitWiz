@@ -6,9 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import uni.graduate.fitwiz.enums.ProductTypeEnum;
-
 import java.math.BigDecimal;
-import java.util.UUID;
 
 @Getter
 @Setter
