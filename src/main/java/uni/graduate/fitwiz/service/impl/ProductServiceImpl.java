@@ -10,6 +10,7 @@ import uni.graduate.fitwiz.model.entity.CartEntity;
 import uni.graduate.fitwiz.model.entity.ProductEntity;
 import uni.graduate.fitwiz.model.entity.UserEntity;
 import uni.graduate.fitwiz.repository.ProductRepository;
+import uni.graduate.fitwiz.service.CartService;
 import uni.graduate.fitwiz.service.GcsService;
 import uni.graduate.fitwiz.service.ProductService;
 import uni.graduate.fitwiz.service.UserService;
@@ -26,13 +27,15 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final UserService userService;
+    private final CartService cartService;
     private final GcsService gcsService;
 
     public ProductServiceImpl(ProductRepository productRepository,
-                              UserService userService, GcsService
+                              UserService userService, CartService cartService, GcsService
                                       gcsService) {
         this.productRepository = productRepository;
         this.userService = userService;
+        this.cartService = cartService;
         this.gcsService = gcsService;
     }
 
@@ -89,12 +92,15 @@ public class ProductServiceImpl implements ProductService {
                 return HttpStatus.BAD_REQUEST; // or another appropriate status
             }
 
-            CartEntity userCart = currentUser.getCart();
+            CartEntity userCart = cartService.getCart(currentUser);
+            userCart.getCartProducts().add(product);
+            for (ProductEntity p : userCart.getCartProducts()) {
+                System.out.println(p.getName());
+            }
 
-            List<ProductEntity> cartProducts = userCart.getCartProducts();
-            cartProducts.add(product);
+           currentUser.setCart(userCart);
 
-            userCart.setCartProducts(cartProducts);
+
             return HttpStatus.OK;
         }
 

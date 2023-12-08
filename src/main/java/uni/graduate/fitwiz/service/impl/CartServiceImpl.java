@@ -21,6 +21,12 @@ public class CartServiceImpl implements CartService {
         return create(newUser);
     }
 
+    @Override
+    public CartEntity getCart(UserEntity currentUser) {
+       return cartRepository.findByUser(currentUser);
+    }
+
+
     private CartEntity create(UserEntity user) {
         CartEntity cart = new CartEntity();
         cart.setUser(user);
