@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1 ">
     <title>AdminLTE 3 | Dashboard</title>
 
-    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf" th:content="${_csrf.token}"/>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -48,7 +48,7 @@
                 <a th:href="@{/api/admins/index}" class=" nav-link">Dashboard</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a th:href="@{/api/admins/add-product}" class= "nav-link">Add Product</a>
+                <a th:href="@{/api/admins/add-product}" class="nav-link">Add Product</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a th:href="@{/api/admins/index}" class="nav-link">Orders</a>
@@ -132,6 +132,14 @@
                     </li>
                     <li class="nav-header">PRODUCTS</li>
                     <li class="nav-item">
+                        <a th:href="@{/api/admins/management/all-products}" class="nav-link">
+                            <i class="fas fa-shopping-bag ml-2 mr-2"></i>
+                            <p>
+                                All Products
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a th:href="@{/api/admins/add-product}" class="nav-link">
                             <i class="nav-icon fas fa-plus"></i>
                             <p>
@@ -163,19 +171,19 @@
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a th:href="@{/api/admins/management/add-banner}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="nav-icon fas fa-plus"></i>
                                     <p>Add Banner</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a th:href="@{/api/admins/management/add-blogcard}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="nav-icon fas fa-plus"></i>
                                     <p>Add Blogcard</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a th:href="@{/api/admins/management/homepage-manager}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="fas fa-cog ml-2 mr-2"></i>
                                     <p>Homepage Manager</p>
                                 </a>
                             </li>
@@ -279,7 +287,13 @@
                 <div class="row">
                     <!-- Left col -->
                     <section class="col-lg-7 connectedSortable">
+                        <div class="sidebar">
+                            <div class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                                <h3><label for="logs">Application Logs</label></h3>
+                                <textarea rows="10" id="logs" class="nav-link w-100"><th:block th:each="log : ${logsList}" th:text="${log}"></th:block></textarea>
 
+                            </div>
+                        </div>
                     </section>
                     <!-- /.Left col -->
                     <!-- right col (We are only adding the ID to make the widgets sortable)-->
@@ -389,7 +403,6 @@
 
 
 </div>
-<!-- ./wrapper -->
 <div th:fragment="scr">
     <!-- jQuery -->
     <script src="/plugins/jquery/jquery.min.js"></script>

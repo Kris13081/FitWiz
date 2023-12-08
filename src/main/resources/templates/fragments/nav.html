@@ -6,67 +6,61 @@
 </head>
 <body th:object="userDetails">
 
-<nav th:fragment="nav" class="navbar navbar-expand-lg bg-dark w-100 border-bottom border-2"
-     style="--bs-breadcrumb-divider: '';">
-
-    <div class="hidden-container container-fluid d-lg-flex justify-content-start mx-0">
+<nav th:fragment="nav" class="navbar navbar-expand-lg bg-dark w-100 border-bottom border-2">
+    <div class="container-fluid">
         <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                 aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a th:href="@{/api/home}"
-           class="navbar-brand fs-1 text-white ms-4 mt-3 align-self-lg-center "><span>FitWizz</span></a>
+        <a th:href="@{/api/home}" class="navbar-brand fs-1 text-white ms-4 mt-3 align-self-lg-center"><span>FitWizz</span></a>
 
-        <div class="collapse navbar-collapse justify-content-center align-items-center" id="navbarNavDropdown">
-            <ul class="pages-list nav-item nav-list text-white breadcrumb fs-4 gap-3 my-0 mt-3 ms-5">
-                <li class="breadcrumb-item">
-                    <a class="page-link" th:href="@{/api/home}">TRACKER</a>
+        <div class="collapse navbar-collapse justify-content-center d-flex fs-4" id="navbarNavDropdown">
+            <ul class="navbar-nav  mb-2 mb-lg-0 justify-self-center align-items-center">
+                <li class="nav-item">
+                    <a class="nav-link text-white" th:href="@{/api/home}">TRACKER</a>
                 </li>
-                <li class="breadcrumb-item">
-                    <a class="page-link" th:href="@{/api/home}">SCHEDULE</a>
+                <li class="nav-item">
+                    <a class="nav-link text-white" th:href="@{/api/home}">SCHEDULE</a>
                 </li>
-                <li class="breadcrumb-item">
-                    <a class="page-link" th:href="@{/api/store}">STORE</a>
+                <li class="nav-item">
+                    <a class="nav-link text-white" th:href="@{/api/store}">STORE</a>
                 </li>
-                <li class="breadcrumb-item" sec:authorize="hasRole('ADMIN')">
-                    <a class="page-link" th:href="@{/api/admins/index}">ADMIN</a>
+                <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                    <a class="nav-link text-white" th:href="@{/api/admins/index}">ADMIN</a>
                 </li>
             </ul>
-
         </div>
     </div>
 
-    <div id="cart-cont" class="img-cart-container nav-item text-white gap-3 d-flex">
-
-
+    <div id="cart-cont" class="img-cart-container gap-3 d-flex">
         <ul sec:authorize="isAnonymous()" id="social-links"
-            class="social-links nav-item nav-list text-white breadcrumb gap-2 my-0  align-self-end">
+            class="social-links breadcrumb gap-2 justify-content-center align-items-end d-none d-lg-flex">
             <li class="breadcrumb-item">
-                <a th:href="@{/api/home}" class="page-link"><i class="fab fa-instagram nav-link"></i></a>
+                <a th:href="@{/api/home}" class="nav-link"><i class="fab fa-instagram"></i></a>
             </li>
             <li class="breadcrumb-item">
-                <a th:href="@{/api/home}" class="page-link"><i class="fab fa-youtube nav-link"></i></a>
+                <a th:href="@{/api/home}" class="nav-link"><i class="fab fa-youtube"></i></a>
             </li>
             <li class="breadcrumb-item">
-                <a th:href="@{/api/home}" class="page-link"><i class="fab fa-facebook-f nav-link"></i></a>
+                <a th:href="@{/api/home}" class="nav-link"><i class="fab fa-facebook-f"></i></a>
             </li>
         </ul>
 
-        <a th:href="@{/api/home}" sec:authorize="isAuthenticated()"><img th:src="${userDetails.profileImage}"
-                                                                         class="rounded-circle shadow-4 border border-1"
-                                                                         style="width: 50px; height: 50px;"
-                                                                         alt="Avatar"/>
+        <a th:href="@{/api/home}" sec:authorize="isAuthenticated()">
+            <img th:src="${userDetails.profileImage}" class="rounded-circle shadow-4 border border-1"
+                 style="width: 50px; height: 50px;" alt="Avatar"/>
         </a>
 
-        <a th:href="@{/api/home}" class="page-link align-self-end fs-4">
-                    <span class="cart">
-                        <i class="fas fa-shopping-cart"></i>
-                        <small class="cart-counter">0</small>
-                    </span>
+        <a th:href="@{/api/home}" class="nav-link align-self-end fs-4">
+            <span class="cart">
+                <i class="fas fa-shopping-cart"></i>
+                <small class="cart-counter">0</small>
+            </span>
         </a>
     </div>
 </nav>
+
 <th:block th:replace="~{fragments/script}"></th:block>
 </body>
 </html>

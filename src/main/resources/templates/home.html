@@ -22,21 +22,22 @@
         <div id="carouselBasicExample" class="carousel slide carousel-fade z-0 border-3 border-bottom border-white"
              data-bs-ride="carousel">
             <!-- login, register, and logout btns -->
-            <div class="background-pic-container position-absolute w-100  justify-content-end z-3">
-                <ul class="log-reg-btns">
+            <div class="background-pic-container position-absolute w-100 justify-content-end z-3" th:fragment="log-reg-btns">
+                <ul class="btn log-reg-btns d-flex flex-row justify-content-end align-items-center list-unstyled">
                     <li class="login-btn-li" sec:authorize="isAnonymous()">
-                        <a th:href="@{/api/users/login}" class="login-btn bg-dark overflow-hidden">LOGIN</a>
+                    <a th:href="@{/api/users/login}" class="login-btn bg-dark overflow-hidden btn btn-sm text-white border border-white" th:text="LOGIN"></a>
                     </li>
-                    <li class="register-btn-li" sec:authorize="isAnonymous()">
-                        <a th:href="@{/api/users/registration}" class="register-btn bg-dark overflow-hidden">REGISTER</a>
+                    <li class="btn register-btn-li" sec:authorize="isAnonymous()">
+                    <a th:href="@{/api/users/registration}" class="register-btn bg-dark overflow-hidden btn btn-sm text-white border border-white" th:text="REGISTER"></a>
                     </li>
-                    <li class="register-btn-li" sec:authorize="isAuthenticated()">
-                        <form th:action="@{/api/users/logout}" th:method="POST">
-                            <button type="submit" class="logout-btn bg-dark overflow-hidden" value="Logout">LOGOUT</button>
-                        </form>
+                    <li class="btn register-btn-li" sec:authorize="isAuthenticated()">
+                    <form th:action="@{/api/users/logout}" th:method="POST">
+                        <button type="submit" class="logout-btn bg-dark overflow-hidden btn btn-sm text-white border border-white" value="Logout" th:text="LOGOUT"></button>
+                    </form>
                     </li>
                 </ul>
             </div>
+
             <!-- login, register, and logout btns -->
 
             <!-- Indicators -->

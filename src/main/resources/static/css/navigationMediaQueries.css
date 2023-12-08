@@ -8,29 +8,25 @@
 
 @media (max-width: 992px) {
     .hidden-container {
-        width: 50%;
+        width: 100%; /* Change to 100% to take full width */
     }
 
     .img-cart-container {
-        width: 50%;
-        justify-content: end;
-        height: 100%;
-        margin-bottom: 5%;
-        margin-top: 3%;
+        width: 100%; /* Change to 100% to take full width */
+        justify-content: center; /* Center content */
+        margin: 3% 0; /* Adjust margin */
     }
 
     .navbar ul {
-        display: flex;
-        flex-direction: row;
+        flex-direction: column; /* Change to column for stacking in smaller screens */
+        align-items: center;
     }
+
 }
 
 @media (min-width: 992px) {
     .img-cart-container {
         width: 15%;
-    }
-    .social-links {
-        justify-self: start;
     }
 }
 
@@ -49,8 +45,8 @@
 
 @media (max-width: 500px) {
     #cart-cont {
-        width: 0;
-        overflow: hidden;
+        width: auto; /* Change to auto to allow content to take its natural width */
+        overflow: visible; /* Adjust overflow property */
     }
 
     .navbar {
@@ -63,18 +59,21 @@
     }
 
     .navbar-brand {
-        margin-left: 30%;
+        margin-left: 0; /* Remove margin */
     }
 
     .navbar ul {
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
+        width: 100%;
     }
 
     .navbar {
         justify-content: center;
     }
+
 }
 
 
@@ -92,4 +91,5 @@
     .navbar-toggler {
         width: 100%;
     }
+
 }

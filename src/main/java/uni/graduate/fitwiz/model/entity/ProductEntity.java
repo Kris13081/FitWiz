@@ -8,6 +8,7 @@ import lombok.Setter;
 import uni.graduate.fitwiz.enums.ProductTypeEnum;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -19,6 +20,7 @@ public class ProductEntity extends BaseEntity {
     private String name;
 
     @NotEmpty
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @Enumerated(EnumType.STRING)
@@ -29,6 +31,8 @@ public class ProductEntity extends BaseEntity {
 
     @Column(nullable = false)
     private int quantity;
+
+    private String sku;
 
     @NotEmpty
     private String mainImgPath;
@@ -59,6 +63,6 @@ public class ProductEntity extends BaseEntity {
         this.mainImgPath = mainImgPath;
         this.secondImgPath = secondImgPath;
         this.thirdImgPath = thirdImgPath;
-
     }
+
 }
