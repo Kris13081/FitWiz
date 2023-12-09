@@ -5,8 +5,6 @@ import org.springframework.stereotype.Repository;
 import uni.graduate.fitwiz.model.entity.CartEntity;
 import uni.graduate.fitwiz.model.entity.UserEntity;
 
-import java.util.Optional;
-
 @Repository
 public interface CartRepository extends JpaRepository<CartEntity, Long> {
 

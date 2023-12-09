@@ -1,6 +1,5 @@
 package uni.graduate.fitwiz.service.impl;
 
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import uni.graduate.fitwiz.model.entity.CartEntity;
 import uni.graduate.fitwiz.model.entity.ProductEntity;
