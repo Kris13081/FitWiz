@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/404.css}">
+    <link rel="stylesheet" th:href="@{/css/snow.css}">
+    <title>FitWizz - 404 Not Found</title>
+
+</head>
+<body>
+<th:block th:replace="~{fragments/snow.html :: snowflakes}" class="d-none d-md-block"></th:block>
+
+<div class="container container-error-404">
+    <div class="clip"><div class="shadow"><span class="digit thirdDigit">4</span></div></div>
+    <div class="clip"><div class="shadow"><span class="digit secondDigit">0</span></div></div>
+    <div class="clip"><div class="shadow"><span class="digit firstDigit">4</span></div></div>
+    <div class="msg">OH!<span class="triangle"></span></div>
+    <h2>Sorry! The page you're looking for was not found.</h2>
+    <p>It seems you've stumbled upon a broken link or entered a URL that doesn't exist on this site.</p>
+    <p><a th:href="@{/api/home}" class="btn btn-primary" title="Go to Home">Go Home</a></p>
+</div>
+
+<th:block th:replace="~{fragments/script}"></th:block>
+</body>
+</html>

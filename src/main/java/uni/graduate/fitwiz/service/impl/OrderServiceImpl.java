@@ -39,6 +39,8 @@ public class OrderServiceImpl implements OrderService {
         CartEntity cart = cartService.getCart(user);
 
         List<ProductEntity> orderedProducts = cart.getCartProducts();
+        StringBuilder receipt = new StringBuilder();
+        
         if (orderedProducts.isEmpty()) {
             return false;
         }
@@ -47,6 +49,8 @@ public class OrderServiceImpl implements OrderService {
 
         for (ProductEntity product : orderedProducts) {
             totalOrderPrice = totalOrderPrice.add(product.getPrice());
+            receipt.append(product.getName()).append(" SKU:").append(product.getSku()).append("\n");
+
             productService.reduceQuantity(product.getSku());
             cartService.removeProduct(product, cart);
         }
@@ -54,6 +58,7 @@ public class OrderServiceImpl implements OrderService {
         OrderEntity order = mapDtoToEntity(orderEntityDto);
 
         order.setUser(user);
+        order.setOrderedItemsSKUs(receipt.toString());
         order.setTotal(totalOrderPrice);
 
         orderRepository.save(order);

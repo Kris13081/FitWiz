@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <link th:replace="~{/fragments/common-links}">
     <link rel="stylesheet" th:href="@{/css/store.css}">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
     <title>FitWizz</title>
 </head>
 <body class="container-fluid p-0 h-100 bg-gray">
@@ -56,7 +57,7 @@
 
                     <a sec:authorize="isAnonymous()" th:href="@{/api/users/login}" class="btn btn-outline-light mt-auto">Add to Cart</a>
 
-                    <button sec:authorize="isAuthenticated()" class="btn btn-outline-light mt-auto add-to-cart-btn" type="button">
+                    <button sec:authorize="isAuthenticated()" th:id="${product.sku}" class="btn btn-outline-light add-to-cart-btn" type="button">
                         <i class="bi-cart-fill me-1"></i>
                         Add to cart
                     </button>
@@ -87,5 +88,6 @@
         $('[id^=productCarousel]').carousel();
     });
 </script>
+<script th:src="@{/js/AddToCart.js}"></script>
 </body>
 </html>

@@ -77,18 +77,18 @@
 
                                             <p class="small mb-2">Delivery company:</p>
                                             <label for="speedy-btn">Speedy</label>
-                                            <input type="radio" class="text-white" value="Speedy" id="speedy-btn" name="deliveryCompany">
+                                            <input type="radio" class="text-white" value="Speedy" id="speedy-btn" name="deliveryCompany" required>
                                             <label for="econt-btn">Econt</label>
-                                            <input type="radio" class="text-white" value="Econt" id="econt-btn" name="deliveryCompany">
+                                            <input type="radio" class="text-white" value="Econt" id="econt-btn" name="deliveryCompany" required>
                                             <label for="dhl-btn">DHL</label>
-                                            <input type="radio" class="text-white" value="DHL" id="dhl-btn" name="deliveryCompany">
+                                            <input type="radio" class="text-white" value="DHL" id="dhl-btn" name="deliveryCompany" required>
 
                                             <div class="form-outline form-white mt-4 mb-4">
                                                 <input type="text"
                                                        id="typeName"
                                                        class="form-control form-control-lg"
                                                        placeholder="Firstname Lastname"
-                                                       name="receiverName" />
+                                                       name="receiverName" required/>
                                                 <label class="form-label" for="typeName">Receiver's Name</label>
                                             </div>
 
@@ -98,7 +98,7 @@
                                                        class="form-control form-control-lg"
                                                        placeholder="089 999 9999"
                                                        minlength="10" maxlength="10"
-                                                       name="phoneNumber" />
+                                                       name="phoneNumber" required/>
                                                 <label class="form-label" for="typeText">Phone Number</label>
                                             </div>
 
@@ -109,7 +109,7 @@
                                                                class="form-control form-control-lg"
                                                                placeholder="City Name"
                                                                id="city"
-                                                               name="city"/>
+                                                               name="city" required/>
                                                         <label class="form-label" for="city">City</label>
                                                     </div>
                                                 </div>
@@ -120,7 +120,7 @@
                                                                id="street"
                                                                class="form-control form-control-lg"
                                                                placeholder="Street 111"
-                                                               name="street"/>
+                                                               name="street" required/>
                                                         <label class="form-label" for="street">Street + St-number</label>
                                                     </div>
                                                 </div>
