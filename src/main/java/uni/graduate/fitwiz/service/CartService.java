@@ -13,4 +13,6 @@ public interface CartService {
     CartEntity getCart(UserEntity currentUser);
 
     void addProduct(CartEntity userCart, ProductEntity product);
+
+    void removeProduct(ProductEntity product, CartEntity cart);
 }

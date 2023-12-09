@@ -24,4 +24,6 @@ public interface ProductService {
     List<ProductEntity> getInStockProducts();
 
     HttpStatus addToCart(String productSKU);
+
+    void reduceQuantity(String productSku);
 }

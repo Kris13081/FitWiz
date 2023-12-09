@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/error.css}">
+    <link rel="stylesheet" th:href="@{/css/snow.css}">
+    <title>FitWizz - Internal Server Error</title>
+</head>
+<body>
+<th:block th:replace="~{fragments/snow.html :: snowflakes}" class="d-none d-md-block"></th:block>
+
+<div class="container container-error">
+    <div class="clip"><div class="shadow"><span class="digit thirdDigit">5</span></div></div>
+    <div class="clip"><div class="shadow"><span class="digit secondDigit">0</span></div></div>
+    <div class="clip"><div class="shadow"><span class="digit firstDigit">0</span></div></div>
+    <div class="msg">OOPS!<span class="triangle"></span></div>
+    <h2>Internal Server Error</h2>
+    <p>Sorry, something went wrong on our end. We are working to fix this issue as soon as possible.</p>
+    <p>Please try again later or contact the website administrator for assistance.</p>
+    <p><a th:href="@{/api/home}" class="btn btn-primary" title="Go to Home">Go Home</a></p>
+</div>
+
+<th:block th:replace="~{fragments/script}"></th:block>
+</body>
+</html>

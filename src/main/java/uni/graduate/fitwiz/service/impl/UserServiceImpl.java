@@ -126,7 +126,7 @@ public class UserServiceImpl implements UserService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication == null || !authentication.isAuthenticated()) {
-            return null; // User not authenticated
+            return null;
         }
 
         Object principal = authentication.getPrincipal();

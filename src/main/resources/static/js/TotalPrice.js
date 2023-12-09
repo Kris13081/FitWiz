@@ -6,11 +6,11 @@ document.querySelectorAll('.price').forEach(priceElement => {
     subtotal = subtotal + product_price;
 });
 
-document.getElementById('subtotal').innerText = '$' + subtotal;
+document.getElementById('subtotal').innerText = '$' + Math.round(subtotal * 100) /100;
 
 let shipping = 10.00;
 
 let totalPrice = subtotal + shipping;
 
-document.getElementById('total').innerText = '$' + totalPrice
-document.getElementById('totalAmount').innerText = '$' + totalPrice;
+document.getElementById('total').innerText = '$' + Math.round(totalPrice * 100) /100
+document.getElementById('totalAmount').innerText = '$' + Math.round(totalPrice * 100) /100;

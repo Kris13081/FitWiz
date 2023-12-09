@@ -105,6 +105,20 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public void reduceQuantity(String productSku) {
+        Optional<ProductEntity> productToReduce = productRepository.findBySku(productSku);
+
+        if (productToReduce.isPresent()) {
+            ProductEntity product = productToReduce.get();
+
+            int reducedQuantity = product.getQuantity() - 1;
+            product.setQuantity(reducedQuantity);
+            productRepository.save(product);
+
+        }
+    }
+
+    @Override
     public ProductEntity viewProduct(String sku) {
         Optional<ProductEntity> optionalProduct = productRepository.findBySku(sku);
 
