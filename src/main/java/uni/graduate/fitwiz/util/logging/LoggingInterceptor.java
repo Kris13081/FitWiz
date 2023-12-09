@@ -54,6 +54,8 @@ public class LoggingInterceptor implements HandlerInterceptor {
         } else if (request.getRequestURL().toString().contains("/api/admins/management/user/update") && request.getMethod().equals("PUT")) {
             loggingService.log("Updated user");
 
+        } else if (request.getRequestURL().toString().contains("/api/users/cart/order") && request.getMethod().equals("POST")) {
+            loggingService.log("New order created");
         }
     }
 
