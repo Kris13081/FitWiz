@@ -51,7 +51,7 @@
                 <a th:href="@{/api/admins/add-product}" class="nav-link">Add Product</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a th:href="@{/api/admins/index}" class="nav-link">Orders</a>
+                <a th:href="@{/api/admins/all-orders}" class="nav-link">Orders</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a th:href="@{/api/admins/all-users}" class="nav-link">All Users</a>
@@ -149,7 +149,7 @@
                     </li>
                     <li class="nav-header">ORDERS</li>
                     <li class="nav-item">
-                        <a href="" class="nav-link">
+                        <a th:href="@{/api/admins/all-orders}" class="nav-link">
                             <i class="nav-icon fas fa-truck"></i>
                             <p>All Orders</p>
                         </a>
@@ -225,7 +225,7 @@
                         <!-- small box -->
                         <div class="small-box bg-info">
                             <div class="inner">
-                                <h3>150</h3>
+                                <h3 th:text="${#lists.size(ordersList)}"></h3>
 
                                 <p>Orders</p>
                             </div>
@@ -270,7 +270,7 @@
                         <!-- small box -->
                         <div class="small-box bg-gradient-orange">
                             <div class="inner">
-                                <h3>65</h3>
+                                <h3 th:text="${ordersTotalPrice}">65</h3>
 
                                 <p>Income</p>
                             </div>

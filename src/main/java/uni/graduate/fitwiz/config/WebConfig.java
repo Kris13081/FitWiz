@@ -32,7 +32,9 @@ public class WebConfig implements WebMvcConfigurer {
                 //user patterns
                 .addPathPatterns("/api/users/registration",
                                  "/api/admins/management/user/delete/**",
-                                 "/api/admins/management/user/update/**");
+                                 "/api/admins/management/user/update/**")
+                //order patterns
+                .addPathPatterns("/api/users/cart/order");
     }
 
     @Bean

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<th:block th:replace="~{admin/index :: head}"></th:block>
+
+<body class="hold-transition sidebar-mini layout-fixed" th:object="${userDetails}">
+<div class="wrapper">
+
+    <!-- Preloader -->
+    <th:block th:replace="~{admin/index :: logo-placeholder}"></th:block>
+
+    <th:block th:replace="~{admin/index :: admin-nav}"></th:block>
+
+    <th:block th:replace="~{admin/index :: sidebar}"></th:block>
+
+    <div class="content-wrapper bg-dark opacity-25">
+        <h1 class="w-100 bg-dark text-white d-flex justify-content-center border-5 border-bottom border-white">ALL ORDERS</h1>
+        <div class="container h-100 pt-5">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="container mt-2 overflow-auto p-0">
+                    <table class="table table-bordered h-50 overflow-hidden bg-white text-center">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Order Code</th>
+                            <th>User</th>
+                            <th>Delivery Company</th>
+                            <th>Receiver Name</th>
+                            <th>Phone Number</th>
+                            <th>City</th>
+                            <th>Street</th>
+                            <th>Total</th>
+                            <th>Ordered Items SKUs</th>
+                            <!-- Add more columns based on your entity fields -->
+                        </tr>
+                        </thead>
+                        <tbody class="overflow-hidden">
+                        <!-- Use Thymeleaf to iterate over your entity records -->
+                        <tr th:each="order : ${ordersList}" th:id="${order.orderCode}">
+                            <td class="id" th:text="${order.id}"></td>
+                            <td class="order-code" th:text="${order.orderCode}"></td>
+                            <td class="user" th:text="${order.user.username}"></td>
+                            <td class="delivery-company" th:text="${order.deliveryCompany}"></td>
+                            <td class="receiver-name" th:text="${order.receiverName}"></td>
+                            <td class="phone-number" th:text="${order.phoneNumber}"></td>
+                            <td class="city" th:text="${order.city}"></td>
+                            <td class="street" th:text="${order.street}"></td>
+                            <td class="total" th:text="${order.total}"></td>
+                            <td class="ordered-items-skus" th:text="${order.orderedItemsSKUs}"></td>
+                            <!-- Add more cells based on your entity fields -->
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <th:block th:replace="~{admin/index :: footer}"></th:block>
+</div>
+
+<th:block th:replace="~{admin/index :: scr}"></th:block>
+<th:block th:replace="~{fragments/script}"></th:block>
+</body>
+</html>

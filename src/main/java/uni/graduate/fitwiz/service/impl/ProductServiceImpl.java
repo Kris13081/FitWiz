@@ -63,7 +63,7 @@ public class ProductServiceImpl implements ProductService {
         List<ProductEntity> inStockProducts = new ArrayList<>();
 
         for (ProductEntity product : allProducts) {
-            if (product.isInStock()) {
+            if (product.getQuantity() > 0) {
                 inStockProducts.add(product);
             }
         }
