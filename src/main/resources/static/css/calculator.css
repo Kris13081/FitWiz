@@ -1,0 +1,21 @@
+.T{
+    font-size: larger;
+    width: 50%;
+}
+
+.I {
+    width: 50%;
+}
+table {
+    border-collapse: collapse;
+}
+
+.SS {
+    font-size: x-large;
+    font-weight: 1000;
+}
+
+.CD {
+    font-weight: normal;
+    font-size: initial;
+}
