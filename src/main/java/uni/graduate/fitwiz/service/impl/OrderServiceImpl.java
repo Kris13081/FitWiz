@@ -49,7 +49,7 @@ public class OrderServiceImpl implements OrderService {
 
         for (ProductEntity product : orderedProducts) {
             totalOrderPrice = totalOrderPrice.add(product.getPrice());
-            receipt.append(product.getName()).append(" SKU:").append(product.getSku()).append("\n");
+            receipt.append("| ").append(product.getName()).append("-SKU:").append(product.getSku()).append(" |, ").append("\n");
 
             productService.reduceQuantity(product.getSku());
             cartService.removeProduct(product, cart);
@@ -64,6 +64,23 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.save(order);
 
         return true;
+    }
+
+    @Override
+    public List<OrderEntity> getOrders() {
+
+        return orderRepository.findAll();
+    }
+
+    @Override
+    public BigDecimal getOrdersTotalPrice() {
+        List<OrderEntity> orders = getOrders();
+        BigDecimal totalPrice = BigDecimal.ZERO;
+
+        for (OrderEntity order : orders) {
+            totalPrice = totalPrice.add(order.getTotal());
+        }
+        return totalPrice;
     }
 
     private OrderEntity mapDtoToEntity(OrderEntityDto orderEntityDto) {

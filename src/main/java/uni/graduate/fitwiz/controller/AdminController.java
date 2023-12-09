@@ -5,10 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import uni.graduate.fitwiz.service.BannerService;
-import uni.graduate.fitwiz.service.BlogService;
-import uni.graduate.fitwiz.service.ProductService;
-import uni.graduate.fitwiz.service.UserService;
+import uni.graduate.fitwiz.service.*;
 import uni.graduate.fitwiz.util.logging.service.LoggingService;
 
 @RestController
@@ -20,17 +17,20 @@ public class AdminController {
     private final BlogService blogService;
     private final ProductService productService;
     private final LoggingService loggingService;
+    private final OrderService orderService;
 
     public AdminController(UserService userService,
                            BannerService bannerService,
                            BlogService blogService,
                            ProductService productService,
-                           LoggingService loggingService) {
+                           LoggingService loggingService,
+                           OrderService orderService) {
         this.userService = userService;
         this.bannerService = bannerService;
         this.blogService = blogService;
         this.productService = productService;
         this.loggingService = loggingService;
+        this.orderService = orderService;
     }
 
     @ModelAttribute(name = "userDetails")
@@ -44,6 +44,16 @@ public class AdminController {
     @ModelAttribute(name = "bannersList")
     public void getBanners(Model model) {
         model.addAttribute("bannersList", bannerService.getBanners());
+    }
+
+    @ModelAttribute(name = "ordersList")
+    public void getOrders(Model model) {
+        model.addAttribute("ordersList", orderService.getOrders());
+    }
+
+    @ModelAttribute(name = "ordersTotalPrice")
+    public void getTotalPrice(Model model) {
+        model.addAttribute("ordersTotalPrice", orderService.getOrdersTotalPrice());
     }
 
     @ModelAttribute(name = "blogsList")
@@ -90,6 +100,12 @@ public class AdminController {
     public ModelAndView getAllUsersPage() {
         return new ModelAndView("/admin/page-manager/user/all-users");
     }
+
+    @GetMapping("/all-orders")
+    public ModelAndView getAllOrdersPage() {
+        return new ModelAndView("/admin/page-manager/store/all-orders");
+    }
+
     @GetMapping("/management/homepage-manager")
     public ModelAndView getHomepageManagerPage() {
         return new ModelAndView("/admin/page-manager/home/homepage-manager");
