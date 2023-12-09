@@ -7,9 +7,11 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
+import uni.graduate.fitwiz.validation.PasswordMatches;
 
 @Getter
 @Setter
+@PasswordMatches
 public class UserEntityDto {
 
     @NotEmpty
