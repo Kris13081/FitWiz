@@ -69,50 +69,62 @@
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between align-items-center mb-4">
                                             <h5 class="mb-0">Order details</h5>
-                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
+                                            <img th:src="${userDetails.profileImage}"
                                                  class="img-fluid rounded-3" style="width: 45px;" alt="Avatar">
                                         </div>
 
-                                        <p class="small mb-2">Delivery company:</p>
-                                        <label for="speedy-btn">Speedy</label>
-                                        <input type="radio" class="text-white" id="speedy-btn">
-                                        <label for="econt-btn">Econt</label>
-                                        <input href="#" type="radio" class="text-white" id="econt-btn">
-                                        <label for="dhl-btn">DHL</label>
-                                        <input href="#" type="radio" class="text-white" id="dhl-btn">
+                                        <form class="mt-4" th:method="POST" th:action="@{/api/users/cart/order}">
 
-                                        <form class="mt-4">
-                                            <div class="form-outline form-white mb-4">
-                                                <input type="text" id="typeName" class="form-control form-control-lg"
-                                                       placeholder="Firstname Lastname" />
+                                            <p class="small mb-2">Delivery company:</p>
+                                            <label for="speedy-btn">Speedy</label>
+                                            <input type="radio" class="text-white" value="Speedy" id="speedy-btn" name="deliveryCompany">
+                                            <label for="econt-btn">Econt</label>
+                                            <input type="radio" class="text-white" value="Econt" id="econt-btn" name="deliveryCompany">
+                                            <label for="dhl-btn">DHL</label>
+                                            <input type="radio" class="text-white" value="DHL" id="dhl-btn" name="deliveryCompany">
+
+                                            <div class="form-outline form-white mt-4 mb-4">
+                                                <input type="text"
+                                                       id="typeName"
+                                                       class="form-control form-control-lg"
+                                                       placeholder="Firstname Lastname"
+                                                       name="receiverName" />
                                                 <label class="form-label" for="typeName">Receiver's Name</label>
                                             </div>
 
                                             <div class="form-outline form-white mb-4">
-                                                <input type="text" id="typeText" class="form-control form-control-lg"
-                                                       placeholder="089 999 9999" minlength="10" maxlength="10" />
+                                                <input type="text"
+                                                       id="typeText"
+                                                       class="form-control form-control-lg"
+                                                       placeholder="089 999 9999"
+                                                       minlength="10" maxlength="10"
+                                                       name="phoneNumber" />
                                                 <label class="form-label" for="typeText">Phone Number</label>
                                             </div>
 
                                             <div class="row mb-4">
                                                 <div class="col-md-6">
                                                     <div class="form-outline form-white">
-                                                        <input type="text" class="form-control form-control-lg"
-                                                               placeholder="City Name"  id="city"/>
+                                                        <input type="text"
+                                                               class="form-control form-control-lg"
+                                                               placeholder="City Name"
+                                                               id="city"
+                                                               name="city"/>
                                                         <label class="form-label" for="city">City</label>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6">
                                                     <div class="form-outline form-white">
-                                                        <input type="text" id="street" class="form-control form-control-lg"
-                                                               placeholder="Street 111" />
+                                                        <input type="text"
+                                                               id="street"
+                                                               class="form-control form-control-lg"
+                                                               placeholder="Street 111"
+                                                               name="street"/>
                                                         <label class="form-label" for="street">Street + St-number</label>
                                                     </div>
                                                 </div>
                                             </div>
-
-                                        </form>
 
                                         <hr class="my-4">
 
@@ -131,10 +143,13 @@
                                             <p class="mb-2" id="total">$4818.00</p>
                                         </div>
 
-                                        <button type="button" class="btn btn-info btn-block btn-lg">
+                                        <button type="submit" class="btn btn-info btn-block btn-lg">
                                                 <span id="totalAmount">$4818.00</span>
                                                 <span>Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
                                         </button>
+
+                                        </form>
+
 
                                     </div>
                                 </div>

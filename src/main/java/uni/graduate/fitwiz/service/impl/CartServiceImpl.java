@@ -1,13 +1,14 @@
 package uni.graduate.fitwiz.service.impl;
 
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import uni.graduate.fitwiz.model.entity.CartEntity;
 import uni.graduate.fitwiz.model.entity.ProductEntity;
 import uni.graduate.fitwiz.model.entity.UserEntity;
 import uni.graduate.fitwiz.repository.CartRepository;
 import uni.graduate.fitwiz.service.CartService;
-import uni.graduate.fitwiz.service.UserService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -38,6 +39,18 @@ public class CartServiceImpl implements CartService {
         cartProducts.add(product);
         cart.setCartProducts(cartProducts);
         cartRepository.save(cart);
+    }
+
+
+    @Override
+    public void removeProduct(ProductEntity product, CartEntity cart) {
+        CartEntity cartToRemoveFrom = getCart(cart.getUser());
+
+        List<ProductEntity> cartProducts = new ArrayList<>();
+
+        cartToRemoveFrom.setCartProducts(cartProducts);
+
+        cartRepository.save(cartToRemoveFrom);
     }
 
 
