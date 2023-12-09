@@ -112,7 +112,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<ProductEntity> getUserCart(String currentUsername) {
-    return new ArrayList<>();
+        Optional<UserEntity> optionalUser = userRepository.findUserEntityByEmail(currentUsername);
+
+        UserEntity user = optionalUser.get();
+
+        CartEntity cart = cartService.getCart(user);
+
+        return cart.getCartProducts();
     }
 
     @Override

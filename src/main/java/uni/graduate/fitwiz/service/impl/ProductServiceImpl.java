@@ -73,7 +73,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public HttpStatus addToCart(String productSKU) {
-        // Retrieve the currently logged-in user
+
         UserEntity currentUser = userService.getCurrentUser();
 
         if (currentUser == null) {
@@ -93,12 +93,9 @@ public class ProductServiceImpl implements ProductService {
             }
 
             CartEntity userCart = cartService.getCart(currentUser);
-            userCart.getCartProducts().add(product);
-            for (ProductEntity p : userCart.getCartProducts()) {
-                System.out.println(p.getName());
-            }
+            cartService.addProduct(userCart, product);
 
-           currentUser.setCart(userCart);
+
 
 
             return HttpStatus.OK;

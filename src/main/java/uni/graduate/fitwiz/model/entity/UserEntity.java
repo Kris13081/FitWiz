@@ -36,7 +36,7 @@ public class UserEntity extends BaseEntity{
     private List<UserRoleEntity> roles;
 
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     private CartEntity cart;
     public UserEntity() {
         this.roles = new ArrayList<>();
