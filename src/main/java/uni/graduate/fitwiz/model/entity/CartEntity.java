@@ -16,11 +16,10 @@ import java.util.List;
 @Table(name = "carts")
 public class CartEntity extends BaseEntity {
 
-    @OneToOne
-    @JoinColumn()
+    @OneToOne(fetch = FetchType.EAGER)
     private UserEntity user;
 
-    @OneToMany(mappedBy = "cart", fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<ProductEntity> cartProducts;
 
     public CartEntity() {
