@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-gray"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link th:replace="~{/fragments/common-links}">
+    <link rel="stylesheet" th:href="@{/css/store.css}">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <title>FitWizz</title>
+</head>
+<body class="container-fluid d-flex flex-column justify-content-between p-0 h-100 bg-gray">
+<!-- Navigation-->
+<th:block th:replace="~{fragments/nav :: nav}"></th:block>
+<th:block th:replace="~{fragments/snow.html :: snowflakes}"></th:block>
+
+
+<div class="container pb-5 mb-5">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h2 class="section-heading text-uppercase">Order Confirmed!</h2>
+            <p class="text-muted">Thank you for your order. Your purchase is confirmed.</p>
+            <p class="text-muted">Your order will be shipped soon. You will receive a confirmation call with tracking details.</p>
+            <a class="btn btn-primary btn-xl text-uppercase" th:href="@{/api/store}">Continue shopping</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid bg-dark mt-4 m-0 p-0 w-100 d-flex justify-content-center border-top border-white">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-2 text-secondary w-75">
+        <div class="col-md-8 d-flex align-items-center">
+            <p>© 2023 FitWizz, Inc. All rights reserved.</p>
+        </div>
+        <div class="col-md-4 d-flex align-items-center">
+            <p class="text-secondary">Created by: <a th:href="@{https://github.com/Kris13081}" class="link-primary text-primary-emphasis" target="_blank">Kristiyan Stefanov</a></p>
+        </div>
+    </footer>
+</div>
+<!-- Bootstrap JS and dependencies -->
+<th:block th:replace="~{fragments/script}"></th:block>
+</body>
+</html>

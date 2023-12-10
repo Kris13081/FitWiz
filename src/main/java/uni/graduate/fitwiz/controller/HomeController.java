@@ -33,6 +33,7 @@ public class HomeController {
         model.addAttribute("userDetails", userService.getUserDetails(currentUsername));
     }
 
+
     @ModelAttribute(name = "bannersList")
     public void getBanners(Model model) {
         model.addAttribute("bannersList", bannerService.getBanners());
