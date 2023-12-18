@@ -1,6 +1,7 @@
 package uni.graduate.fitwiz.service;
 
 import org.springframework.http.HttpStatus;
+import uni.graduate.fitwiz.model.dto.UserDisplayDto;
 import uni.graduate.fitwiz.model.dto.UserEntityDto;
 import uni.graduate.fitwiz.model.dto.UserUpdateDto;
 import uni.graduate.fitwiz.model.entity.ProductEntity;
@@ -12,9 +13,9 @@ import java.util.List;
 public interface UserService {
     boolean create(UserEntityDto userEntityDto) throws IOException;
 
-    UserEntity getUserDetails(String currentUsername);
+    UserDisplayDto displayUserDetails(String currentUsername);
 
-    List<UserEntity> getUsers();
+    List<UserDisplayDto> getUsers();
 
     void delete(Long id);
 

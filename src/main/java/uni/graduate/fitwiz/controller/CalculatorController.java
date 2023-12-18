@@ -25,7 +25,7 @@ public class CalculatorController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUsername = authentication.getName();
 
-        model.addAttribute("userDetails", userService.getUserDetails(currentUsername));
+        model.addAttribute("userDetails", userService.displayUserDetails(currentUsername));
     }
 
     @GetMapping("/calculator")

@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import uni.graduate.fitwiz.enums.UserRoleEnum;
+import uni.graduate.fitwiz.model.dto.UserDisplayDto;
 import uni.graduate.fitwiz.model.dto.UserEntityDto;
 import uni.graduate.fitwiz.model.dto.UserUpdateDto;
 import uni.graduate.fitwiz.model.entity.CartEntity;
@@ -66,19 +67,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserEntity getUserDetails(String currentUsername) {
+    public UserDisplayDto displayUserDetails(String currentUsername) {
 
         Optional<UserEntity> optionalUser = userRepository.findUserEntityByEmail(currentUsername);
 
         if (optionalUser.isPresent()) {
-            return userRepository.getUserEntitiesByEmail(currentUsername);
+            return entityToDto(userRepository.getUserEntitiesByEmail(currentUsername));
         }
         return null;
     }
 
+
+
     @Override
-    public List<UserEntity> getUsers() {
-        return userRepository.findAll();
+    public List<UserDisplayDto> getUsers() {
+        List<UserEntity> entitiesList = userRepository.findAll();
+        List<UserDisplayDto> dtoList = new ArrayList<>();
+
+        for (UserEntity userEntity : entitiesList) {
+            dtoList.add(entityToDto(userEntity));
+        }
+        return dtoList;
     }
 
     @Override
@@ -114,7 +123,7 @@ public class UserServiceImpl implements UserService {
     public List<ProductEntity> getUserCart(String currentUsername) {
         Optional<UserEntity> optionalUser = userRepository.findUserEntityByEmail(currentUsername);
 
-        UserEntity user = optionalUser.get();
+            UserEntity user = optionalUser.orElse(null);
 
         CartEntity cart = cartService.getCart(user);
 
@@ -142,62 +151,91 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-    private UserEntity getUserEntity (UserUpdateDto userUpdateDto, Optional <UserEntity> optionalUser){
-            UserEntity userEntity = optionalUser.get();
+    private UserEntity getUserDetails(String currentUsername) {
 
-            if (!userUpdateDto.getUsername().isEmpty()) {
-                userEntity.setUsername(userUpdateDto.getUsername());
-            } else {
-                return null;
-            }
+        Optional<UserEntity> optionalUser = userRepository.findUserEntityByEmail(currentUsername);
 
-            if (!userUpdateDto.getEmail().isEmpty() && userUpdateDto.getEmail().contains("@") && userUpdateDto.getEmail().contains(".")) {
-                userEntity.setEmail(userUpdateDto.getEmail());
-            } else {
-                return null;
-            }
-
-            if (!userUpdateDto.getRole().isEmpty() && userUpdateDto.getRole().equals("ADMIN")){
-                UserRoleEntity admin = userRoleRepository.getByRole(UserRoleEnum.ADMIN);
-                UserRoleEntity user = userRoleRepository.getByRole(UserRoleEnum.USER);
-                List<UserRoleEntity> roles = new ArrayList<>();
-
-                roles.add(admin);
-                roles.add(user);
-
-                userEntity.setRoles(roles);
-            } else {
-                UserRoleEntity user = userRoleRepository.getByRole(UserRoleEnum.USER);
-                List<UserRoleEntity> roles = new ArrayList<>();
-
-                roles.add(user);
-
-                userEntity.setRoles(roles);
-            }
-
-            return userEntity;
+        if (optionalUser.isPresent()) {
+            return userRepository.getUserEntitiesByEmail(currentUsername);
         }
-
-        private UserEntity dtoToEntityMapper (UserEntityDto userEntityDto) throws IOException {
-            UserEntity user = getUserDetails(userEntityDto.getUsername());
-
-            if (user == null) {
-                user = new UserEntity();
-
-                String profileImagePath = gcsService.uploadProfileImages("fitwiz_images_bucket", userEntityDto.getProfileImage());
-                UserRoleEntity role = userRoleRepository.getByRole(UserRoleEnum.USER);
-                List<UserRoleEntity> roles = user.getRoles();
-                roles.add(role);
-
-                user.setUsername(userEntityDto.getUsername());
-                user.setEmail(userEntityDto.getEmail());
-                user.setPassword(passwordEncoder.encode(userEntityDto.getPassword()));
-                user.setProfileImage(profileImagePath);
-                user.setRoles(roles);
-                userRepository.save(user);
-            }
-
-            return user;
-        }
-
+        return null;
     }
+
+    private UserEntity getUserEntity(UserUpdateDto userUpdateDto, Optional<UserEntity> optionalUser) {
+        UserEntity userEntity = optionalUser.orElse(null);
+
+        if (!userUpdateDto.getUsername().isEmpty()) {
+            if (userEntity != null) {
+                userEntity.setUsername(userUpdateDto.getUsername());
+            }
+        } else {
+            return null;
+        }
+
+        if (!userUpdateDto.getEmail().isEmpty() && userUpdateDto.getEmail().contains("@") && userUpdateDto.getEmail().contains(".")) {
+            if (userEntity != null) {
+                userEntity.setEmail(userUpdateDto.getEmail());
+            }
+        } else {
+            return null;
+        }
+
+        if (!userUpdateDto.getRole().isEmpty() && userUpdateDto.getRole().equals("ADMIN")) {
+            UserRoleEntity admin = userRoleRepository.getByRole(UserRoleEnum.ADMIN);
+            UserRoleEntity user = userRoleRepository.getByRole(UserRoleEnum.USER);
+            List<UserRoleEntity> roles = new ArrayList<>();
+
+            roles.add(admin);
+            roles.add(user);
+
+            if (userEntity != null) {
+                userEntity.setRoles(roles);
+            }
+        } else {
+            UserRoleEntity user = userRoleRepository.getByRole(UserRoleEnum.USER);
+            List<UserRoleEntity> roles = new ArrayList<>();
+
+            roles.add(user);
+
+            if (userEntity != null) {
+                userEntity.setRoles(roles);
+            }
+        }
+
+        return userEntity;
+    }
+
+    private UserEntity dtoToEntityMapper(UserEntityDto userEntityDto) throws IOException {
+        UserEntity user = getUserDetails(userEntityDto.getUsername());
+
+        if (user == null) {
+            user = new UserEntity();
+
+            String profileImagePath = gcsService.uploadProfileImages("fitwiz_images_bucket", userEntityDto.getProfileImage());
+            UserRoleEntity role = userRoleRepository.getByRole(UserRoleEnum.USER);
+            List<UserRoleEntity> roles = user.getRoles();
+            roles.add(role);
+
+            user.setUsername(userEntityDto.getUsername());
+            user.setEmail(userEntityDto.getEmail());
+            user.setPassword(passwordEncoder.encode(userEntityDto.getPassword()));
+            user.setProfileImage(profileImagePath);
+            user.setRoles(roles);
+            userRepository.save(user);
+        }
+
+        return user;
+    }
+
+    private UserDisplayDto entityToDto(UserEntity userEntity) {
+        UserDisplayDto dto = new UserDisplayDto();
+
+        dto.setId(userEntity.getId());
+        dto.setUsername(userEntity.getUsername());
+        dto.setEmail(userEntity.getEmail());
+        dto.setProfileImage(userEntity.getProfileImage());
+        dto.setRoles(userEntity.getRoles());
+
+        return dto;
+    }
+}
