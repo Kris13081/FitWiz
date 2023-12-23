@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import uni.graduate.fitwiz.model.dto.BannerDisplayDto;
 import uni.graduate.fitwiz.model.dto.BannerEntityDto;
 import uni.graduate.fitwiz.model.dto.BannerUpdateDto;
 import uni.graduate.fitwiz.model.entity.BannerEntity;
@@ -12,6 +13,7 @@ import uni.graduate.fitwiz.service.BannerService;
 import uni.graduate.fitwiz.service.GcsService;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,9 +45,16 @@ public class BannerServiceImpl implements BannerService {
     }
 
     @Override
-    public List<BannerEntity> getBanners() {
-        return bannerRepository.findAll();
+    public List<BannerDisplayDto> getBanners() {
+        List<BannerEntity> allBanners = bannerRepository.findAll();
+        List<BannerDisplayDto> dtoBannersList = new ArrayList<>();
+
+        allBanners.forEach(bannerEntity -> dtoBannersList.add(mapEntityToDto(bannerEntity)));
+
+        return dtoBannersList;
     }
+
+
 
     @Override
     public void delete(Long id) {
@@ -73,6 +82,8 @@ public class BannerServiceImpl implements BannerService {
     }
 
     private static BannerEntity getBannerEntity(BannerUpdateDto bannerUpdateDto, Optional<BannerEntity> optionalBanner) {
+
+
         BannerEntity bannerEntity = optionalBanner.get();
 
         // Update fields from the DTO
@@ -101,5 +112,17 @@ public class BannerServiceImpl implements BannerService {
         newBanner.setImagePath(bannerImage);
 
         return newBanner;
+    }
+
+    private BannerDisplayDto mapEntityToDto(BannerEntity entity) {
+
+        BannerDisplayDto dto = new BannerDisplayDto();
+
+        dto.setName(entity.getName());
+        dto.setTitle(entity.getTitle());
+        dto.setText(entity.getText());
+        dto.setImagePath(entity.getImagePath());
+
+        return dto;
     }
 }
