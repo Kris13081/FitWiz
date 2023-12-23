@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import uni.graduate.fitwiz.model.dto.BannerDisplayDto;
 import uni.graduate.fitwiz.model.dto.BannerEntityDto;
 import uni.graduate.fitwiz.model.dto.BannerUpdateDto;
-import uni.graduate.fitwiz.model.entity.BannerEntity;
 
 import java.io.IOException;
 import java.util.List;

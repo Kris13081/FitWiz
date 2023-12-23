@@ -39,7 +39,7 @@
                         <tr th:each="order : ${ordersList}" th:id="${order.orderCode}">
                             <td class="id" th:text="${order.id}"></td>
                             <td class="order-code" th:text="${order.orderCode}"></td>
-                            <td class="user" th:text="${order.user.username}"></td>
+                            <td class="user" th:text="${order.user}"></td>
                             <td class="delivery-company" th:text="${order.deliveryCompany}"></td>
                             <td class="receiver-name" th:text="${order.receiverName}"></td>
                             <td class="phone-number" th:text="${order.phoneNumber}"></td>
