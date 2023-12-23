@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import uni.graduate.fitwiz.enums.UserRoleEnum;
+import uni.graduate.fitwiz.model.dto.ProductEntityDisplayDto;
 import uni.graduate.fitwiz.model.dto.UserDisplayDto;
 import uni.graduate.fitwiz.model.dto.UserEntityDto;
 import uni.graduate.fitwiz.model.dto.UserUpdateDto;
@@ -47,6 +48,7 @@ public class UserServiceImpl implements UserService {
         this.gcsService = gcsService;
     }
 
+
     @Override
     public boolean create(UserEntityDto userEntityDto) throws IOException {
 
@@ -76,7 +78,6 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
-
 
 
     @Override
@@ -120,14 +121,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<ProductEntity> getUserCart(String currentUsername) {
+    public List<ProductEntityDisplayDto> getUserCart(String currentUsername) {
         Optional<UserEntity> optionalUser = userRepository.findUserEntityByEmail(currentUsername);
 
-            UserEntity user = optionalUser.orElse(null);
+        UserEntity user = optionalUser.orElse(null);
 
         CartEntity cart = cartService.getCart(user);
 
-        return cart.getCartProducts();
+        List<ProductEntity> cartProducts = cart.getCartProducts();
+
+        return mapEntityListToDtoList(cartProducts);
+    }
+
+    @Override
+    public List<ProductEntityDisplayDto> mapEntityListToDtoList(List<ProductEntity> entityList) {
+        List<ProductEntityDisplayDto> dtoList = new ArrayList<>();
+
+        entityList.forEach(entity -> dtoList.add(mapEntityToDto(entity)));
+
+        return dtoList;
     }
 
     @Override
@@ -235,6 +247,22 @@ public class UserServiceImpl implements UserService {
         dto.setEmail(userEntity.getEmail());
         dto.setProfileImage(userEntity.getProfileImage());
         dto.setRoles(userEntity.getRoles());
+
+        return dto;
+    }
+
+    private ProductEntityDisplayDto mapEntityToDto(ProductEntity entity) {
+        ProductEntityDisplayDto dto = new ProductEntityDisplayDto();
+
+        dto.setName(entity.getName());
+        dto.setPrice(entity.getPrice());
+        dto.setCategory(entity.getCategory());
+        dto.setQuantity(entity.getQuantity());
+        dto.setDescription(entity.getDescription());
+        dto.setMainImgPath(entity.getMainImgPath());
+        dto.setSecondImgPath(entity.getSecondImgPath());
+        dto.setThirdImgPath(entity.getThirdImgPath());
+        dto.setSku(entity.getSku());
 
         return dto;
     }

@@ -9,7 +9,6 @@ public interface CartService {
 
     CartEntity createCart(UserEntity newUser);
 
-
     CartEntity getCart(UserEntity currentUser);
 
     void addProduct(CartEntity userCart, ProductEntity product);

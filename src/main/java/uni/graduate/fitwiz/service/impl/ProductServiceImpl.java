@@ -1,9 +1,12 @@
 package uni.graduate.fitwiz.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import uni.graduate.fitwiz.enums.ProductTypeEnum;
+import uni.graduate.fitwiz.model.dto.ProductEntityDisplayDto;
 import uni.graduate.fitwiz.model.dto.ProductEntityDto;
 import uni.graduate.fitwiz.model.dto.ProductUpdateDto;
 import uni.graduate.fitwiz.model.entity.CartEntity;
@@ -15,6 +18,7 @@ import uni.graduate.fitwiz.service.GcsService;
 import uni.graduate.fitwiz.service.ProductService;
 import uni.graduate.fitwiz.service.UserService;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -26,18 +30,21 @@ import java.util.UUID;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
+
     private final UserService userService;
     private final CartService cartService;
     private final GcsService gcsService;
 
     public ProductServiceImpl(ProductRepository productRepository,
-                              UserService userService, CartService cartService, GcsService
-                                      gcsService) {
+                              UserService userService,
+                              CartService cartService,
+                              GcsService gcsService) {
         this.productRepository = productRepository;
         this.userService = userService;
         this.cartService = cartService;
         this.gcsService = gcsService;
     }
+
 
     @Override
     public ResponseEntity<String> create(ProductEntityDto productEntityDto) throws IOException {
@@ -96,8 +103,6 @@ public class ProductServiceImpl implements ProductService {
             cartService.addProduct(userCart, product);
 
 
-
-
             return HttpStatus.OK;
         }
 
@@ -117,6 +122,7 @@ public class ProductServiceImpl implements ProductService {
 
         }
     }
+
 
     @Override
     public ProductEntity viewProduct(String sku) {
@@ -230,4 +236,6 @@ public class ProductServiceImpl implements ProductService {
 
         return newProduct;
     }
+
+
 }

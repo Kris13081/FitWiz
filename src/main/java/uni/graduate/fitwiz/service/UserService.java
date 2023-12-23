@@ -1,9 +1,7 @@
 package uni.graduate.fitwiz.service;
 
 import org.springframework.http.HttpStatus;
-import uni.graduate.fitwiz.model.dto.UserDisplayDto;
-import uni.graduate.fitwiz.model.dto.UserEntityDto;
-import uni.graduate.fitwiz.model.dto.UserUpdateDto;
+import uni.graduate.fitwiz.model.dto.*;
 import uni.graduate.fitwiz.model.entity.ProductEntity;
 import uni.graduate.fitwiz.model.entity.UserEntity;
 
@@ -21,8 +19,10 @@ public interface UserService {
 
     HttpStatus updateUser(Long id, UserUpdateDto userUpdateDto);
 
-    List<ProductEntity> getUserCart(String currentUsername);
+    List<ProductEntityDisplayDto> getUserCart(String currentUsername);
 
     UserEntity getCurrentUser();
+
+    List<ProductEntityDisplayDto> mapEntityListToDtoList(List<ProductEntity> entityList);
 
 }

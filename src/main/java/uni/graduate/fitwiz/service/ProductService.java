@@ -2,6 +2,7 @@ package uni.graduate.fitwiz.service;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import uni.graduate.fitwiz.model.dto.ProductEntityDisplayDto;
 import uni.graduate.fitwiz.model.dto.ProductEntityDto;
 import uni.graduate.fitwiz.model.dto.ProductUpdateDto;
 import uni.graduate.fitwiz.model.entity.ProductEntity;
@@ -26,4 +27,5 @@ public interface ProductService {
     HttpStatus addToCart(String productSKU);
 
     void reduceQuantity(String productSku);
+
 }
