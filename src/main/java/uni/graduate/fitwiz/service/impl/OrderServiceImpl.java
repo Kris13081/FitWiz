@@ -1,6 +1,7 @@
 package uni.graduate.fitwiz.service.impl;
 
 import org.springframework.stereotype.Service;
+import uni.graduate.fitwiz.model.dto.OrderDisplayDto;
 import uni.graduate.fitwiz.model.dto.OrderEntityDto;
 import uni.graduate.fitwiz.model.entity.CartEntity;
 import uni.graduate.fitwiz.model.entity.OrderEntity;
@@ -13,6 +14,7 @@ import uni.graduate.fitwiz.service.ProductService;
 import uni.graduate.fitwiz.service.UserService;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -40,7 +42,7 @@ public class OrderServiceImpl implements OrderService {
 
         List<ProductEntity> orderedProducts = cart.getCartProducts();
         StringBuilder receipt = new StringBuilder();
-        
+
         if (orderedProducts.isEmpty()) {
             return false;
         }
@@ -67,14 +69,37 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderEntity> getOrders() {
+    public List<OrderDisplayDto> getOrders() {
 
-        return orderRepository.findAll();
+        List<OrderEntity> allOrders = orderRepository.findAll();
+        List<OrderDisplayDto> dtoOrdersList = new ArrayList<>();
+
+        allOrders.forEach(order -> dtoOrdersList.add(mapEntityToDto(order)));
+
+        return dtoOrdersList;
+    }
+
+    private OrderDisplayDto mapEntityToDto(OrderEntity entity) {
+
+        OrderDisplayDto dto = new OrderDisplayDto();
+
+        dto.setId(entity.getId());
+        dto.setUser(entity.getUser().getUsername());
+        dto.setCity(entity.getCity());
+        dto.setStreet(entity.getStreet());
+        dto.setReceiverName(entity.getReceiverName());
+        dto.setDeliveryCompany(entity.getDeliveryCompany());
+        dto.setPhoneNumber(entity.getPhoneNumber());
+        dto.setOrderCode(entity.getOrderCode());
+        dto.setOrderedItemsSKUs(entity.getOrderedItemsSKUs());
+        dto.setTotal(entity.getTotal());
+
+        return dto;
     }
 
     @Override
     public BigDecimal getOrdersTotalPrice() {
-        List<OrderEntity> orders = getOrders();
+        List<OrderEntity> orders = orderRepository.findAll();
         BigDecimal totalPrice = BigDecimal.ZERO;
 
         for (OrderEntity order : orders) {
@@ -86,7 +111,7 @@ public class OrderServiceImpl implements OrderService {
     private OrderEntity mapDtoToEntity(OrderEntityDto orderEntityDto) {
         OrderEntity newOrder = new OrderEntity();
 
-        newOrder.setOrderCode(String.valueOf(UUID.randomUUID()).substring(0,8));
+        newOrder.setOrderCode(String.valueOf(UUID.randomUUID()).substring(0, 8));
         newOrder.setDeliveryCompany(orderEntityDto.getDeliveryCompany());
         newOrder.setReceiverName(orderEntityDto.getReceiverName());
         newOrder.setPhoneNumber(orderEntityDto.getPhoneNumber());

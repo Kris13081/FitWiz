@@ -1,5 +1,6 @@
 package uni.graduate.fitwiz.service;
 
+import uni.graduate.fitwiz.model.dto.OrderDisplayDto;
 import uni.graduate.fitwiz.model.dto.OrderEntityDto;
 import uni.graduate.fitwiz.model.entity.OrderEntity;
 
@@ -9,7 +10,7 @@ import java.util.List;
 public interface OrderService {
     boolean create(OrderEntityDto orderEntityDto);
 
-    List<OrderEntity> getOrders();
+    List<OrderDisplayDto> getOrders();
 
     BigDecimal getOrdersTotalPrice();
 }
