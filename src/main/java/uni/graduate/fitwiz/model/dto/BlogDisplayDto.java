@@ -4,10 +4,11 @@ import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
 @Getter
-public class BannerDisplayDto {
+@Setter
+public class BlogDisplayDto {
 
+    @NotEmpty
     private Long id;
 
     @NotEmpty
@@ -17,7 +18,10 @@ public class BannerDisplayDto {
     private String title;
 
     @NotEmpty
-    private String text;
+    private String description;
+
+    @NotEmpty
+    private String url;
 
     @NotEmpty
     private String imagePath;
