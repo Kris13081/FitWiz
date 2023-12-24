@@ -8,6 +8,8 @@ import lombok.Setter;
 @Getter
 public class BannerDisplayDto {
 
+    private Long id;
+
     @NotEmpty
     private String name;
 

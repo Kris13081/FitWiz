@@ -118,6 +118,7 @@ public class BannerServiceImpl implements BannerService {
 
         BannerDisplayDto dto = new BannerDisplayDto();
 
+        dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setTitle(entity.getTitle());
         dto.setText(entity.getText());

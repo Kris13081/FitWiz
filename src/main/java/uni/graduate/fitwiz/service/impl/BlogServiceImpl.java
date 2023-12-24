@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import uni.graduate.fitwiz.model.dto.BlogDisplayDto;
 import uni.graduate.fitwiz.model.dto.BlogEntityDto;
 import uni.graduate.fitwiz.model.dto.BlogUpdateDto;
 import uni.graduate.fitwiz.model.entity.BlogEntity;
@@ -13,6 +14,7 @@ import uni.graduate.fitwiz.service.GcsService;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,8 +47,13 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public List<BlogEntity> getBlogs() {
-        return blogRepository.findAll();
+    public List<BlogDisplayDto> getBlogs() {
+        List<BlogEntity> allBlogs = blogRepository.findAll();
+        List<BlogDisplayDto> dtoList = new ArrayList<>();
+
+        allBlogs.forEach(blog -> dtoList.add(mapEntityToDto(blog)));
+
+        return dtoList;
     }
 
     @Override
@@ -109,5 +116,19 @@ public class BlogServiceImpl implements BlogService {
         newBlog.setCreated(LocalDateTime.now());
 
         return newBlog;
+    }
+
+    private BlogDisplayDto mapEntityToDto(BlogEntity entity) {
+
+        BlogDisplayDto dto = new BlogDisplayDto();
+
+        dto.setId(entity.getId());
+        dto.setName(entity.getName());
+        dto.setTitle(entity.getTitle());
+        dto.setDescription(entity.getDescription());
+        dto.setUrl(entity.getUrl());
+        dto.setImagePath(entity.getImagePath());
+
+        return dto;
     }
 }
