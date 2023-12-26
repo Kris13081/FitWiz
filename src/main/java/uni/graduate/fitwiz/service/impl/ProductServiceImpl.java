@@ -1,12 +1,10 @@
 package uni.graduate.fitwiz.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import uni.graduate.fitwiz.enums.ProductTypeEnum;
-import uni.graduate.fitwiz.model.dto.ProductEntityDisplayDto;
+import uni.graduate.fitwiz.model.dto.ProductDisplayDto;
 import uni.graduate.fitwiz.model.dto.ProductEntityDto;
 import uni.graduate.fitwiz.model.dto.ProductUpdateDto;
 import uni.graduate.fitwiz.model.entity.CartEntity;
@@ -18,7 +16,6 @@ import uni.graduate.fitwiz.service.GcsService;
 import uni.graduate.fitwiz.service.ProductService;
 import uni.graduate.fitwiz.service.UserService;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -60,18 +57,24 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductEntity> getProducts() {
-        return productRepository.findAll();
+    public List<ProductDisplayDto> getProducts() {
+        List<ProductEntity> all = productRepository.findAll();
+        List<ProductDisplayDto> dtoList = new ArrayList<>();
+
+        all.forEach(productEntity -> dtoList.add(mapEntityToDto(productEntity)));
+
+        return dtoList;
     }
 
     @Override
-    public List<ProductEntity> getInStockProducts() {
+    public List<ProductDisplayDto> getInStockProducts() {
         List<ProductEntity> allProducts = productRepository.findAll();
-        List<ProductEntity> inStockProducts = new ArrayList<>();
+
+        List<ProductDisplayDto> inStockProducts = new ArrayList<>();
 
         for (ProductEntity product : allProducts) {
             if (product.getQuantity() > 0) {
-                inStockProducts.add(product);
+                inStockProducts.add(mapEntityToDto(product));
             }
         }
 
@@ -125,11 +128,12 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
-    public ProductEntity viewProduct(String sku) {
+    public ProductDisplayDto viewProduct(String sku) {
         Optional<ProductEntity> optionalProduct = productRepository.findBySku(sku);
 
+
         if (optionalProduct.isPresent()) {
-            return optionalProduct.get();
+            return mapEntityToDto(optionalProduct.get());
         } else {
             throw new IllegalArgumentException("Product dont exist;");
         }
@@ -237,5 +241,22 @@ public class ProductServiceImpl implements ProductService {
         return newProduct;
     }
 
+    private ProductDisplayDto mapEntityToDto(ProductEntity entity) {
+        ProductDisplayDto dto = new ProductDisplayDto();
 
+        dto.setId(entity.getId());
+        dto.setName(entity.getName());
+        dto.setDescription(entity.getDescription());
+        dto.setCategory(entity.getCategory());
+        dto.setPrice(entity.getPrice());
+        dto.setQuantity(entity.getQuantity());
+        dto.setSku(entity.getSku());
+        dto.setInStock(entity.isInStock());
+        dto.setMainImgPath(entity.getMainImgPath());
+        dto.setSecondImgPath(entity.getSecondImgPath());
+        dto.setThirdImgPath(entity.getThirdImgPath());
+
+
+        return dto;
+    }
 }
